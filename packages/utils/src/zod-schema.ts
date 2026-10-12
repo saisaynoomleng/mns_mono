@@ -16,3 +16,12 @@ export const passwordSchema = z
     error: 'Password requirement does not meet',
     path: ['password'],
   });
+
+//============================//
+//====== Forms ==============//
+//==========================//
+
+export const NewsletterFormSchema = z.object({
+  email: emailSchema,
+});
+export type NewsletterFormInput = z.input<typeof NewsletterFormSchema>;
