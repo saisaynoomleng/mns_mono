@@ -1,0 +1,42 @@
+{
+  "name": "@mns/api",
+  "version": "1.0.0",
+  "type": "module",
+  "private": true,
+  "scripts": {
+    "dev": "tsx watch ./src/server.ts",
+    "test": "vitest run",
+    "test:coverage": "vitest run --coverage",
+    "test:watch": "vitest",
+    "build": "tsc -p tsconfig.build.json",
+    "db:push": "drizzle-kit push",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "tsx ./src/db/seed.ts"
+  },
+  "exports": {
+    "./types": "./src/lib/types.ts"
+  },
+  "dependencies": {
+    "@trpc/server": "^11.19.0",
+    "better-auth": "catalog:",
+    "cors": "^2.8.6",
+    "dotenv": "catalog:",
+    "drizzle-orm": "1.0.0-rc.4",
+    "express": "catalog:",
+    "helmet": "^8.3.0",
+    "morgan": "^1.12.1",
+    "pg": "^8.23.1",
+    "superjson": "^2.2.6",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.6",
+    "@types/morgan": "^1.9.10",
+    "@types/node": "^26.6.5",
+    "@types/pg": "^8.23.1",
+    "tsx": "^4.23.15",
+    "vitest": "catalog:"
+  }
+}
