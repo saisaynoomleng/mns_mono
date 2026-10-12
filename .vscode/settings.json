@@ -1,0 +1,11 @@
+{
+  "tailwindCSS.experimental.configFile": {
+    "apps/admin/src/app/globals.css": "apps/admin/**",
+    "apps/agency/src/app/globals.css": "apps/agency/**",
+    "apps/dental/src/app/globals.css": "apps/dental/**",
+    "packages/ui/src/globals.css": "packages/ui/**"
+  },
+  "files.associations": {
+    "*.css": "tailwindcss"
+  }
+}

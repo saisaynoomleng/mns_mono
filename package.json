@@ -1,0 +1,33 @@
+{
+  "name": "mns",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "mns is a software and web services company based in Ohio, US, serving customers in the US and Myanmar. It sells two things to small businesses: ready-made SaaS products on a monthly subscription, and custom-built websites.",
+  "keywords": [
+    "node",
+    "SaaS",
+    "web design",
+    "web development"
+  ],
+  "scripts": {
+    "dev": "turbo dev",
+    "build": "turbo build",
+    "lint": "turbo lint",
+    "format": "prettier --write .",
+    "clean": "turbo clean",
+    "test": "turbo test"
+  },
+  "engines": {
+    "node": ">=24.21.0",
+    "pnpm": ">=11.24.0"
+  },
+  "packageManager": "pnpm@11.24.0",
+  "devDependencies": {
+    "@manypkg/cli": "0.25.1",
+    "prettier": "3.9.10",
+    "syncpack": "15.3.3",
+    "turbo": "2.11.7",
+    "typescript": "5.9.3"
+  }
+}
