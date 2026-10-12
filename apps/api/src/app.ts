@@ -3,6 +3,9 @@ import cors from 'cors';
 import helmet from 'helmet';
 import morgan from 'morgan';
 import env, { isTest } from './lib/env.js';
+import { createExpressMiddleware } from '@trpc/server/adapters/express';
+import { appRouter } from './trpc/router.js';
+import { createContext } from './trpc/context.js';
 
 const app = express();
 
@@ -28,6 +31,13 @@ app.get('/health-check', (req, res) => {
 });
 
 // trpc
+app.use(
+  '/trpc',
+  createExpressMiddleware({
+    router: appRouter,
+    createContext,
+  }),
+);
 
 // error hander
 
