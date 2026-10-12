@@ -4,6 +4,12 @@ import { drizzleAdapter } from 'better-auth/adapters/drizzle';
 import db from '../db/index.js';
 import { admin, emailOTP } from 'better-auth/plugins';
 import { nextCookies } from 'better-auth/next-js';
+import {
+  account,
+  session,
+  user,
+  verification,
+} from '../db/schema/auth-schema.js';
 
 export const auth = betterAuth({
   appName: env.APP_NAME,
@@ -21,5 +27,11 @@ export const auth = betterAuth({
 
   database: drizzleAdapter(db, {
     provider: 'pg',
+    schema: {
+      user: user,
+      session: session,
+      verification: verification,
+      account: account,
+    },
   }),
 });

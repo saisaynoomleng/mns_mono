@@ -32,7 +32,7 @@ app.get('/health-check', (req, res) => {
 
 // trpc
 app.use(
-  '/trpc',
+  '/api/trpc',
   createExpressMiddleware({
     router: appRouter,
     createContext,
