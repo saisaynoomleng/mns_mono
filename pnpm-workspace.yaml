@@ -16,3 +16,7 @@ catalog:
   better-auth: 1.7.7
   tsx: 4.23.15
   react-email: 6.11.1
+  "@vitest/browser-playwright": 5.0.1
+
+minimumReleaseAgeExclude:
+  - '@chromatic-com/storybook@5.5.0'
