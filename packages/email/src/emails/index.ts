@@ -8,3 +8,4 @@ export * from './NewDeviceAlertEmail.js';
 export * from './WelcomeEmail.js';
 export * from './ProjectKickOffEmail.js';
 export * from './ProjectStatusEmail.js';
+export * from './ProductUpdateEmail.js';

@@ -25,3 +25,14 @@ export const NewsletterFormSchema = z.object({
   email: emailSchema,
 });
 export type NewsletterFormInput = z.input<typeof NewsletterFormSchema>;
+
+export const SendProductUpdateEmailFormSchema = z.object({
+  subject: z.string().min(1, { error: 'Subject is required' }),
+  message: z
+    .string()
+    .min(1, { error: 'Message must have at least 10 characters' })
+    .max(10000, { error: 'Message cannot exceeds 10,000 characters' }),
+});
+export type sendProductUpdateEmailInput = z.input<
+  typeof SendProductUpdateEmailFormSchema
+>;

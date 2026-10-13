@@ -1,0 +1,174 @@
+import {
+  NewsletterFormSchema,
+  SendProductUpdateEmailFormSchema,
+} from '@mns/utils';
+import { publicProcedure, router } from '../trpc/trpc.js';
+import db from '../db/index.js';
+import { NewsletterTable } from '../db/schema/newsletters.schema.js';
+import { emailClient } from '../lib/emailClient.js';
+import { SendEmailCommand } from '@aws-sdk/client-ses';
+import env from '../lib/env.js';
+import {
+  renderNewsletterEmail,
+  renderProductUpdateEmail,
+} from '../../../../packages/email/dist/index.js';
+import { TRPCError } from '@trpc/server';
+
+export const newsletterRouter = router({
+  subscribe: publicProcedure
+    .input(NewsletterFormSchema)
+    .mutation(async ({ input }) => {
+      try {
+        const { email } = input;
+
+        const [data] = await db
+          .insert(NewsletterTable)
+          .values({
+            email,
+          })
+          .onConflictDoNothing({ target: NewsletterTable.email })
+          .returning();
+
+        if (!data) {
+          throw new TRPCError({
+            code: 'CONFLICT',
+            message: 'You are already subscribed!',
+          });
+        }
+
+        try {
+          const html = await renderNewsletterEmail({ email: data.email });
+
+          await emailClient.send(
+            new SendEmailCommand({
+              Source: env.NO_REPLY_EMAIL,
+
+              Destination: {
+                ToAddresses: [data.email],
+              },
+
+              Message: {
+                Subject: {
+                  Data: `You’re subscribed`,
+                  Charset: 'utf-8',
+                },
+
+                Body: {
+                  Html: {
+                    Data: html,
+                    Charset: 'utf-8',
+                  },
+                },
+              },
+            }),
+          );
+        } catch (error) {
+          console.error(`Newsletter subscription SES error`, error);
+
+          throw new TRPCError({
+            code: 'INTERNAL_SERVER_ERROR',
+            message: 'Internal server error',
+          });
+        }
+
+        return {
+          message: `Thanks for joining our newsletter.`,
+        };
+      } catch (error) {
+        console.error('Newsletter subscription trpc error', error);
+
+        if (error instanceof TRPCError) {
+          throw error;
+        }
+
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+          message: 'Unable to subscribe right now.',
+        });
+      }
+    }),
+
+  list: publicProcedure.query(async () => {
+    try {
+      const data = await db.query.NewsletterTable.findMany({
+        columns: {
+          email: true,
+          createdAt: true,
+        },
+      });
+
+      if (data.length === 0) {
+        console.error('List newsletter db error', data);
+        throw new TRPCError({
+          code: 'PRECONDITION_FAILED',
+          message: 'There are no subscribers to email',
+        });
+      }
+
+      return {
+        data: data,
+      };
+    } catch (error) {
+      console.error(`List newsletter trpc error`, error);
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+      });
+    }
+  }),
+
+  sendProductUpdateEmail: publicProcedure
+    .input(SendProductUpdateEmailFormSchema)
+    .mutation(async ({ input }) => {
+      try {
+        const { subject, message } = input;
+
+        const subscribers = await db.query.NewsletterTable.findMany({
+          columns: {
+            email: true,
+          },
+        });
+
+        for (const subscriber of subscribers) {
+          const html = await renderProductUpdateEmail({
+            email: subscriber.email,
+            subject,
+            message,
+          });
+
+          await emailClient.send(
+            new SendEmailCommand({
+              Source: env.NO_REPLY_EMAIL,
+
+              Destination: {
+                ToAddresses: [subscriber.email],
+              },
+
+              Message: {
+                Subject: {
+                  Data: subject,
+                  Charset: 'utf-8',
+                },
+
+                Body: {
+                  Html: {
+                    Data: html,
+                    Charset: 'utf-8',
+                  },
+                },
+              },
+            }),
+          );
+        }
+
+        return {
+          message: 'Message sent to the subscribers!',
+        };
+      } catch (error) {
+        console.error('Newsletter send product email error', error);
+
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+        });
+      }
+    }),
+});
