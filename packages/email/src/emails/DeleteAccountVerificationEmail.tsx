@@ -5,9 +5,13 @@ import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
 
 type DeleteAccountVerificationProps = {
   url: string;
+  expiresAt?: number;
 };
 
-const DeleteAccountVerification = ({ url }: DeleteAccountVerificationProps) => {
+const DeleteAccountVerification = ({
+  url,
+  expiresAt = 15,
+}: DeleteAccountVerificationProps) => {
   return (
     <Tailwind config={tailwindConfig}>
       <EmailHeader title="Confirm your account deletion" />
@@ -24,6 +28,12 @@ const DeleteAccountVerification = ({ url }: DeleteAccountVerificationProps) => {
           </Text>
 
           <Text>
+            This link will be expired in
+            <span className="font-semibold text-primary-400">{expiresAt}</span>
+            minutes.
+          </Text>
+
+          <Text>
             This permanently removes your account and data and can&apos;t be
             undone. If you didn&apos;t request this, ignore this email and your
             account stays as is, but consider changing your password.
@@ -37,6 +47,7 @@ const DeleteAccountVerification = ({ url }: DeleteAccountVerificationProps) => {
 export default DeleteAccountVerification;
 export const renderDeleteAccountVerification = async ({
   url,
+  expiresAt = 15,
 }: DeleteAccountVerificationProps) => {
-  return await render(DeleteAccountVerification({ url }));
+  return await render(DeleteAccountVerification({ url, expiresAt }));
 };

@@ -48,6 +48,7 @@ const SignUpVerificationEmail = ({
               <span className="font-semibold text-primary-400">
                 {expiresAt}
               </span>
+              minutes.
             </Text>
 
             <Text>

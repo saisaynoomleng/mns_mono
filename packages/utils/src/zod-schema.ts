@@ -17,6 +17,11 @@ export const passwordSchema = z
     path: ['password'],
   });
 
+export const otpSchema = z
+  .string()
+  .min(1, { error: 'OTP is required' })
+  .max(6, { error: 'OTP cannot exceeds 6 characters' });
+
 //============================//
 //====== Forms ==============//
 //==========================//
@@ -84,3 +89,86 @@ export const SignUpFormSchema = z
     path: ['confirmPassword'],
   });
 export type SignUpFormInput = z.input<typeof SignUpFormSchema>;
+
+export const SignInFormSchema = z.object({
+  email: emailSchema,
+  password: z.string(),
+});
+export type SignInFormInput = z.input<typeof SignInFormSchema>;
+
+export const RequestPasswordResetFormSchema = z.object({
+  email: emailSchema,
+});
+export type RequestPasswordResetFormInput = z.input<
+  typeof RequestPasswordResetFormSchema
+>;
+
+export const CheckVerificationOTPFormSchema =
+  RequestPasswordResetFormSchema.extend({
+    type: z.literal('forget-password').default('forget-password'),
+    otp: otpSchema,
+  });
+export type CheckVerificationOTPFormInput = z.input<
+  typeof CheckVerificationOTPFormSchema
+>;
+
+export const ResetPasswordFormSchema = CheckVerificationOTPFormSchema.omit({
+  type: true,
+})
+  .extend({
+    password: passwordSchema,
+    confirmPassword: z
+      .string()
+      .min(1, { error: 'Confirm Password is required' }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: 'Passwords must match',
+    path: ['confirmPassword'],
+  });
+export type ResetPasswordFormInput = z.input<typeof ResetPasswordFormSchema>;
+
+export const RequestEmailChangeFormSchema = z
+  .object({
+    currentEmail: emailSchema,
+    newEmail: emailSchema,
+  })
+  .refine((data) => data.currentEmail !== data.newEmail, {
+    error: 'Cannot use old email as new email',
+    path: ['newEmail'],
+  });
+export type RequestEmailChangeFormInput = z.input<
+  typeof RequestEmailChangeFormSchema
+>;
+
+export const ChangeEmailFormSchema = z.object({
+  newEmail: emailSchema,
+  otp: otpSchema,
+});
+export type ChangeEmailFormInput = z.input<typeof ChangeEmailFormSchema>;
+
+export const UpdatePasswordFormSchema = z
+  .object({
+    currentPassowrd: z.string(),
+    newPassword: passwordSchema,
+    confirmNewPassword: z
+      .string()
+      .min(1, { error: 'Confirm new password is required' }),
+  })
+  .superRefine((val, ctx) => {
+    if (val.currentPassowrd === val.newPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'New password cannot be the same as old password',
+        path: ['newPassword'],
+      });
+    }
+
+    if (val.newPassword !== val.confirmNewPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'New passwords must match',
+        path: ['confirmNewPassword'],
+      });
+    }
+  });
+export type UpdatePasswordFormInput = z.input<typeof UpdatePasswordFormSchema>;
