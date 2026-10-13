@@ -8,9 +8,6 @@ import {
   render,
 } from 'react-email';
 import tailwindConfig from '../lib/tailwind.config.js';
-import { EmailFont } from '../components/EmailFont.js';
-import { LogoEmail } from '../components/LogoEmail.js';
-import { EmailFooter } from '../components/EmailFooter.js';
 import { UnsubscribeLink } from '../components/UnsubscribeLink.js';
 import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
 import { EmailHeader } from '../components/EmailHeader.js';
@@ -25,8 +22,6 @@ const NewsletterEmail = ({ email }: { email: string }) => {
           <Preview>Thanks for joining our newsletter.</Preview>
 
           <MainEmailWrapper>
-            <LogoEmail />
-
             <Section>
               <Text>Hello,</Text>
               <Text>
@@ -36,8 +31,6 @@ const NewsletterEmail = ({ email }: { email: string }) => {
                 below.
               </Text>
             </Section>
-
-            <EmailFooter />
           </MainEmailWrapper>
 
           <UnsubscribeLink email={email} />
