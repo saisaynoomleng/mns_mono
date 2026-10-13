@@ -16,17 +16,17 @@
   ],
   "dependencies": {
     "@mns/utils": "workspace:*",
-    "@sanity/vision": "^6.18.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
+    "@sanity/vision": "6.18.0",
+    "react": "catalog:",
+    "react-dom": "catalog:",
     "react-icons": "catalog:",
-    "sanity": "^6.18.0",
-    "sanity-plugin-media": "^6.3.3",
-    "styled-components": "^6.1.18"
+    "sanity": "catalog:",
+    "sanity-plugin-media": "6.3.3",
+    "styled-components": "6.1.18"
   },
   "devDependencies": {
-    "@sanity/eslint-config-studio": "^7",
-    "@types/react": "^19.2.14",
+    "@sanity/eslint-config-studio": "7",
+    "@types/react": "catalog:",
     "eslint": "^10.8.1",
     "prettier": "^3.5",
     "typescript": "~6.0"

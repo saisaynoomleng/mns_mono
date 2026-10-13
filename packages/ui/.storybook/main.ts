@@ -3,6 +3,8 @@ import type { StorybookConfig } from '@storybook/react-vite';
 import { dirname } from 'path';
 
 import { fileURLToPath } from 'url';
+import { mergeConfig } from 'vitest/config';
+import tailwindcss from '@tailwindcss/vite';
 
 /**
  * This function is used to resolve the absolute path of a package.
@@ -21,5 +23,8 @@ const config: StorybookConfig = {
     getAbsolutePath('@storybook/addon-mcp'),
   ],
   framework: getAbsolutePath('@storybook/react-vite'),
+  viteFinal: async (config) => {
+    return mergeConfig(config, { plugins: [tailwindcss()] });
+  },
 };
 export default config;
