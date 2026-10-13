@@ -1,4 +1,11 @@
 import type { Preview } from '@storybook/react-vite';
+import '../src/globals.css';
+
+import '@fontsource-variable/fraunces';
+import '@fontsource-variable/sora';
+import '@fontsource-variable/playpen-sans';
+
+import './fonts.css';
 
 const preview: Preview = {
   parameters: {
@@ -16,6 +23,13 @@ const preview: Preview = {
       test: 'todo',
     },
   },
+  decorators: [
+    (Story) => (
+      <>
+        <Story />
+      </>
+    ),
+  ],
 };
 
 export default preview;

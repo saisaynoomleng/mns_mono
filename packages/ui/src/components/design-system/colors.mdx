@@ -1,0 +1,11 @@
+import { Meta, ColorPalette, ColorItem } from '@storybook/addon-docs/blocks';
+import { colors } from '../../lib/colors';
+import { toTitleCase } from '@mns/utils';
+
+<Meta title="DesignSystem/Colors" />
+
+<ColorPalette>
+  {Object.entries(colors).map(([title, colors]) => (
+    <ColorItem title={toTitleCase(title)} colors={colors} />
+  ))}
+</ColorPalette>
