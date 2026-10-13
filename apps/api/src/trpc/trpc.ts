@@ -10,7 +10,7 @@ export const publicProcedure = t.procedure;
 export const protectedProcedure = publicProcedure.use(async ({ ctx, next }) => {
   if (!ctx.user) {
     throw new TRPCError({
-      code: 'FORBIDDEN',
+      code: 'UNAUTHORIZED',
     });
   }
 
@@ -29,7 +29,7 @@ export const adminProcedure = protectedProcedure.use(async ({ ctx, next }) => {
 
   if (!authenticated) {
     throw new TRPCError({
-      code: 'UNAUTHORIZED',
+      code: 'FORBIDDEN',
     });
   }
 

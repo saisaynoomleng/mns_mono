@@ -1,7 +1,5 @@
 import {
   Body,
-  Container,
-  Head,
   Html,
   Preview,
   render,
@@ -11,24 +9,28 @@ import {
 } from 'react-email';
 import tailwindConfig from '../lib/tailwind.config.js';
 import { toTitleCase } from '@mns/utils';
+import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
+import { EmailHeader } from '../components/EmailHeader.js';
+import { LogoEmail } from '../components/LogoEmail.js';
+import { EmailFooter } from '../components/EmailFooter.js';
 
 type ContactEmailProps = {
   name: string;
   email: string;
 };
 
-const ContactEmail = ({ name, email }: ContactEmailProps) => {
+const ContactEmail = ({ name = 'hi', email }: ContactEmailProps) => {
   return (
     <Tailwind config={tailwindConfig}>
       <Html>
-        <Head>
-          <title>We received your message</title>
-        </Head>
+        <EmailHeader title="We received your message" />
 
         <Body>
           <Preview>Thanks for reaching out. We&apos;ll reply soon.</Preview>
 
-          <Container className="max-w-160 mx-auto">
+          <MainEmailWrapper>
+            <LogoEmail />
+
             <Section>
               <Text>Hello {toTitleCase(name)},</Text>
 
@@ -37,7 +39,9 @@ const ContactEmail = ({ name, email }: ContactEmailProps) => {
                 {email} as soon as we can.
               </Text>
             </Section>
-          </Container>
+
+            <EmailFooter />
+          </MainEmailWrapper>
         </Body>
       </Html>
     </Tailwind>

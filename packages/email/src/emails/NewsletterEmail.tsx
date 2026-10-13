@@ -1,36 +1,46 @@
 import {
-  Head,
   Html,
   Tailwind,
   Body,
-  Container,
   Preview,
   Section,
   Text,
   render,
 } from 'react-email';
 import tailwindConfig from '../lib/tailwind.config.js';
+import { EmailFont } from '../components/EmailFont.js';
+import { LogoEmail } from '../components/LogoEmail.js';
+import { EmailFooter } from '../components/EmailFooter.js';
+import { UnsubscribeLink } from '../components/UnsubscribeLink.js';
+import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
+import { EmailHeader } from '../components/EmailHeader.js';
 
 const NewsletterEmail = ({ email }: { email: string }) => {
   return (
     <Tailwind config={tailwindConfig}>
       <Html>
-        <Head>
-          <title>You&apos;re subscribed</title>
-        </Head>
+        <EmailHeader title={`You're subscribed!`} />
+
         <Body>
           <Preview>Thanks for joining our newsletter.</Preview>
 
-          <Container className="max-w-160 mx-auto">
+          <MainEmailWrapper>
+            <LogoEmail />
+
             <Section>
               <Text>Hello,</Text>
               <Text>
-                {email} is now subscribed to our newsletter. You&apos;ll get
-                news and updates from us. You can unsubscribe at any time using
-                the link below.
+                <span className="font-semibold">{email} </span>
+                is now subscribed to our newsletter. You&apos;ll get news and
+                updates from us. You can unsubscribe at any time using the link
+                below.
               </Text>
             </Section>
-          </Container>
+
+            <EmailFooter />
+          </MainEmailWrapper>
+
+          <UnsubscribeLink email={email} />
         </Body>
       </Html>
     </Tailwind>
