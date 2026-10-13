@@ -6,6 +6,8 @@ import env, { isTest } from './lib/env.js';
 import { createExpressMiddleware } from '@trpc/server/adapters/express';
 import { appRouter } from './trpc/router.js';
 import { createContext } from './trpc/context.js';
+import { toNodeHandler } from 'better-auth/node';
+import { auth } from './lib/auth.js';
 
 const app = express();
 
@@ -22,15 +24,15 @@ app.use(
   }),
 );
 
+app.all('/api/auth/{*any}', toNodeHandler(auth));
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// health check
 app.get('/health-check', (req, res) => {
   return res.status(200).json({ message: 'Health OK' });
 });
 
-// trpc
 app.use(
   '/api/trpc',
   createExpressMiddleware({

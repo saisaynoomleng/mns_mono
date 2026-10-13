@@ -8,12 +8,26 @@ import { UserTable } from '../db/schema/users.schema.js';
 import { SessionTable } from '../db/schema/sessions.schema.js';
 import { AccountTable } from '../db/schema/accounts.schema.js';
 import { VerificationTable } from '../db/schema/verifications.schema.js';
+import { ac, admin as adminAC, super_admin, user } from './access-control.js';
 
 const origins = env.ALLOWED_ORIGINS.split(',');
+const adminIds = env.ADMIN_USER_IDS?.split(',');
 
 export const auth = betterAuth({
   plugins: [
-    admin(),
+    admin({
+      ac,
+      defaultRole: 'user',
+      roles: {
+        admin: adminAC,
+        super_admin,
+        user,
+      },
+      bannedUserMessage: `You've been banned for spamming the account`,
+      impersonationSessionDuration: env.IMPERSONATE_SESSION_DURATION,
+      adminUserIds: adminIds ? [...adminIds] : [],
+      defaultBanReason: 'Spamming',
+    }),
     emailOTP({
       sendVerificationOTP: async ({ otp, type, email }) => {
         if (type === 'forget-password') {
