@@ -10,6 +10,8 @@ import { AccountTable } from '../db/schema/accounts.schema.js';
 import { VerificationTable } from '../db/schema/verifications.schema.js';
 import { ac, admin as adminAC, super_admin, user } from './access-control.js';
 import { signUpVerification } from '../auth/signUpVerification.js';
+import { otpVerification } from '../auth/otpVerification.js';
+import { deleteVerification } from '../auth/deleteVerification.js';
 
 const origins = env.ALLOWED_ORIGINS.split(',');
 const adminIds = env.ADMIN_USER_IDS?.split(',');
@@ -32,13 +34,16 @@ export const auth = betterAuth({
     emailOTP({
       sendVerificationOTP: async ({ otp, type, email }) => {
         if (type === 'forget-password') {
-          //  forget password
+          void otpVerification({ otp, email });
         }
         if (type === 'change-email') {
-          // change email
+          void otpVerification({ otp, email });
         }
       },
       expiresIn: env.OTP_EXPIRES_IN,
+      changeEmail: {
+        enabled: true,
+      },
     }),
     nextCookies(),
   ],
@@ -100,7 +105,7 @@ export const auth = betterAuth({
     deleteUser: {
       enabled: true,
       sendDeleteAccountVerification: async ({ user, url }) => {
-        // send delete email
+        void deleteVerification({ email: user.email, url });
       },
     },
   },
