@@ -25,7 +25,7 @@ const NewsletterEmail = ({ email }: { email: string }) => {
             <Section>
               <Text>Hello,</Text>
               <Text>
-                <span className="font-semibold">{email} </span>
+                <span className="font-semibold text-primary-400">{email} </span>
                 is now subscribed to our newsletter. You&apos;ll get news and
                 updates from us. You can unsubscribe at any time using the link
                 below.
