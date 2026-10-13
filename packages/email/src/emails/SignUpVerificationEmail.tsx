@@ -42,6 +42,14 @@ const SignUpVerificationEmail = ({
                 link
               </Link>
             </Text>
+
+            <Text>
+              This URL will be expired in{' '}
+              <span className="font-semibold text-primary-400">
+                {expiresAt}
+              </span>
+            </Text>
+
             <Text>
               If you didn&apos;t create an account, you can ignore this email.
             </Text>

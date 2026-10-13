@@ -69,3 +69,18 @@ export type ReplytoContactFormInput = z.input<typeof ReplyToContactFormSchema>;
 export type ReplytoContactFormOutput = z.output<
   typeof ReplyToContactFormSchema
 >;
+
+export const SignUpFormSchema = z
+  .object({
+    name: z.string().min(1, { error: 'Full name is required' }),
+    email: emailSchema,
+    password: passwordSchema,
+    confirmPassword: z
+      .string()
+      .min(1, { error: 'Confirm Password is required' }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: 'Password must match',
+    path: ['confirmPassword'],
+  });
+export type SignUpFormInput = z.input<typeof SignUpFormSchema>;

@@ -9,6 +9,7 @@ import { SessionTable } from '../db/schema/sessions.schema.js';
 import { AccountTable } from '../db/schema/accounts.schema.js';
 import { VerificationTable } from '../db/schema/verifications.schema.js';
 import { ac, admin as adminAC, super_admin, user } from './access-control.js';
+import { signUpVerification } from '../auth/signUpVerification.js';
 
 const origins = env.ALLOWED_ORIGINS.split(',');
 const adminIds = env.ADMIN_USER_IDS?.split(',');
@@ -54,7 +55,7 @@ export const auth = betterAuth({
 
   emailVerification: {
     sendVerificationEmail: async ({ user, url }) => {
-      // send email
+      void signUpVerification({ email: user.email, url });
     },
     sendOnSignUp: true,
     autoSignInAfterVerification: true,
