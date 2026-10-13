@@ -94,8 +94,9 @@ export default {
           '950': '#070707',
         },
       },
-      fontFamily: {},
-      fontSize: {},
+      fontFamily: {
+        display: ['"Fraunces", serif'],
+      },
     },
   },
 } satisfies TailwindConfig;
