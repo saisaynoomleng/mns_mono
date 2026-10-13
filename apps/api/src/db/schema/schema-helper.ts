@@ -29,3 +29,5 @@ export const contactMessageStatus = t.pgEnum('contactMessageStatus', [
   'sent',
   'failed',
 ]);
+
+export const userRole = t.pgEnum('userRole', ['user', 'admin', 'super_admin']);

@@ -25,6 +25,8 @@ const schema = z.object({
   SESSION_EXPIRES_IN: z.coerce.number().nonnegative().default(604800),
   SESSION_UPDATE_AGE: z.coerce.number().nonnegative().default(86400),
   SESSION_COOKIE_CACHE_MAX_AGE: z.coerce.number().nonnegative().default(300),
+  IMPERSONATE_SESSION_DURATION: z.coerce.number().nonnegative().default(86400),
+  ADMIN_USER_IDS: z.string().optional(),
 
   // Social Providers
   GOOGLE_CLIENT_ID: z
