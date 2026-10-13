@@ -8,4 +8,16 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.ContactMessageTable.contactId,
     }),
   },
+
+  UserTable: {
+    sessions: r.many.SessionTable({
+      from: r.UserTable.id,
+      to: r.SessionTable.userId,
+    }),
+
+    accounts: r.many.AccountTable({
+      from: r.UserTable.id,
+      to: r.AccountTable.userId,
+    }),
+  },
 }));
