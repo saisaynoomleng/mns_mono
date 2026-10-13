@@ -10,8 +10,6 @@ import {
 import tailwindConfig from '../lib/tailwind.config.js';
 import { EmailHeader } from '../components/EmailHeader.js';
 import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
-import { LogoEmail } from '../components/LogoEmail.js';
-import { EmailFooter } from '../components/EmailFooter.js';
 
 type SignUpVerificationEmailProps = {
   email: string;
@@ -32,8 +30,6 @@ const SignUpVerificationEmail = ({
         <Preview>One click to finish creating your account.</Preview>
 
         <MainEmailWrapper>
-          <LogoEmail />
-
           <Section>
             <Text>Thanks for signing up with {email}.</Text>
 
@@ -50,8 +46,6 @@ const SignUpVerificationEmail = ({
               If you didn&apos;t create an account, you can ignore this email.
             </Text>
           </Section>
-
-          <EmailFooter />
         </MainEmailWrapper>
       </Body>
     </Tailwind>

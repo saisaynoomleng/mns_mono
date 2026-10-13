@@ -11,8 +11,6 @@ import tailwindConfig from '../lib/tailwind.config.js';
 import { toTitleCase } from '@mns/utils';
 import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
 import { EmailHeader } from '../components/EmailHeader.js';
-import { LogoEmail } from '../components/LogoEmail.js';
-import { EmailFooter } from '../components/EmailFooter.js';
 
 type ContactEmailProps = {
   name: string;
@@ -29,8 +27,6 @@ const ContactEmail = ({ name = 'hi', email }: ContactEmailProps) => {
           <Preview>Thanks for reaching out. We&apos;ll reply soon.</Preview>
 
           <MainEmailWrapper>
-            <LogoEmail />
-
             <Section>
               <Text>Hello {toTitleCase(name)},</Text>
 
@@ -39,8 +35,6 @@ const ContactEmail = ({ name = 'hi', email }: ContactEmailProps) => {
                 {email} as soon as we can.
               </Text>
             </Section>
-
-            <EmailFooter />
           </MainEmailWrapper>
         </Body>
       </Html>

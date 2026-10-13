@@ -30,6 +30,9 @@ export type ChatProps = {
   outbound: string;
 };
 
+export type ProjectStatus =
+  'initial_call' | 'concept' | 'prototype' | 'developing' | 'review';
+
 // ---------------------------- //
 // Emails                       //
 // ---------------------------- //

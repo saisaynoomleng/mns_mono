@@ -39,6 +39,4 @@ app.use(
   }),
 );
 
-// error hander
-
 export default app;

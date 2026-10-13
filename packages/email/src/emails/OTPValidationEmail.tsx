@@ -2,8 +2,6 @@ import { Body, Preview, render, Section, Tailwind, Text } from 'react-email';
 import tailwindConfig from '../lib/tailwind.config.js';
 import { EmailHeader } from '../components/EmailHeader.js';
 import { MainEmailWrapper } from '../components/MainEmailWrapper.js';
-import { LogoEmail } from '../components/LogoEmail.js';
-import { EmailFooter } from '../components/EmailFooter.js';
 
 type OTPValidationEmailProps = {
   otp: string;
@@ -22,8 +20,6 @@ const OTPValidationEmail = ({
         <Preview>Use this code to continue. It expires in 15 minutes.</Preview>
 
         <MainEmailWrapper>
-          <LogoEmail />
-
           <Section>
             <Text>Hello,</Text>
             <Text>
@@ -42,8 +38,6 @@ const OTPValidationEmail = ({
               it. If you didn&apos;t request it, you can ignore this email.
             </Text>
           </Section>
-
-          <EmailFooter />
         </MainEmailWrapper>
       </Body>
     </Tailwind>
