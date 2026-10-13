@@ -17,7 +17,7 @@ const sizeVariant: Record<Size, string> = {
 
 export const Logo = ({
   className,
-  size = 'md',
+  size = 'sm',
   fullText = true,
   ...props
 }: Logo) => {
