@@ -9,3 +9,4 @@ export * from './WelcomeEmail.js';
 export * from './ProjectKickOffEmail.js';
 export * from './ProjectStatusEmail.js';
 export * from './ProductUpdateEmail.js';
+export * from './ReplyToContactEmail.js';
