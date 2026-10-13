@@ -12,3 +12,26 @@ export type { AppRouter } from '../trpc/router.js';
 //========================//
 //====== Schema ==========//
 //========================//
+export const ListNewsletterOutputSchema = z.object({
+  data: z.array(
+    z.object({
+      email: z.email(),
+      createdAt: z.coerce.date(),
+    }),
+  ),
+});
+export type ListNewsletterOutputType = z.output<
+  typeof ListNewsletterOutputSchema
+>;
+
+export const ListContactOutputSchema = z.object({
+  data: z.array(
+    z.object({
+      name: z.string(),
+      email: z.string(),
+      createdAt: z.coerce.date(),
+      status: z.enum(['in_progress', 'new', 'spam', 'resolved']),
+    }),
+  ),
+});
+export type ListContactOutputType = z.output<typeof ListContactOutputSchema>;

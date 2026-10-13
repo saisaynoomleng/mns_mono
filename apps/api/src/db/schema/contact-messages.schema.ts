@@ -18,6 +18,7 @@ export const ContactMessageTable = t.pgTable(
       .notNull()
       .default('outbound'),
     status: contactMessageStatus('status').notNull().default('pending'),
+    message: t.text('message').notNull(),
     ...timestamps,
   },
   (table) => [t.index('contactMessage_contactId_idx').on(table.contactId)],

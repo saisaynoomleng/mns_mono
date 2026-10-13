@@ -9,7 +9,9 @@ export const LogoEmail = () => {
         src={LOGO_URL}
         alt="logo"
         loading="lazy"
-        className="max-w-80 h-full"
+        width={200}
+        height={50}
+        className="mx-auto"
       />
     </Section>
   );

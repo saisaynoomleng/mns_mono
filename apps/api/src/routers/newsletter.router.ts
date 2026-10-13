@@ -2,7 +2,11 @@ import {
   NewsletterFormSchema,
   SendProductUpdateEmailFormSchema,
 } from '@mns/utils';
-import { publicProcedure, router } from '../trpc/trpc.js';
+import {
+  organizationProcedure,
+  publicProcedure,
+  router,
+} from '../trpc/trpc.js';
 import db from '../db/index.js';
 import { NewsletterTable } from '../db/schema/newsletters.schema.js';
 import { emailClient } from '../lib/emailClient.js';
@@ -13,6 +17,7 @@ import {
   renderProductUpdateEmail,
 } from '../../../../packages/email/dist/index.js';
 import { TRPCError } from '@trpc/server';
+import { ListNewsletterOutputSchema } from '../lib/types.js';
 
 export const newsletterRouter = router({
   subscribe: publicProcedure
@@ -88,35 +93,37 @@ export const newsletterRouter = router({
       }
     }),
 
-  list: publicProcedure.query(async () => {
-    try {
-      const data = await db.query.NewsletterTable.findMany({
-        columns: {
-          email: true,
-          createdAt: true,
-        },
-      });
+  list: organizationProcedure
+    .output(ListNewsletterOutputSchema)
+    .query(async () => {
+      try {
+        const data = await db.query.NewsletterTable.findMany({
+          columns: {
+            email: true,
+            createdAt: true,
+          },
+        });
 
-      if (data.length === 0) {
-        console.error('List newsletter db error', data);
+        if (data.length === 0) {
+          console.error('List newsletter db error', data);
+          throw new TRPCError({
+            code: 'PRECONDITION_FAILED',
+            message: 'There are no subscribers to email',
+          });
+        }
+
+        return {
+          data: data,
+        };
+      } catch (error) {
+        console.error(`List newsletter trpc error`, error);
         throw new TRPCError({
-          code: 'PRECONDITION_FAILED',
-          message: 'There are no subscribers to email',
+          code: 'INTERNAL_SERVER_ERROR',
         });
       }
+    }),
 
-      return {
-        data: data,
-      };
-    } catch (error) {
-      console.error(`List newsletter trpc error`, error);
-      throw new TRPCError({
-        code: 'INTERNAL_SERVER_ERROR',
-      });
-    }
-  }),
-
-  sendProductUpdateEmail: publicProcedure
+  sendProductUpdateEmail: organizationProcedure
     .input(SendProductUpdateEmailFormSchema)
     .mutation(async ({ input }) => {
       try {
