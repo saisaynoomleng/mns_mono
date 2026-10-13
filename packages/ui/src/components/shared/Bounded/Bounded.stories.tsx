@@ -9,8 +9,8 @@ const meta: Meta<typeof Bounded> = {
   parameters: {
     layout: 'fullscreen',
     docs: {
-      component: {
-        description: 'Component Wrapper, default to <section>',
+      description: {
+        component: 'Component Wrapper, default to SECTION',
       },
     },
   },

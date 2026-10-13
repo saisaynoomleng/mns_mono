@@ -15,7 +15,7 @@ const meta: Meta<typeof SubmitButton> = {
   },
 
   args: {
-    label: 'Submit',
+    children: 'Submit',
   },
   argTypes: {
     className: {
@@ -23,7 +23,7 @@ const meta: Meta<typeof SubmitButton> = {
       description: 'Additional TailwindCSS classes',
     },
 
-    label: {
+    children: {
       control: 'text',
       description: 'Button Submit label',
     },

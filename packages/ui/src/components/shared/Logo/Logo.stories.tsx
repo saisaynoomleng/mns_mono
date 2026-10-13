@@ -8,13 +8,15 @@ const meta: Meta<typeof Logo> = {
   parameters: {
     layout: 'centered',
     docs: {
-      component: {
-        description: 'Logo Text',
+      description: {
+        component: 'Logo Text',
       },
     },
   },
 
-  args: {},
+  args: {
+    size: 'sm',
+  },
   argTypes: {
     className: {
       control: 'text',
@@ -45,3 +47,9 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {};
+
+export const ShortText: Story = {
+  args: {
+    fullText: false,
+  },
+};

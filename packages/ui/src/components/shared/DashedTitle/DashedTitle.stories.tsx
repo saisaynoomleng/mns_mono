@@ -9,8 +9,8 @@ const meta: Meta<typeof DashedTitle> = {
   parameters: {
     layout: 'centered',
     docs: {
-      component: {
-        description: 'Subtitle with Dashed',
+      description: {
+        component: 'Small text with Dashed sit on top of section title',
       },
     },
   },
