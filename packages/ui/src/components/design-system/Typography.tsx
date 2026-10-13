@@ -8,7 +8,7 @@ import {
   TableHeader,
   TableRow,
 } from '#components/ui/table';
-import { Bounded, DashedTitle } from '../shared';
+import { Bounded, SectionTitle } from '../shared';
 
 const fontSizes = {
   900: { rem: '5.5rem', px: '88px' },
@@ -23,9 +23,9 @@ const fontSizes = {
 
 export const Typography = (): React.JSX.Element => {
   return (
-    <Bounded>
+    <Bounded spacing="md">
       <div className="space-y-4">
-        <DashedTitle label="Typography" />
+        <SectionTitle>Typography</SectionTitle>
 
         <p>
           Typography establishes hierarchy, improves readability, and creates a
@@ -41,30 +41,30 @@ export const Typography = (): React.JSX.Element => {
       </div>
 
       <div className="space-y-4">
-        <DashedTitle label="Type Faces" />
+        <SectionTitle as="h3">Type Faces</SectionTitle>
 
         <div className="grid max-md:gap-y-4 md:grid-cols-3 justify-between gap-x-6 ">
-          <div className="grid grid-cols-2 font-sans p-6 items-center border-2 border-border primary-box-shadow">
+          <div className="grid grid-cols-2 font-header p-6 items-center border-2 border-border rounded-lg">
             <p className="text-fs-600">Aa</p>
-            <p className="font-extrabold">Instrument Sans</p>
+            <p className="font-extrabold">Fraunces</p>
           </div>
 
-          <div className="grid grid-cols-2 font-mono px-6 items-center border-2 border-border primary-box-shadow">
+          <div className="grid grid-cols-2 font-body px-6 items-center border-2 border-border rounded-lg">
             <p className="text-fs-600">Aa</p>
-            <p className="font-extrabold">Chivo Mono</p>
+            <p className="font-extrabold">Sora</p>
           </div>
 
-          <div className="grid grid-cols-2 font-cursive px-6 items-center border-2 border-border primary-box-shadow">
+          <div className="grid grid-cols-2 font-cursive px-6 items-center border-2 border-border rounded-lg">
             <p className="text-fs-600">Aa</p>
-            <p className="font-extrabold">Sue Ellen Francisco</p>
+            <p className="font-extrabold">Playpen Sans</p>
           </div>
         </div>
       </div>
 
       <div className="space-y-4">
-        <DashedTitle label="Font sizes" />
+        <SectionTitle as="h3">Font Sizes</SectionTitle>
 
-        <Table>
+        <Table className="caption-top border-collapse">
           <TableCaption>Different font sizes</TableCaption>
           <TableHeader>
             <TableRow className="uppercase font-bold">

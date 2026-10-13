@@ -1,14 +1,13 @@
 import type React from 'react';
-import { Bounded } from '../shared';
-import { DashedTitle } from '#components/shared/DashedTitle/DashedTitle';
+import { Bounded, SectionTitle } from '../shared';
 import { BsDash } from 'react-icons/bs';
 
 const icons: React.ReactElement[] = [<BsDash />];
 
 export const Iconography = (): React.JSX.Element => {
   return (
-    <Bounded padding="sm" spacing="sm">
-      <DashedTitle label="Iconography" />
+    <Bounded spacing="sm">
+      <SectionTitle>Iconography</SectionTitle>
       <p>
         Icons provide a simple and recognizable visual language for
         communicating actions, navigation, status, and supporting information.
@@ -22,10 +21,13 @@ export const Iconography = (): React.JSX.Element => {
         competing with the primary message.
       </p>
 
-      <div className="flex flex-wrap gap-2">
+      <div className="flex flex-wrap gap-2 border p-2 rounded-lg">
         {icons.map((icon, i) => {
           return (
-            <span key={i} className="text-fs-600 p-1 border border-border/10">
+            <span
+              key={i}
+              className="text-fs-600 p-1 border border-muted-foreground rounded-lg"
+            >
               {icon}
             </span>
           );
