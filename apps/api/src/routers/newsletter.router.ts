@@ -105,6 +105,7 @@ export const newsletterRouter = router({
           columns: {
             email: true,
             createdAt: true,
+            id: true,
           },
         });
 

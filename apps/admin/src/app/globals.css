@@ -1,3 +1,4 @@
+@import 'tailwindcss';
 @import '@mns/ui/styles';
 @source '../../../../packages/ui/**/*.{js,ts,jsx,tsx}';
 

@@ -17,6 +17,7 @@ export const ListNewsletterOutputSchema = z.object({
     z.object({
       email: z.email(),
       createdAt: z.coerce.date(),
+      id: z.uuid(),
     }),
   ),
 });
