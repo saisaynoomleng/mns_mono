@@ -1,7 +1,7 @@
 import * as t from 'drizzle-orm/pg-core';
 import { sql } from 'drizzle-orm';
 import { UserTable } from './users.schema.js';
-import { SubscriptionTable } from './subscriptions.schema.js';
+import { SubscriptionPlanTable } from './subscription-plans.schema.js';
 import { PaymentProviderTable } from './payment-providers.schema.js';
 import { ServiceTable } from './services.schema.js';
 import {
@@ -26,7 +26,7 @@ export const InvoicesTable = t.pgTable(
       .notNull(),
     subscriptionId: t
       .uuid('subscription_id')
-      .references(() => SubscriptionTable.id, { onDelete: 'set null' }),
+      .references(() => SubscriptionPlanTable.id, { onDelete: 'set null' }),
     subscriptionNameSnapshot: t.varchar('subscription_name_snapshot', {
       length: 255,
     }),

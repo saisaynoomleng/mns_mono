@@ -1,6 +1,6 @@
 import * as t from 'drizzle-orm/pg-core';
 import { UserTable } from './users.schema.js';
-import { SubscriptionTable } from './subscriptions.schema.js';
+import { SubscriptionPlanTable } from './subscription-plans.schema.js';
 import { AppTable } from './apps.schema.js';
 import { PaymentProviderTable } from './payment-providers.schema.js';
 import {
@@ -20,7 +20,7 @@ export const UserSubscriptionTable = t.pgTable(
       .notNull(),
     subscriptionId: t
       .uuid('subscription_id')
-      .references(() => SubscriptionTable.id, { onDelete: 'cascade' })
+      .references(() => SubscriptionPlanTable.id, { onDelete: 'cascade' })
       .notNull(),
     appId: t
       .uuid('app_id')

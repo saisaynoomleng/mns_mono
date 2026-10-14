@@ -2,8 +2,8 @@ import * as t from 'drizzle-orm/pg-core';
 import { ServiceTable } from './services.schema.js';
 import { subscriptionStauts, timestamps } from './schema-helper.js';
 
-export const SubscriptionTable = t.pgTable(
-  'subscriptions',
+export const SubscriptionPlanTable = t.pgTable(
+  'subscription_plans',
   {
     id: t.uuid('id').primaryKey().defaultRandom(),
     serviceId: t
@@ -15,5 +15,5 @@ export const SubscriptionTable = t.pgTable(
     status: subscriptionStauts('status').notNull().default('active'),
     ...timestamps,
   },
-  (table) => [t.index('subscription_serviceId_idx').on(table.serviceId)],
+  (table) => [t.index('subscriptionPlan_serviceId_idx').on(table.serviceId)],
 );
