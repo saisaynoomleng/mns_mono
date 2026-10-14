@@ -10,7 +10,7 @@ export const AppTable = t.pgTable('apps', {
   isMyanmarOnly: t.boolean('is_myanmar_only').notNull().default(false),
   type: appType('type').notNull().default('generic'),
   excerpt: t.text().notNull(),
-  body: t.text(),
+  body: t.text().notNull(),
   imageUrl: t.varchar('image_url', { length: 255 }),
   ...timestamps,
 });

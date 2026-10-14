@@ -26,15 +26,15 @@ export const newsletterRouter = router({
       try {
         const { email } = input;
 
-        const [data] = await db
+        const [subscription] = await db
           .insert(NewsletterTable)
           .values({
             email,
           })
           .onConflictDoNothing({ target: NewsletterTable.email })
-          .returning();
+          .returning({ email: NewsletterTable.email, id: NewsletterTable.id });
 
-        if (!data) {
+        if (!subscription) {
           throw new TRPCError({
             code: 'CONFLICT',
             message: 'You are already subscribed!',
@@ -42,14 +42,16 @@ export const newsletterRouter = router({
         }
 
         try {
-          const html = await renderNewsletterEmail({ email: data.email });
+          const html = await renderNewsletterEmail({
+            email: subscription.email,
+          });
 
           await emailClient.send(
             new SendEmailCommand({
               Source: env.NO_REPLY_EMAIL,
 
               Destination: {
-                ToAddresses: [data.email],
+                ToAddresses: [subscription.email],
               },
 
               Message: {
@@ -77,7 +79,9 @@ export const newsletterRouter = router({
         }
 
         return {
+          success: true,
           message: `Thanks for joining our newsletter.`,
+          data: subscription,
         };
       } catch (error) {
         console.error('Newsletter subscription trpc error', error);
@@ -113,6 +117,7 @@ export const newsletterRouter = router({
         }
 
         return {
+          success: true,
           data: data,
         };
       } catch (error) {
@@ -126,9 +131,9 @@ export const newsletterRouter = router({
   sendProductUpdateEmail: organizationProcedure
     .input(SendProductUpdateEmailFormSchema)
     .mutation(async ({ input }) => {
-      try {
-        const { subject, message } = input;
+      const { subject, message } = input;
 
+      try {
         const subscribers = await db.query.NewsletterTable.findMany({
           columns: {
             email: true,
@@ -168,6 +173,7 @@ export const newsletterRouter = router({
         }
 
         return {
+          success: true,
           message: 'Message sent to the subscribers!',
         };
       } catch (error) {

@@ -172,3 +172,31 @@ export const UpdatePasswordFormSchema = z
     }
   });
 export type UpdatePasswordFormInput = z.input<typeof UpdatePasswordFormSchema>;
+
+export const CreateApplicationFormSchema = z.object({
+  name: z.string().min(1, 'App name is required'),
+  liveUrl: z
+    .url({ error: 'Must be a valid URL' })
+    .min(1, { error: 'Live URL is required' }),
+  demoUrl: z
+    .url({ error: 'Must be a valid URL' })
+    .min(1, { error: 'Live URL is required' }),
+  status: z.enum(['production', 'development', 'test']),
+  isMyanmarOnly: z.boolean().default(false),
+  type: z.enum([
+    'health_care',
+    'generic',
+    'restaurant',
+    'creative_and_media',
+    'retail_and_commerce',
+  ]),
+  excerpt: z.string().min(1, { error: 'Excerpt is required' }),
+  body: z.string().min(1, { error: 'Text content is required' }),
+  imageUrl: z.string().optional(),
+});
+export type CreateApplicationFormInput = z.input<
+  typeof CreateApplicationFormSchema
+>;
+export type CreateApplicationFormOutput = z.output<
+  typeof CreateApplicationFormSchema
+>;
