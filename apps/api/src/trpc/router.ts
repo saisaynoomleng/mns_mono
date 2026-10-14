@@ -1,3 +1,4 @@
+import { applicationRouter } from '../routers/application.router.js';
 import { contactRouter } from '../routers/contact.router.js';
 import { newsletterRouter } from '../routers/newsletter.router.js';
 import { router } from './trpc.js';
@@ -5,6 +6,7 @@ import { router } from './trpc.js';
 export const appRouter = router({
   newsletters: newsletterRouter,
   contacts: contactRouter,
+  applications: applicationRouter,
 });
 
 export type AppRouter = typeof appRouter;

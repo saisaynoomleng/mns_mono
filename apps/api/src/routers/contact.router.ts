@@ -125,6 +125,7 @@ export const contactRouter = router({
         });
 
         return {
+          success: true,
           data,
         };
       } catch (error) {
