@@ -1,3 +1,5 @@
+'use client';
+
 import { Checkbox } from '#components/ui/checkbox';
 import { Field, FieldError, FieldLabel } from '#components/ui/field';
 import { useId } from 'react';

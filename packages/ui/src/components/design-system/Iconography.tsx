@@ -15,6 +15,7 @@ import { TfiSupport } from 'react-icons/tfi';
 import { LuMessageCircleWarning } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
+import { TbTextWrapDisabled } from 'react-icons/tb';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -33,6 +34,7 @@ const icons: React.ReactElement[] = [
   <SiFacebook />,
   <CiLinkedin />,
   <SiTiktok />,
+  <TbTextWrapDisabled />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
