@@ -1,6 +1,7 @@
 import {
   NewsletterFormSchema,
   SendProductUpdateEmailFormSchema,
+  toTitleCase,
 } from '@mns/utils';
 import {
   organizationProcedure,
@@ -158,7 +159,7 @@ export const newsletterRouter = router({
 
               Message: {
                 Subject: {
-                  Data: subject,
+                  Data: toTitleCase(subject),
                   Charset: 'utf-8',
                 },
 

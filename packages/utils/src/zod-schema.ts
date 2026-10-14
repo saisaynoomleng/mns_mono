@@ -38,7 +38,7 @@ export const SendProductUpdateEmailFormSchema = z.object({
     .min(10, { error: 'Message must have at least 10 characters' })
     .max(10000, { error: 'Message cannot exceed 10,000 characters' }),
 });
-export type sendProductUpdateEmailInput = z.input<
+export type SendProductUpdateEmailInput = z.input<
   typeof SendProductUpdateEmailFormSchema
 >;
 
