@@ -6,6 +6,7 @@ import { NewslettersPageSkeleton } from '@/components/Skeletons';
 import { queryKeys } from '@/lib/querykeys';
 import {
   Bounded,
+  SendProductEmailForm,
   Table,
   TableBody,
   TableCaption,
@@ -13,15 +14,33 @@ import {
   TableHead,
   TableHeader,
   TableRow,
+  toast,
 } from '@mns/ui';
 import { formatDateUS } from '@mns/utils';
-import { useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 
 const NewsletterPage = () => {
   const trpc = useTRPC();
 
   const { data, isPending, isError } = useQuery(
     trpc.newsletters.list.queryOptions(),
+  );
+
+  const sendEmailAction = useMutation(
+    trpc.newsletters.sendProductUpdateEmail.mutationOptions({
+      onSuccess: (result) => {
+        if (!result.success) {
+          toast.error(result.message);
+          return;
+        }
+
+        toast.success(result.message);
+      },
+
+      onError: (ctx) => {
+        toast.error(ctx.message);
+      },
+    }),
   );
 
   if (isPending) {
@@ -42,18 +61,25 @@ const NewsletterPage = () => {
     <Bounded padding="none" spacing="sm">
       <PageBreadcrumb />
 
-      <div className="grid grid-cols-[auto_1fr] p-2">
+      <div className="grid grid-cols-[auto_1fr] gap-4 md:gap-6 items-start">
         <div className="border border-muted rounded-lg p-2">
           <p className="font-semibold ">Total Subscribers</p>
           <p className="tabular-nums">total</p>
         </div>
 
-        <div></div>
+        <SendProductEmailForm
+          action={async (input) => {
+            const result = await sendEmailAction.mutateAsync(input);
+
+            return result;
+          }}
+          isPending={sendEmailAction.isPending}
+        />
       </div>
 
       {/* filter and query */}
 
-      <Table className="caption-top border-collapse table-fixed">
+      <Table className="caption-top border-collapse table-fixed ">
         <TableCaption>Active Subscribers</TableCaption>
 
         <TableHeader>

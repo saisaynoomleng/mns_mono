@@ -72,7 +72,7 @@ export const SignInForm = ({
         <form
           noValidate
           onSubmit={form.handleSubmit(onSubmit)}
-          className="flex flex-col gap-y-6"
+          className="generic-form"
         >
           <OAuthSignIn OAuthAction={OAuthAction} />
 

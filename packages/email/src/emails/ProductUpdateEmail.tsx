@@ -21,8 +21,6 @@ const ProductUpdateEmail = ({
       <EmailHeader title={`What’s new at mns`} />
 
       <Body>
-        <Preview>{toTitleCase(subject)}</Preview>
-
         <MainEmailWrapper>
           <Section>
             <Text>Hello,</Text>

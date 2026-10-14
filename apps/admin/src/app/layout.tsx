@@ -31,6 +31,7 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html
+      data-scroll-behavior="smooth"
       lang="en"
       className={`${fraunces.variable} ${playpen_sans.variable} ${sora.variable} h-full antialiased`}
     >

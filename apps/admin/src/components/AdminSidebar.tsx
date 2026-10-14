@@ -26,6 +26,7 @@ import {
 import { AiFillAppstore } from 'react-icons/ai';
 import { TfiSupport } from 'react-icons/tfi';
 import { LuMessageCircleWarning } from 'react-icons/lu';
+import { usePathname } from 'next/navigation';
 
 const MARKETING_LINKS = [
   { label: 'Newsletters', href: '/newsletters', icon: <FaNewspaper /> },
@@ -65,6 +66,7 @@ const USER_LINKS = [{ label: 'Users', href: '/users', icon: <FaUsers /> }];
 
 export const AdminSidebar = (): React.JSX.Element => {
   const { open: sidebarOpen } = useSidebar();
+  const pathname = usePathname();
 
   return (
     <Sidebar collapsible="icon" variant="floating">
@@ -80,7 +82,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {OPERATION_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -105,7 +107,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {APPLICATION_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -130,7 +132,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {USER_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -155,7 +157,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {MARKETING_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
