@@ -1,8 +1,33 @@
 import type React from 'react';
 import { Bounded, SectionTitle } from '../shared';
-import { BsDash } from 'react-icons/bs';
 
-const icons: React.ReactElement[] = [<BsDash />];
+import { BsDash } from 'react-icons/bs';
+import { LiaSignOutAltSolid } from 'react-icons/lia';
+import { FaCcMastercard, FaNewspaper, FaUsers } from 'react-icons/fa';
+import {
+  MdDesignServices,
+  MdOutlineContactSupport,
+  MdOutlineHealthAndSafety,
+  MdReviews,
+} from 'react-icons/md';
+import { AiFillAppstore } from 'react-icons/ai';
+import { TfiSupport } from 'react-icons/tfi';
+import { LuMessageCircleWarning } from 'react-icons/lu';
+
+const icons: React.ReactElement[] = [
+  <BsDash />,
+  <LiaSignOutAltSolid />,
+  <FaNewspaper />,
+  <MdOutlineContactSupport />,
+  <MdReviews />,
+  <MdDesignServices />,
+  <MdOutlineHealthAndSafety />,
+  <FaCcMastercard />,
+  <AiFillAppstore />,
+  <TfiSupport />,
+  <LuMessageCircleWarning />,
+  <FaUsers />,
+];
 
 export const Iconography = (): React.JSX.Element => {
   return (

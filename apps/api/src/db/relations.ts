@@ -13,9 +13,9 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.AccountTable.userId,
     }),
 
-    subscriptions: r.many.SubscriptionTable({
+    subscriptions: r.many.SubscriptionPlanTable({
       from: r.UserTable.id.through(r.UserSubscriptionTable.userId),
-      to: r.SubscriptionTable.id.through(
+      to: r.SubscriptionPlanTable.id.through(
         r.UserSubscriptionTable.subscriptionId,
       ),
     }),
@@ -61,32 +61,32 @@ export const relations = defineRelations(schema, (r) => ({
   },
 
   ServiceTable: {
-    subscriptions: r.many.SubscriptionTable({
+    subscriptions: r.many.SubscriptionPlanTable({
       from: r.ServiceTable.id,
-      to: r.SubscriptionTable.serviceId,
+      to: r.SubscriptionPlanTable.serviceId,
     }),
   },
 
   SubscriptionTable: {
-    includedFeatures: r.many.SubscriptionIncludedFeatureTable({
-      from: r.SubscriptionTable.id,
-      to: r.SubscriptionIncludedFeatureTable.subscriptionId,
+    includedFeatures: r.many.SubscriptionPlanIncludedFeatureTable({
+      from: r.SubscriptionPlanTable.id,
+      to: r.SubscriptionPlanIncludedFeatureTable.subscriptionId,
     }),
 
     notIncludedFeatures: r.many.SubscriptionNotIncludedFeatureTable({
-      from: r.SubscriptionTable.id,
+      from: r.SubscriptionPlanTable.id,
       to: r.SubscriptionNotIncludedFeatureTable.subscriptionId,
     }),
 
     users: r.many.UserTable({
-      from: r.SubscriptionTable.id.through(
+      from: r.SubscriptionPlanTable.id.through(
         r.UserSubscriptionTable.subscriptionId,
       ),
       to: r.UserTable.id.through(r.UserSubscriptionTable.userId),
     }),
 
     service: r.one.ServiceTable({
-      from: r.SubscriptionTable.serviceId,
+      from: r.SubscriptionPlanTable.serviceId,
       to: r.ServiceTable.id,
     }),
   },

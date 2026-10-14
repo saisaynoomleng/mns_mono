@@ -3,7 +3,11 @@
 import type { AppRouter } from '@mns/api/types';
 import { createTRPCContext } from '@trpc/tanstack-react-query';
 import { createTRPCClient, httpBatchLink } from '@trpc/client';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import {
+  defaultShouldDehydrateQuery,
+  QueryClient,
+  QueryClientProvider,
+} from '@tanstack/react-query';
 import { useState } from 'react';
 import { env } from '@/lib/env/client';
 import superjson from 'superjson';
@@ -17,6 +21,15 @@ const makeQueryClient = () => {
       queries: {
         staleTime: 60 * 1000,
         gcTime: 60 * 1000 * 15,
+      },
+      dehydrate: {
+        serializeData: superjson.serialize,
+        shouldDehydrateQuery: (query) =>
+          defaultShouldDehydrateQuery(query) ||
+          query.state.status === 'pending',
+      },
+      hydrate: {
+        deserializeData: superjson.deserialize,
       },
     },
   });
