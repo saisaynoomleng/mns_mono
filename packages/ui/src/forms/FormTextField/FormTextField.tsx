@@ -7,6 +7,7 @@ import {
   FieldLabel,
 } from '#components/ui/field';
 import { Input } from '#components/ui/input';
+import clsx from 'clsx';
 import { useId, type ComponentPropsWithoutRef } from 'react';
 import type React from 'react';
 import {
@@ -54,7 +55,9 @@ export const FormTextField = <T extends FieldValues>({
       control={control}
       render={({ field, fieldState }) => (
         <Field>
-          <FieldLabel htmlFor={id}>{label}</FieldLabel>
+          <FieldLabel htmlFor={id} className="capitalize">
+            {label}
+          </FieldLabel>
           {description && <FieldDescription>{description}</FieldDescription>}
 
           <Input
