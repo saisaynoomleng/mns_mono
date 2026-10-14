@@ -13,6 +13,8 @@ import {
 import { AiFillAppstore } from 'react-icons/ai';
 import { TfiSupport } from 'react-icons/tfi';
 import { LuMessageCircleWarning } from 'react-icons/lu';
+import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
+import { CiLinkedin } from 'react-icons/ci';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -27,6 +29,10 @@ const icons: React.ReactElement[] = [
   <TfiSupport />,
   <LuMessageCircleWarning />,
   <FaUsers />,
+  <SiGoogle />,
+  <SiFacebook />,
+  <CiLinkedin />,
+  <SiTiktok />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
