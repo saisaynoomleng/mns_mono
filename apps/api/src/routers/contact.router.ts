@@ -300,6 +300,7 @@ export const contactRouter = router({
           .where(eq(ContactMessageTable.id, messageData.id));
 
         return {
+          success: true,
           message: 'Email sent to the contact.',
         };
       } catch (error) {
@@ -336,6 +337,17 @@ export const contactRouter = router({
             position: true,
           },
           where: { id },
+          with: {
+            messages: {
+              columns: {
+                id: true,
+                direction: true,
+                status: true,
+                message: true,
+                createdAt: true,
+              },
+            },
+          },
         });
 
         if (!data) {

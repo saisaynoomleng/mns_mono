@@ -16,9 +16,8 @@ export type PageParamsIdProps = {
   params: Promise<{ id: string }>;
 };
 
-export type ActionResponse<T> =
-  | { success: true; message: string; data?: T }
-  | { success: false; message: string; field?: keyof T };
+export type ActionResponse =
+  { success: true; message: string } | { success: false; message: string };
 
 export type ImageResponse =
   { success: true; file: File } | { success: false; message: string };
