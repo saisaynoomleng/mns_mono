@@ -17,9 +17,20 @@ type List = {
 type SortByProps = {
   lists: List[];
   pathname: string;
+  page?: number;
+  sortOrder?: 'desc' | 'asc';
+  filter?: string;
+  search?: string;
 };
 
-export const SortBy = ({ lists, pathname }: SortByProps) => {
+export const SortBy = ({
+  lists,
+  pathname,
+  page,
+  sortOrder,
+  filter,
+  search,
+}: SortByProps) => {
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild className="flex-1">
@@ -36,6 +47,10 @@ export const SortBy = ({ lists, pathname }: SortByProps) => {
                 href={{
                   pathname,
                   query: {
+                    ...(page && { page }),
+                    ...(sortOrder && { sortOrder }),
+                    ...(filter && { filter }),
+                    ...(search && { search }),
                     sortBy: l.href,
                   },
                 }}

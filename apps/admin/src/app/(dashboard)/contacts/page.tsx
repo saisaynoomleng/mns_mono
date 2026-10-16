@@ -3,8 +3,10 @@
 import { PageBreadcrumb } from '@/components/PageBreadcrumb';
 import { useTRPC } from '@/components/Provider';
 import { SortBy } from '@/components/SortBy';
+import { SortOrder } from '@/components/SortOrder';
 import {
   Bounded,
+  Button,
   Card,
   CardContent,
   CardHeader,
@@ -19,6 +21,7 @@ import {
 } from '@mns/ui';
 import { formatDateUS, replaceUnderscore, toTitleCase } from '@mns/utils';
 import { useQuery } from '@tanstack/react-query';
+import clsx from 'clsx';
 import Link from 'next/link';
 import { useSearchParams } from 'next/navigation';
 import React from 'react';
@@ -27,19 +30,23 @@ const ContactsPage = (): React.JSX.Element => {
   const trpc = useTRPC();
 
   const searchParams = useSearchParams();
-  const page = searchParams.get('page') ?? '1';
-  const sortOrder = searchParams.get('sortOrder') ?? 'desc';
-  const sortBy = searchParams.get('sortBy') ?? 'createdAt';
-  const limit = searchParams.get('limit') ?? '20';
-  const search = searchParams.get('search');
+  const page = parseInt(searchParams.get('page') ?? '1');
+  const sortOrder = (searchParams.get('sortOrder') ?? 'desc') as 'desc' | 'asc';
+  const sortBy = (searchParams.get('sortBy') ?? 'createdAt') as
+    'name' | 'email' | 'createdAt';
+  const limit = searchParams.get('limit') ?? '10';
+  const search = searchParams.get('search') ?? '';
+  const filter = (searchParams.get('filter') ?? 'new') as
+    'new' | 'resolved' | 'spam' | 'in_progress' | 'none';
 
   const { data, isPending, isError } = useQuery(
     trpc.contacts.list.queryOptions({
-      sortBy: sortBy as 'name' | 'email' | 'createdAt',
-      page: page ?? '1',
-      limit: limit,
-      search: search ?? '',
-      sortOrder: sortOrder as 'desc' | 'asc',
+      sortBy,
+      page,
+      limit,
+      search,
+      sortOrder,
+      filterBy: filter,
     }),
   );
 
@@ -55,7 +62,7 @@ const ContactsPage = (): React.JSX.Element => {
     );
   }
 
-  const { data: allContacts } = data;
+  const { data: allContacts, total, totalPages } = data;
 
   const contactStatuses = allContacts.reduce(
     (acc, contact) => {
@@ -82,7 +89,7 @@ const ContactsPage = (): React.JSX.Element => {
           </CardHeader>
 
           <CardContent>
-            <p className="tabular-nums">{data.total}</p>
+            <p className="tabular-nums">{total}</p>
           </CardContent>
         </Card>
 
@@ -106,6 +113,14 @@ const ContactsPage = (): React.JSX.Element => {
         <div></div>
 
         <div className="flex gap-x-2 items-center">
+          <SortOrder
+            pathname="/contacts"
+            page={page}
+            sortBy={sortBy}
+            filter={filter}
+            search={search}
+          />
+
           <SortBy
             lists={[
               { name: 'Name', href: 'name' },
@@ -113,6 +128,10 @@ const ContactsPage = (): React.JSX.Element => {
               { name: 'Date', href: 'createdAt' },
             ]}
             pathname="/contacts"
+            page={page}
+            sortOrder={sortOrder}
+            filter={filter}
+            search={search}
           />
         </div>
       </div>
@@ -151,6 +170,35 @@ const ContactsPage = (): React.JSX.Element => {
           ))}
         </TableBody>
       </Table>
+
+      {totalPages > 1 && (
+        <div className="flex gap-x-2 justify-center items-center">
+          {Array.from({ length: totalPages })
+            .map((_, i) => i + 1)
+            .map((pageNum) => (
+              <Button
+                key={pageNum}
+                className={clsx(
+                  page === pageNum ? 'bg-primary' : 'bg-primary/70',
+                )}
+              >
+                <Link
+                  href={{
+                    pathname: '/contacts',
+                    query: {
+                      ...(search && { search }),
+                      ...(sortBy && { sortBy }),
+                      ...(sortOrder && { sortOrder }),
+                      page: pageNum,
+                    },
+                  }}
+                >
+                  {pageNum}
+                </Link>
+              </Button>
+            ))}
+        </div>
+      )}
     </Bounded>
   );
 };

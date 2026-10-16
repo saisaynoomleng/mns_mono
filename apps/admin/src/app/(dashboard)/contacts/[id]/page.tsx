@@ -8,7 +8,6 @@ import {
   SectionTitle,
   Table,
   TableBody,
-  TableCaption,
   TableCell,
   TableRow,
   toast,
