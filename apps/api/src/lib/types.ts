@@ -12,6 +12,13 @@ export type { AppRouter } from '../trpc/router.js';
 //========================//
 //====== Schema ==========//
 //========================//
+export const PagniatedSchema = z.object({
+  page: z.coerce.number().int().min(1).default(1),
+  limit: z.coerce.number().int().min(1).max(100).default(20),
+});
+
+export const SortOrderSchema = z.enum(['desc', 'asc']).default('desc');
+
 export const ListNewsletterOutputSchema = z.object({
   data: z.array(
     z.object({
@@ -35,5 +42,16 @@ export const ListContactOutputSchema = z.object({
       id: z.uuid(),
     }),
   ),
+  total: z.coerce.number().int().nonnegative(),
+  totalPages: z.coerce.number().int().min(1).default(1),
 });
 export type ListContactOutputType = z.output<typeof ListContactOutputSchema>;
+
+export const ListContactInputSchema = PagniatedSchema.extend({
+  sortOrder: SortOrderSchema,
+  sortBy: z.enum(['name', 'email', 'createdAt']).default('createdAt'),
+  search: z.string().trim().default(''),
+  filterBy: z
+    .enum(['in_progress', 'new', 'resolved', 'spam', 'none'])
+    .default('none'),
+});

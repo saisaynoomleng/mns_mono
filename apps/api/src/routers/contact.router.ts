@@ -18,9 +18,13 @@ import {
 import { emailClient } from '../lib/emailClient.js';
 import { SendEmailCommand } from '@aws-sdk/client-ses';
 import env from '../lib/env.js';
-import { ListContactOutputSchema } from '../lib/types.js';
+import {
+  ListContactInputSchema,
+  ListContactOutputSchema,
+} from '../lib/types.js';
 import { ContactMessageTable } from '../db/schema/contact-messages.schema.js';
-import { eq } from 'drizzle-orm';
+import { count, eq, ilike } from 'drizzle-orm';
+import { escapeLike } from '../lib/helpers.js';
 
 export const contactRouter = router({
   sendContactForm: publicProcedure
@@ -112,22 +116,76 @@ export const contactRouter = router({
     }),
 
   list: organizationProcedure
+    .input(ListContactInputSchema)
     .output(ListContactOutputSchema)
-    .query(async () => {
+    .query(async ({ input }) => {
+      const { sortBy, sortOrder, page, limit, search, filterBy } = input;
+
+      const offset = (page - 1) * limit;
+
+      const pattern = search ? `%${escapeLike(search)}%` : undefined;
+
+      const orderBy = (() => {
+        switch (sortBy) {
+          case 'createdAt': {
+            return {
+              createdAt: sortOrder,
+              name: 'asc',
+              email: 'asc',
+            } as const;
+          }
+
+          case 'email': {
+            return {
+              email: sortOrder,
+              name: 'asc',
+              createdAt: 'desc',
+            } as const;
+          }
+
+          case 'name': {
+            return {
+              name: sortOrder,
+              email: 'asc',
+              createdAt: 'desc',
+            } as const;
+          }
+        }
+      })();
+
       try {
-        const data = await db.query.ContactTable.findMany({
-          columns: {
-            name: true,
-            email: true,
-            createdAt: true,
-            status: true,
-            id: true,
-          },
-        });
+        const [row, [rowCount]] = await Promise.all([
+          db.query.ContactTable.findMany({
+            columns: {
+              name: true,
+              email: true,
+              createdAt: true,
+              status: true,
+              id: true,
+            },
+            limit,
+            offset,
+            orderBy,
+            where: pattern
+              ? { name: { ilike: pattern } }
+              : filterBy !== 'none'
+                ? {
+                    status: filterBy,
+                  }
+                : {},
+          }),
+          db.select({ total: count() }).from(ContactTable),
+        ]);
+
+        const total = rowCount?.total ?? 1;
 
         return {
           success: true,
-          data,
+          data: row,
+          total,
+          totalPages: Math.max(1, Math.ceil(total / limit)),
+          page,
+          limit,
         };
       } catch (error) {
         console.error('Contacts list db error', error);

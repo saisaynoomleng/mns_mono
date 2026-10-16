@@ -27,14 +27,20 @@ const ContactsPage = (): React.JSX.Element => {
   const trpc = useTRPC();
 
   const searchParams = useSearchParams();
-  const page = searchParams.get('page');
-  const sortOrder = searchParams.get('sortOrder');
-  const sortBy = searchParams.get('sortBy');
-  const limit = searchParams.get('limit');
+  const page = searchParams.get('page') ?? '1';
+  const sortOrder = searchParams.get('sortOrder') ?? 'desc';
+  const sortBy = searchParams.get('sortBy') ?? 'createdAt';
+  const limit = searchParams.get('limit') ?? '20';
   const search = searchParams.get('search');
 
   const { data, isPending, isError } = useQuery(
-    trpc.contacts.list.queryOptions(),
+    trpc.contacts.list.queryOptions({
+      sortBy: sortBy as 'name' | 'email' | 'createdAt',
+      page: page ?? '1',
+      limit: limit,
+      search: search ?? '',
+      sortOrder: sortOrder as 'desc' | 'asc',
+    }),
   );
 
   if (isPending) {
@@ -76,7 +82,7 @@ const ContactsPage = (): React.JSX.Element => {
           </CardHeader>
 
           <CardContent>
-            <p className="tabular-nums">2</p>
+            <p className="tabular-nums">{data.total}</p>
           </CardContent>
         </Card>
 
