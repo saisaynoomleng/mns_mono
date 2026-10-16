@@ -32,6 +32,7 @@ export const ListContactOutputSchema = z.object({
       email: z.string(),
       createdAt: z.coerce.date(),
       status: z.enum(['in_progress', 'new', 'spam', 'resolved']),
+      id: z.uuid(),
     }),
   ),
 });
