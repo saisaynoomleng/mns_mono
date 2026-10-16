@@ -21,8 +21,6 @@ export default async function proxy(req: NextRequest) {
     },
   });
 
-  console.log(cookieStore.toString());
-
   if (!response.ok) {
     return NextResponse.redirect(new URL('/sign-in', req.url));
   }

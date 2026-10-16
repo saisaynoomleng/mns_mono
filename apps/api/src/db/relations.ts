@@ -121,4 +121,11 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.InvoicesTable.paymentProviderId,
     }),
   },
+
+  TestimonialTable: {
+    user: r.one.UserTable({
+      from: r.TestimonialTable.userId,
+      to: r.UserTable.id,
+    }),
+  },
 }));

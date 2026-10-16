@@ -3,8 +3,14 @@ import { Bounded, SectionTitle } from '../shared';
 
 import { BsDash } from 'react-icons/bs';
 import { LiaSignOutAltSolid } from 'react-icons/lia';
-import { FaCcMastercard, FaNewspaper, FaUsers } from 'react-icons/fa';
 import {
+  FaCcMastercard,
+  FaNewspaper,
+  FaSortAmountDown,
+  FaUsers,
+} from 'react-icons/fa';
+import {
+  MdDashboard,
   MdDesignServices,
   MdOutlineContactSupport,
   MdOutlineHealthAndSafety,
@@ -35,6 +41,8 @@ const icons: React.ReactElement[] = [
   <CiLinkedin />,
   <SiTiktok />,
   <TbTextWrapDisabled />,
+  <MdDashboard />,
+  <FaSortAmountDown />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
