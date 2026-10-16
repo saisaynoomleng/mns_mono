@@ -23,7 +23,8 @@ import {
   ListContactByIdOutputSchema,
   ListContactInputSchema,
   ListContactOutputSchema,
-  ModifyContactStatusInput,
+  MutateContactStatusInput,
+  TRPCMutationSchema,
 } from '../lib/types.js';
 import { ContactMessageTable } from '../db/schema/contact-messages.schema.js';
 import { count, eq, ilike } from 'drizzle-orm';
@@ -356,7 +357,8 @@ export const contactRouter = router({
     }),
 
   changeContactStatus: organizationProcedure
-    .input(ModifyContactStatusInput)
+    .input(MutateContactStatusInput)
+    .output(TRPCMutationSchema)
     .mutation(async ({ input }) => {
       const { id, status } = input;
 
@@ -370,9 +372,10 @@ export const contactRouter = router({
           .returning({ id: ContactTable.id });
 
         if (!data) {
-          throw new TRPCError({
-            code: 'INTERNAL_SERVER_ERROR',
-          });
+          return {
+            success: false,
+            message: 'Something went wrong, try again.',
+          };
         }
 
         return {

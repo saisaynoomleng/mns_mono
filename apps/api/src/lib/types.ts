@@ -19,6 +19,12 @@ export const PagniatedSchema = z.object({
 
 export const SortOrderSchema = z.enum(['desc', 'asc']).default('desc');
 
+export const TRPCMutationSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+});
+export type TRPCMutationType = z.infer<typeof TRPCMutationSchema>;
+
 export const ListNewsletterOutputSchema = z.object({
   data: z.array(
     z.object({
@@ -75,7 +81,10 @@ export type ListContactByIdOutputType = z.output<
   typeof ListContactByIdOutputSchema
 >;
 
-export const ModifyContactStatusInput = z.object({
+export const MutateContactStatusInput = z.object({
   id: z.uuid(),
   status: z.enum(['new', 'resolved', 'spam']),
 });
+export type MutateContactStatusInputType = z.infer<
+  typeof MutateContactStatusInput
+>['status'];
