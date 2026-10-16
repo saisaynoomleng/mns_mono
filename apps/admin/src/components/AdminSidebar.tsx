@@ -18,6 +18,7 @@ import React from 'react';
 import { SignOutButton } from './SignOutButton';
 import { FaCcMastercard, FaNewspaper, FaUsers } from 'react-icons/fa';
 import {
+  MdDashboard,
   MdDesignServices,
   MdOutlineContactSupport,
   MdOutlineHealthAndSafety,
@@ -35,6 +36,7 @@ const MARKETING_LINKS = [
 ];
 
 const OPERATION_LINKS = [
+  { label: 'Dashboard', href: '/', icon: <MdDashboard /> },
   { label: 'Services', href: '/services', icon: <MdDesignServices /> },
   {
     label: 'Subscription Plans',
@@ -82,7 +84,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {OPERATION_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
+                <SidebarMenuButton asChild isActive={l.href === pathname}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -107,7 +109,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {APPLICATION_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
+                <SidebarMenuButton asChild isActive={l.href === pathname}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -132,7 +134,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {USER_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
+                <SidebarMenuButton asChild isActive={l.href === pathname}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>
@@ -157,7 +159,7 @@ export const AdminSidebar = (): React.JSX.Element => {
           <SidebarMenu>
             {MARKETING_LINKS.map((l) => (
               <SidebarMenuItem key={l.label}>
-                <SidebarMenuButton asChild isActive={l.href.includes(pathname)}>
+                <SidebarMenuButton asChild isActive={l.href === pathname}>
                   <Link href={l.href}>
                     {sidebarOpen ? (
                       <>

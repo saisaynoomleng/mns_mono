@@ -12,6 +12,7 @@
     "@mns/api": "workspace:*",
     "@mns/ui": "workspace:*",
     "@mns/utils": "workspace:*",
+    "@next/third-parties": "^16.4.0",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/tanstack-react-query": "catalog:",
@@ -24,7 +25,6 @@
     "zod": "catalog:"
   },
   "devDependencies": {
-    "tailwind-merge": "3.7.0",
     "@t3-oss/env-nextjs": "catalog:",
     "@tailwindcss/turbopack": "^4",
     "@types/node": "catalog:",
@@ -34,6 +34,7 @@
     "clsx": "catalog:",
     "eslint": "^9",
     "eslint-config-next": "16.4.0",
+    "tailwind-merge": "3.7.0",
     "tailwindcss": "^4",
     "typescript": "catalog:"
   },
