@@ -55,3 +55,27 @@ export const ListContactInputSchema = PagniatedSchema.extend({
     .enum(['in_progress', 'new', 'resolved', 'spam', 'none'])
     .default('none'),
 });
+
+export const ListContactByIdInputSchema = z.object({
+  id: z.uuid(),
+});
+
+export const ListContactByIdOutputSchema = z.object({
+  name: z.string(),
+  email: z.string(),
+  status: z.enum(['in_progress', 'new', 'resolved', 'spam']),
+  companyName: z.string().optional().nullable(),
+  position: z.string().optional().nullable(),
+  minBudget: z.coerce.number().nonnegative(),
+  maxBudget: z.coerce.number().nonnegative(),
+  message: z.string(),
+  createdAt: z.coerce.date(),
+});
+export type ListContactByIdOutputType = z.output<
+  typeof ListContactByIdOutputSchema
+>;
+
+export const ModifyContactStatusInput = z.object({
+  id: z.uuid(),
+  status: z.enum(['new', 'resolved', 'spam']),
+});
