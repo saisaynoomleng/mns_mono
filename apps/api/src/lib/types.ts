@@ -76,6 +76,15 @@ export const ListContactByIdOutputSchema = z.object({
   maxBudget: z.coerce.number().nonnegative(),
   message: z.string(),
   createdAt: z.coerce.date(),
+  messages: z.array(
+    z.object({
+      id: z.uuid(),
+      direction: z.enum(['outbound', 'inbound']),
+      status: z.enum(['pending', 'sent', 'failed']),
+      message: z.string(),
+      createdAt: z.coerce.date(),
+    }),
+  ),
 });
 export type ListContactByIdOutputType = z.output<
   typeof ListContactByIdOutputSchema

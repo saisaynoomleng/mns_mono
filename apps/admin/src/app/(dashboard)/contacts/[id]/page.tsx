@@ -4,6 +4,8 @@ import { PageBreadcrumb } from '@/components/PageBreadcrumb';
 import { useTRPC } from '@/components/Provider';
 import {
   Bounded,
+  ReplyToContactForm,
+  SectionTitle,
   Table,
   TableBody,
   TableCaption,
@@ -11,7 +13,12 @@ import {
   TableRow,
   toast,
 } from '@mns/ui';
-import { formatDateUS, formatPriceInUSD, toTitleCase } from '@mns/utils';
+import {
+  formatDateTimeUS,
+  formatDateUS,
+  formatPriceInUSD,
+  toTitleCase,
+} from '@mns/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { useParams } from 'next/navigation';
 import { ContactStatusBadge } from '../_components/ContactStatusBadge';
@@ -36,6 +43,18 @@ const ContactDetailPage = () => {
 
       onError: (result) => {
         toast.error(result.message);
+      },
+    }),
+  );
+
+  const replyToContact = useMutation(
+    trpc.contacts.replyToContact.mutationOptions({
+      onSuccess: (result) => {
+        toast.success(result.message);
+      },
+
+      onError: (result) => {
+        toast.success(result.message);
       },
     }),
   );
@@ -66,19 +85,21 @@ const ContactDetailPage = () => {
     minBudget,
     maxBudget,
     message,
+    messages,
   } = data;
 
   return (
     <Bounded as="main" padding="none" spacing="md">
       <PageBreadcrumb />
 
-      <div className="grid md:grid-cols-[auto_1fr] md:gap-x-6 gap-y-4">
+      <div className="grid md:grid-cols-2 md:gap-x-6 gap-y-4">
+        <SectionTitle as="h3" size="sm">
+          Contact Detail
+        </SectionTitle>
         <ContactStatusBadge status={status} className="col-span-full" />
 
         <div className="space-y-4 md:space-y-6">
-          <Table className="caption-top table-fixed max-w-100 md:max-w-130">
-            <TableCaption>Contact Details</TableCaption>
-
+          <Table className="caption-top table-fixed ">
             <TableBody>
               <TableRow>
                 <TableCell>Name</TableCell>
@@ -138,6 +159,54 @@ const ContactDetailPage = () => {
           <p className="font-semibold">Message</p>
 
           <p className="prose prose-md min-w-full">{message}</p>
+        </div>
+      </div>
+
+      <div className="space-y-4">
+        <SectionTitle as="h3" size="sm">
+          Reply to Contact
+        </SectionTitle>
+
+        <ReplyToContactForm
+          action={async (data) => {
+            return await replyToContact.mutateAsync({
+              id: data.id,
+              subject: data.subject,
+              message: data.message,
+            });
+          }}
+          id={params.id}
+          isPending={replyToContact.isPending}
+        />
+      </div>
+
+      <div className="space-y-4">
+        <SectionTitle as="h3" size="sm">
+          Chat History
+        </SectionTitle>
+
+        <div className="flex gap-x-2 overflow-auto p-5">
+          {messages.map((m) => (
+            <div
+              key={m.id}
+              className="flex-1 max-w-100 p-2 shadow-lg flex flex-col gap-y-2 rounded-lg"
+            >
+              <div className="flex justify-between items-center text-fs-300">
+                <p className="p-1 border w-fit rounded-lg border-muted">
+                  {toTitleCase(m.direction)}
+                </p>
+                <p className="p-1 border w-fit rounded-lg border-muted">
+                  {formatDateTimeUS(m.createdAt)}
+                </p>
+              </div>
+              <p>
+                Status:{' '}
+                <span className="font-semibold">{toTitleCase(m.status)}</span>
+              </p>
+
+              <p className="prose prose-sm">{m.message}</p>
+            </div>
+          ))}
         </div>
       </div>
     </Bounded>
