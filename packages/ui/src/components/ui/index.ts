@@ -7,3 +7,5 @@ export * from './table';
 export * from './dropdown-menu';
 export * from './input';
 export * from './input-group';
+export * from './spinner';
+export * from './card';

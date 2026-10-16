@@ -121,6 +121,7 @@ export const contactRouter = router({
             email: true,
             createdAt: true,
             status: true,
+            id: true,
           },
         });
 
