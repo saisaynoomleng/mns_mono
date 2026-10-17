@@ -1,7 +1,13 @@
-import React from 'react';
+import { SignOutButton } from '@/components/SignOutButton';
+import { Bounded } from '@mns/ui';
 
 const UsersPage = () => {
-  return <div>UsersPage</div>;
+  return (
+    <Bounded>
+      UsersPage
+      <SignOutButton />
+    </Bounded>
+  );
 };
 
 export default UsersPage;
