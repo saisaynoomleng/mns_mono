@@ -1,0 +1,45 @@
+{
+  "name": "agency",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint"
+  },
+  "dependencies": {
+    "@mns/api": "workspace:*",
+    "@mns/ui": "workspace:*",
+    "@mns/utils": "workspace:*",
+    "@sanity/image-url": "^2.1.1",
+    "@t3-oss/env-nextjs": "catalog:",
+    "@tanstack/react-query": "catalog:",
+    "@trpc/client": "catalog:",
+    "@trpc/tanstack-react-query": "catalog:",
+    "better-auth": "catalog:",
+    "dotenv": "catalog:",
+    "next": "catalog:",
+    "next-sanity": "^13.3.4",
+    "react": "catalog:",
+    "react-dom": "catalog:",
+    "react-icons": "catalog:",
+    "zod": "catalog:"
+  },
+  "devDependencies": {
+    "@tailwindcss/turbopack": "^4",
+    "@types/node": "catalog:",
+    "@types/react": "catalog:",
+    "@types/react-dom": "catalog:",
+    "babel-plugin-react-compiler": "1.0.0",
+    "clsx": "catalog:",
+    "eslint": "^9",
+    "eslint-config-next": "16.4.2",
+    "superjson": "catalog:",
+    "tailwind-merge": "3.7.0",
+    "tailwindcss": "^4",
+    "typescript": "catalog:",
+    "vitest": "catalog:"
+  },
+  "packageManager": "pnpm@11.24.0"
+}
