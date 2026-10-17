@@ -74,10 +74,6 @@ export const SignInForm = ({
           onSubmit={form.handleSubmit(onSubmit)}
           className="generic-form"
         >
-          <OAuthSignIn OAuthAction={OAuthAction} />
-
-          <FieldSeparator>Or Sign In With</FieldSeparator>
-
           <FormTextField
             name="email"
             type="email"
@@ -118,6 +114,10 @@ export const SignInForm = ({
               )}
             </SubmitButton>
           </Field>
+
+          <FieldSeparator>Or</FieldSeparator>
+
+          <OAuthSignIn OAuthAction={OAuthAction} />
         </form>
       </CardContent>
 
