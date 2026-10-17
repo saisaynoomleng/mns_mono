@@ -12,7 +12,7 @@ export type { AppRouter } from '../trpc/router.js';
 //========================//
 //====== Schema ==========//
 //========================//
-export const PagniatedSchema = z.object({
+export const PaginatedSchema = z.object({
   page: z.coerce.number().int().min(1).default(1),
   limit: z.coerce.number().int().min(1).max(100).default(20),
 });
@@ -53,7 +53,7 @@ export const ListContactOutputSchema = z.object({
 });
 export type ListContactOutputType = z.output<typeof ListContactOutputSchema>;
 
-export const ListContactInputSchema = PagniatedSchema.extend({
+export const ListContactInputSchema = PaginatedSchema.extend({
   sortOrder: SortOrderSchema,
   sortBy: z.enum(['name', 'email', 'createdAt']).default('createdAt'),
   search: z.string().trim().default(''),

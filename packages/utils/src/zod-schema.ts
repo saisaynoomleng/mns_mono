@@ -5,6 +5,12 @@ import { passwordRules } from './helper.js';
 //======Schema Helper========//
 //==========================//
 
+export const TRPCMutationSchema = z.object({
+  success: z.boolean(),
+  message: z.string(),
+});
+export type TRPCMutationType = z.infer<typeof TRPCMutationSchema>;
+
 export const emailSchema = z
   .email({ error: 'Must be a valid email addres' })
   .min(1, { error: 'Email is required!' });
