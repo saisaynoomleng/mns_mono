@@ -22,6 +22,8 @@ import { LuMessageCircleWarning } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
+import { IoIosCheckmark } from 'react-icons/io';
+import { IoCheckmark, IoClose } from 'react-icons/io5';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -43,6 +45,8 @@ const icons: React.ReactElement[] = [
   <TbTextWrapDisabled />,
   <MdDashboard />,
   <FaSortAmountDown />,
+  <IoClose />,
+  <IoCheckmark />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
