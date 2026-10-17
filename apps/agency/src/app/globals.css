@@ -1,0 +1,9 @@
+@import 'tailwindcss';
+@import '@mns/ui/styles';
+@source '../../../../packages/ui/**/*.{js,ts,jsx,tsx}';
+
+@theme inline {
+  --font-header: var(--font-fraunces);
+  --font-body: var(--font-sora);
+  --font-cursive: var(--font-playpen-sans);
+}
