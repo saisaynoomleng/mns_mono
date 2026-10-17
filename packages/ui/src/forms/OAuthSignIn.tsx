@@ -18,29 +18,41 @@ export const OAuthSignIn = ({
   OAuthAction,
 }: OAuthSignInProps): React.JSX.Element => {
   return (
-    <div
-      className={twMerge(
-        clsx('flex gap-x-2 items-center justify-center', className),
-      )}
-    >
-      <Button type="button" onClick={() => OAuthAction('google')}>
+    <div className={twMerge(clsx('flex flex-col gap-y-2', className))}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => OAuthAction('google')}
+      >
         <SiGoogle aria-label="sign in with google" />
-        <span className="sr-only">sign in with google</span>
+        <span>Continue in with Google</span>
       </Button>
 
-      <Button type="button" onClick={() => OAuthAction('facebook')}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => OAuthAction('facebook')}
+      >
         <SiFacebook aria-label="sign in with facebook" />
-        <span className="sr-only">sign in with facebook</span>
+        <span>Continue in with Facebook</span>
       </Button>
 
-      <Button type="button" onClick={() => OAuthAction('linkedin')}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => OAuthAction('linkedin')}
+      >
         <CiLinkedin aria-label="sign in with linkedin" />
-        <span className="sr-only">sign in with linkedIn</span>
+        <span>Continue in with LinkedIn</span>
       </Button>
 
-      <Button type="button" onClick={() => OAuthAction('tiktok')}>
+      <Button
+        variant="outline"
+        type="button"
+        onClick={() => OAuthAction('tiktok')}
+      >
         <SiTiktok aria-label="sign in with tiktok" />
-        <span className="sr-only">sign in with tiktok</span>
+        <span>Continue in with TikTok</span>
       </Button>
     </div>
   );
