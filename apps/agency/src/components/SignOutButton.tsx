@@ -1,11 +1,12 @@
 'use client';
 
 import { authClient } from '@/lib/auth-client';
-import { Button } from '@mns/ui';
+import { Button, useSidebar } from '@mns/ui';
 import { useRouter } from 'next/navigation';
 import { LiaSignOutAltSolid } from 'react-icons/lia';
 
 export const SignOutButton = () => {
+  const { open } = useSidebar();
   const router = useRouter();
 
   const handleSignOut = async () => {
@@ -20,10 +21,21 @@ export const SignOutButton = () => {
 
   return (
     <Button variant="destructive" onClick={handleSignOut}>
-      <span>
-        <LiaSignOutAltSolid />
-      </span>
-      <span>Sign Out</span>
+      {open ? (
+        <>
+          <span>
+            <LiaSignOutAltSolid />
+          </span>
+          <span>Sign Out</span>
+        </>
+      ) : (
+        <>
+          <span>
+            <LiaSignOutAltSolid />
+          </span>
+          <span className="sr-only">Sign Out</span>
+        </>
+      )}
     </Button>
   );
 };

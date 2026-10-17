@@ -14,6 +14,7 @@ import {
   MdDesignServices,
   MdOutlineContactSupport,
   MdOutlineHealthAndSafety,
+  MdOutlinePayments,
   MdReviews,
 } from 'react-icons/md';
 import { AiFillAppstore } from 'react-icons/ai';
@@ -22,8 +23,7 @@ import { LuMessageCircleWarning } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
-import { IoIosCheckmark } from 'react-icons/io';
-import { IoCheckmark, IoClose } from 'react-icons/io5';
+import { IoCheckmark, IoClose, IoSettingsSharp } from 'react-icons/io5';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -47,6 +47,8 @@ const icons: React.ReactElement[] = [
   <FaSortAmountDown />,
   <IoClose />,
   <IoCheckmark />,
+  <IoSettingsSharp />,
+  <MdOutlinePayments />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
