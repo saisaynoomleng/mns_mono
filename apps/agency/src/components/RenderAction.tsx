@@ -8,15 +8,33 @@ type RenderActionProps = {
   className?: string;
   label: string;
   href: string;
+  type?: 'text' | 'link';
 };
 
-const RenderAction = ({ className, label, href }: RenderActionProps) => {
-  return (
+const RenderAction = ({
+  className,
+  label,
+  href,
+  type = 'link',
+}: RenderActionProps) => {
+  return type === 'link' ? (
     <Button variant="link" className={twMerge(clsx('', className))} asChild>
       <Link href={href} className="capitalize">
         {label}
       </Link>
     </Button>
+  ) : (
+    <Link
+      href={href}
+      className={twMerge(
+        clsx(
+          'capitalize hover:underline underline-offset-2 text-primary',
+          className,
+        ),
+      )}
+    >
+      {label}
+    </Link>
   );
 };
 

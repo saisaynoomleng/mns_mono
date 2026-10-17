@@ -122,7 +122,10 @@ export const SignInForm = ({
       </CardContent>
 
       <CardFooter className="">
-        {renderSignUp({ label: signUpCTA.label, href: signUpCTA.href })}
+        <p className="text-right w-full">
+          Already a member?{' '}
+          {renderSignUp({ label: signUpCTA.label, href: signUpCTA.href })}
+        </p>
       </CardFooter>
     </Card>
   );

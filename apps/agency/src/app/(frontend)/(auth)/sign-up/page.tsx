@@ -6,6 +6,7 @@ import { authClient } from '@/lib/auth-client';
 import { OAuthProviders, SignUpFormInput } from '@mns/utils';
 import { useRouter } from 'next/navigation';
 import RenderAction from '@/components/RenderAction';
+import { env } from '@/lib/env/client';
 
 const SignUpPage = (): React.JSX.Element => {
   const router = useRouter();
@@ -16,6 +17,7 @@ const SignUpPage = (): React.JSX.Element => {
         name: data.name,
         email: data.email,
         password: data.password,
+        callbackURL: `${env.NEXT_PUBLIC_APP_URL}/users`,
       },
       {
         onSuccess: () => {
@@ -30,9 +32,20 @@ const SignUpPage = (): React.JSX.Element => {
   };
 
   const handleOAuthSignIn = async (provider: OAuthProviders) => {
-    await authClient.signIn.social({
-      provider,
-    });
+    await authClient.signIn.social(
+      {
+        provider,
+      },
+      {
+        onSuccess: () => {
+          router.push('/users');
+        },
+
+        onError: (ctx) => {
+          toast.error(ctx.error.message);
+        },
+      },
+    );
   };
 
   return (
