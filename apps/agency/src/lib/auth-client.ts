@@ -1,11 +1,40 @@
 import { createAuthClient } from 'better-auth/react';
 import { env } from './env/client';
-import { adminClient, emailOTPClient } from 'better-auth/client/plugins';
+import {
+  adminClient,
+  emailOTPClient,
+  inferAdditionalFields,
+} from 'better-auth/client/plugins';
 
 export const authClient = createAuthClient({
   baseURL: `${env.NEXT_PUBLIC_API_URL}/api/auth`,
   fetchOptions: {
     credentials: 'include',
   },
-  plugins: [emailOTPClient(), adminClient()],
+  plugins: [
+    emailOTPClient(),
+    adminClient(),
+    inferAdditionalFields({
+      user: {
+        phone: {
+          type: 'string',
+          required: false,
+          input: true,
+          returned: true,
+        },
+        companyName: {
+          type: 'string',
+          required: false,
+          input: true,
+          returned: true,
+        },
+        position: {
+          type: 'string',
+          required: false,
+          input: true,
+          returned: true,
+        },
+      },
+    }),
+  ],
 });
