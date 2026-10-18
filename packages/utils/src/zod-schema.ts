@@ -207,3 +207,15 @@ export type CreateApplicationFormInput = z.input<
 export type CreateApplicationFormOutput = z.output<
   typeof CreateApplicationFormSchema
 >;
+
+//============================//
+//====== User Forms =========//
+//==========================//
+
+export const UserInfoFormSchema = z.object({
+  name: z.string().min(1, { error: 'Name is required' }),
+  companyName: z.string().optional().nullable(),
+  position: z.string().optional().nullable(),
+  phone: z.string().optional().nullable(),
+});
+export type UserInfoFormInput = z.input<typeof UserInfoFormSchema>;

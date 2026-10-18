@@ -35,6 +35,11 @@ export const relations = defineRelations(schema, (r) => ({
       to: r.ReportIssueTable.userId,
     }),
 
+    address: r.one.AddressTable({
+      from: r.UserTable.id,
+      to: r.AddressTable.userId,
+    }),
+
     featureRequests: r.many.FeatureRequestTable({
       from: r.UserTable.id,
       to: r.FeatureRequestTable.userId,
@@ -43,6 +48,13 @@ export const relations = defineRelations(schema, (r) => ({
     invoices: r.many.InvoicesTable({
       from: r.UserTable.id,
       to: r.InvoicesTable.userId,
+    }),
+  },
+
+  AddressTable: {
+    user: r.one.UserTable({
+      from: r.AddressTable.userId,
+      to: r.UserTable.id,
     }),
   },
 

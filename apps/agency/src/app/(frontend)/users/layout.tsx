@@ -8,7 +8,7 @@ const UserLayout = ({ children }: LayoutProps<'/users'>) => {
       <SidebarProvider>
         <UserSidebar />
 
-        <div className="min-w-full">{children}</div>
+        <div className="w-full">{children}</div>
       </SidebarProvider>
     </UserSessionProvider>
   );
