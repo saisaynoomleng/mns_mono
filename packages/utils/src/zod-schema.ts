@@ -229,3 +229,22 @@ export const UserAddressFormSchema = z.object({
   country: z.string().min(1, { error: 'Country is required' }),
 });
 export type UserAddressFormInput = z.input<typeof UserAddressFormSchema>;
+
+export const UserRequestChangeEmailFormSchema = z
+  .object({
+    oldEmail: emailSchema,
+    newEmail: emailSchema,
+  })
+  .refine((data) => data.oldEmail !== data.newEmail, {
+    error: 'New email cannot be the same as old email',
+    path: ['newEmail'],
+  });
+export type UserRequestChangeEmailInput = z.input<
+  typeof UserRequestChangeEmailFormSchema
+>;
+
+export const UserChangeEmailFormSchema = z.object({
+  newEmail: emailSchema,
+  otp: otpSchema,
+});
+export type UserChangeEmailInput = z.input<typeof UserChangeEmailFormSchema>;

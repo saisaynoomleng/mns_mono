@@ -10,3 +10,4 @@ export * from './input-group';
 export * from './spinner';
 export * from './card';
 export * from './pagination';
+export * from './input-otp';
