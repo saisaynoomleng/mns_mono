@@ -10,6 +10,7 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
+  useSidebar,
 } from '@mns/ui';
 import React from 'react';
 import { SignOutButton } from './SignOutButton';
@@ -21,6 +22,7 @@ import { LuMessageCircleWarning } from 'react-icons/lu';
 import { TfiSupport } from 'react-icons/tfi';
 import { useUserSessionContext } from './UserSessionProvider';
 import Image from 'next/image';
+import clsx from 'clsx';
 
 const BILLING_LINKS = [
   {
@@ -46,6 +48,7 @@ const APPLICATION_LINKS = [
 
 const UserSidebar = (): React.JSX.Element | null => {
   const { session } = useUserSessionContext();
+  const { open } = useSidebar();
 
   if (!session) return null;
 
@@ -62,7 +65,7 @@ const UserSidebar = (): React.JSX.Element | null => {
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>
-            <div className="flex gap-x-2">
+            <div className={clsx('flex gap-x-2', open ? 'flex' : 'hidden')}>
               <Image
                 src={userProfile}
                 alt="user profile"
@@ -86,7 +89,7 @@ const UserSidebar = (): React.JSX.Element | null => {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Link href="/users">
+                <Link href="/user">
                   <IoSettingsSharp />
                   <span>Account Setting</span>
                 </Link>

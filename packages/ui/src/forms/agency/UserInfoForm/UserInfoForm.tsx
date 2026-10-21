@@ -42,7 +42,7 @@ export const UserInfoForm = ({
   };
 
   return (
-    <div className={twMerge(clsx('space-y-2', className))}>
+    <div className={twMerge(clsx('space-y-4 md:space-y-6', className))}>
       <SectionTitle size="sm" as="h3">
         Basic Info
       </SectionTitle>
