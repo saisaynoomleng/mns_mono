@@ -248,3 +248,38 @@ export const UserChangeEmailFormSchema = z.object({
   otp: otpSchema,
 });
 export type UserChangeEmailInput = z.input<typeof UserChangeEmailFormSchema>;
+
+export const UserUpdatePasswordFormSchema = z
+  .object({
+    oldPassword: passwordSchema,
+    newPassword: z
+      .string()
+      .min(1, { error: 'New Password is required' })
+      .max(128, { error: 'New password cannot exceeds 128 characters' }),
+    confirmNewPassword: z
+      .string()
+      .min(1, { error: 'Confirm New Password is required' })
+      .max(128, {
+        error: 'Confirm New password cannot exceeds 128 characters',
+      }),
+  })
+  .superRefine((val, ctx) => {
+    if (val.oldPassword === val.newPassword) {
+      ctx.addIssue({
+        message: 'Old password cannot be the same as new password',
+        path: ['newPassword'],
+        code: 'custom',
+      });
+    }
+
+    if (val.newPassword !== val.confirmNewPassword) {
+      ctx.addIssue({
+        code: 'custom',
+        message: 'Password must match',
+        path: ['confirmNewPassword'],
+      });
+    }
+  });
+export type UserUpdatePasswordFormInput = z.input<
+  typeof UserUpdatePasswordFormSchema
+>;
