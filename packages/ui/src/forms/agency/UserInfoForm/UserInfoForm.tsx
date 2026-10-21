@@ -1,6 +1,6 @@
 'use client';
 
-import { Card, CardContent, CardHeader, CardTitle } from '#components/ui/card';
+import { Card, CardContent } from '#components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { type UserInfoFormInput, UserInfoFormSchema } from '@mns/utils';
 import clsx from 'clsx';
@@ -11,6 +11,7 @@ import { FormTextField } from '../../FormTextField';
 import { Field } from '#components/ui/field';
 import { SubmitButton } from '#components/shared/SubmitButton/SubmitButton';
 import { LoadingSpinner } from '#components/shared/LoadingSpinner/LoadingSpinner';
+import { SectionTitle } from '#components/shared/SectionTitle/SectionTitle';
 
 type UserInfoFormProps = {
   user: UserInfoFormInput;
@@ -41,56 +42,58 @@ export const UserInfoForm = ({
   };
 
   return (
-    <Card className={twMerge(clsx('', className))}>
-      <CardHeader>
-        <CardTitle>Update Basic Info</CardTitle>
-      </CardHeader>
+    <div className={twMerge(clsx('space-y-2', className))}>
+      <SectionTitle size="sm" as="h3">
+        Basic Info
+      </SectionTitle>
 
-      <CardContent>
-        <form
-          noValidate
-          onSubmit={form.handleSubmit(onSubmit)}
-          className="generic-form"
-        >
-          <FormTextField
-            name="name"
-            control={form.control}
-            label="Full Name"
-            type="text"
-            autoComplete="name"
-          />
+      <Card>
+        <CardContent>
+          <form
+            noValidate
+            onSubmit={form.handleSubmit(onSubmit)}
+            className="generic-form"
+          >
+            <FormTextField
+              name="name"
+              control={form.control}
+              label="Full Name"
+              type="text"
+              autoComplete="name"
+            />
 
-          <FormTextField
-            name="companyName"
-            control={form.control}
-            label="Company Name"
-            description="Company name is optional"
-            type="text"
-          />
+            <FormTextField
+              name="companyName"
+              control={form.control}
+              label="Company Name"
+              description="Company name is optional"
+              type="text"
+            />
 
-          <FormTextField
-            name="position"
-            control={form.control}
-            label="Position"
-            description="Position is optional"
-            type="text"
-          />
+            <FormTextField
+              name="position"
+              control={form.control}
+              label="Position"
+              description="Position is optional"
+              type="text"
+            />
 
-          <FormTextField
-            name="phone"
-            control={form.control}
-            label="Phone"
-            description="Phone number is optional"
-            type="text"
-          />
+            <FormTextField
+              name="phone"
+              control={form.control}
+              label="Phone"
+              description="Phone number is optional"
+              type="text"
+            />
 
-          <Field orientation="horizontal">
-            <SubmitButton disabled={isSubmitting}>
-              {isSubmitting ? <LoadingSpinner /> : 'Update'}
-            </SubmitButton>
-          </Field>
-        </form>
-      </CardContent>
-    </Card>
+            <Field orientation="horizontal">
+              <SubmitButton disabled={isSubmitting}>
+                {isSubmitting ? <LoadingSpinner /> : 'Update'}
+              </SubmitButton>
+            </Field>
+          </form>
+        </CardContent>
+      </Card>
+    </div>
   );
 };

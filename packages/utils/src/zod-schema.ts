@@ -219,3 +219,13 @@ export const UserInfoFormSchema = z.object({
   phone: z.string().optional().nullable(),
 });
 export type UserInfoFormInput = z.input<typeof UserInfoFormSchema>;
+
+export const UserAddressFormSchema = z.object({
+  address1: z.string().min(1, { error: 'Address 1 is required' }),
+  address2: z.string().nullable(),
+  city: z.string().min(1, { error: 'City is required' }),
+  state: z.string().min(1, { error: 'State is required' }),
+  zip: z.string().min(1, { error: 'Zip/Postal code is required' }),
+  country: z.string().min(1, { error: 'Country is required' }),
+});
+export type UserAddressFormInput = z.input<typeof UserAddressFormSchema>;
