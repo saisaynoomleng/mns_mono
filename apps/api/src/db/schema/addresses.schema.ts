@@ -10,8 +10,8 @@ export const AddressTable = t.pgTable(
       .uuid('user_id')
       .references(() => UserTable.id, { onDelete: 'cascade' })
       .notNull(),
-    street1: t.varchar('street_1', { length: 255 }).notNull(),
-    street2: t.varchar('street_2', { length: 255 }),
+    address1: t.varchar('address_1', { length: 255 }).notNull(),
+    address2: t.varchar('address_2', { length: 255 }),
     city: t.varchar('city', { length: 255 }).notNull(),
     state: t.varchar('state', { length: 255 }).notNull(),
     zip: t.varchar('zip', { length: 100 }).notNull(),
