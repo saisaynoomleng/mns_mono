@@ -65,28 +65,37 @@ export const UserUpdatePasswordForm = ({
             className={clsx('generic-form')}
             onSubmit={form.handleSubmit(onSubmit)}
           >
-            <FormTextField
-              name="oldPassword"
-              type="password"
-              label="Current Password"
-              control={form.control}
-            />
+            <div className="flex md:gap-x-4 flex-col md:flex-row gap-y-4 md:items-center">
+              <div className="flex-1">
+                <FormTextField
+                  name="oldPassword"
+                  type="password"
+                  label="Current Password"
+                  control={form.control}
+                />
 
-            <FormTextField
-              name="newPassword"
-              type="password"
-              label="New Password"
-              control={form.control}
-            />
+                <FormTextField
+                  name="newPassword"
+                  type="password"
+                  label="New Password"
+                  control={form.control}
+                />
 
-            <FormTextField
-              name="confirmNewPassword"
-              type="password"
-              label="Confirm New Password"
-              control={form.control}
-            />
+                <FormTextField
+                  name="confirmNewPassword"
+                  type="password"
+                  label="Confirm New Password"
+                  control={form.control}
+                />
+              </div>
 
-            <PasswordChecker password={password} />
+              <div className="flex-1">
+                <PasswordChecker
+                  password={password}
+                  className="md:text-fs-400"
+                />
+              </div>
+            </div>
 
             <Field orientation="horizontal">
               <SubmitButton disabled={isSubmitting}>

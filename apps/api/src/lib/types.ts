@@ -8,6 +8,9 @@ import { UserAddressFormSchema } from '@mns/utils';
 
 export type BetterAuthSessionProps = typeof auth.$Infer.Session;
 export type BetterAuthUserProps = typeof auth.$Infer.Session.user;
+export type BetterAuthAccountsProps = Awaited<
+  ReturnType<typeof auth.api.listUserAccounts>
+>;
 export type { AppRouter } from '../trpc/router.js';
 
 //========================//
