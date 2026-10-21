@@ -3,6 +3,7 @@
 import { Bounded } from '@mns/ui';
 import UserBasicInfo from './_components/BasicInfo';
 import UserChangeEmail from './_components/Email';
+import UserUpdatePassword from './_components/UpdatePassword';
 
 const UsersPage = () => {
   return (
@@ -10,6 +11,8 @@ const UsersPage = () => {
       <UserBasicInfo />
 
       <UserChangeEmail />
+
+      <UserUpdatePassword />
     </Bounded>
   );
 };
