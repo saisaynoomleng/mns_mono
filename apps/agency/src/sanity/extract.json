@@ -150,6 +150,13 @@
               },
               "optional": true
             },
+            "phone": {
+              "type": "objectAttribute",
+              "value": {
+                "type": "string"
+              },
+              "optional": true
+            },
             "street": {
               "type": "objectAttribute",
               "value": {

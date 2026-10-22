@@ -83,6 +83,10 @@ export const siteSettingType = defineType({
           type: 'email',
         }),
         defineField({
+          name: 'phone',
+          type: 'string',
+        }),
+        defineField({
           name: 'street',
           type: 'string',
         }),

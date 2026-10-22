@@ -11,6 +11,7 @@ import {
   InputGroupAddon,
   InputGroupTextarea,
 } from '#components/ui/input-group';
+import { twMerge } from 'cn';
 import { useId, type ComponentPropsWithoutRef } from 'react';
 import {
   Controller,
@@ -26,6 +27,7 @@ type FormTextareaFieldProps<T extends FieldValues> = {
   maxLength?: number;
   label: string;
   description?: string;
+  className?: string;
 } & Omit<
   ComponentPropsWithoutRef<'textarea'>,
   | 'name'
@@ -47,6 +49,7 @@ export const FormTextareaField = <T extends FieldValues>({
   control,
   label,
   description,
+  className,
   ...props
 }: FormTextareaFieldProps<T>) => {
   const id = useId();
@@ -56,7 +59,7 @@ export const FormTextareaField = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <Field aria-invalid={fieldState.invalid}>
+        <Field aria-invalid={fieldState.invalid} className={twMerge(className)}>
           <FieldLabel htmlFor={id} aria-invalid={fieldState.invalid}>
             {label}
           </FieldLabel>
