@@ -6,6 +6,7 @@ import UserChangeEmail from './_components/Email';
 import UserUpdatePassword from './_components/UpdatePassword';
 import { LinkAccounts } from './_components/LinkAccounts';
 import UserAddress from './_components/Address';
+import { UserDeleteAccount } from './_components/DeleteAccount';
 
 const UsersPage = () => {
   const { isMobile } = useSidebar();
@@ -27,6 +28,8 @@ const UsersPage = () => {
       <UserUpdatePassword />
 
       <LinkAccounts />
+
+      <UserDeleteAccount />
     </Bounded>
   );
 };

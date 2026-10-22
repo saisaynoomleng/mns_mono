@@ -63,7 +63,7 @@ const UserSidebar = (): React.JSX.Element | null => {
     <Sidebar
       collapsible={isMobile ? 'offcanvas' : 'none'}
       variant="floating"
-      className="sticky top-5"
+      className={clsx('sticky top-6', isMobile ? '' : 'border border-input/10')}
     >
       <SidebarHeader>
         <SidebarMenu>

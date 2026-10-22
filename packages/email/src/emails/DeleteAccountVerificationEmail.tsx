@@ -29,7 +29,10 @@ const DeleteAccountVerification = ({
 
           <Text>
             This link will be expired in
-            <span className="font-semibold text-primary-400">{expiresAt}</span>
+            <span className="font-semibold text-primary-400">
+              {' '}
+              {expiresAt}{' '}
+            </span>
             minutes.
           </Text>
 
