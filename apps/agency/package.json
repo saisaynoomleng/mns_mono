@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "sanity:typegen": "sanity typegen generate"
   },
   "dependencies": {
     "@mns/api": "workspace:*",

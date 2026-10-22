@@ -1,4 +1,5 @@
 import { FaUserGear } from 'react-icons/fa6';
+import { GiGearHammer } from 'react-icons/gi';
 import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
 import { MdOutlineDesignServices } from 'react-icons/md';
@@ -11,6 +12,10 @@ export const structure: StructureResolver = (S) =>
     .title('mns')
     .items([
       S.divider().title('Operations'),
+      S.listItem()
+        .singleton('siteSetting')
+        .title('Settings')
+        .icon(GiGearHammer),
       S.documentTypeListItem('portfolio')
         .title('Portfolios')
         .icon(MdOutlineDesignServices),

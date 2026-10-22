@@ -1,4 +1,4 @@
-import { defineConfig } from 'sanity';
+import { defineConfig, defineSingleton } from 'sanity';
 import { structureTool } from 'sanity/structure';
 import { visionTool } from '@sanity/vision';
 import { schemaTypes } from './schemaTypes';
@@ -16,5 +16,16 @@ export default defineConfig({
 
   schema: {
     types: schemaTypes,
+  },
+
+  document: {
+    singletons: [
+      defineSingleton({
+        id: 'siteSetting',
+        documentId: 'ab74cade-e077-4510-b893-aa5e33963949',
+        schemaType: 'siteSetting',
+        title: 'Settings',
+      }),
+    ],
   },
 });

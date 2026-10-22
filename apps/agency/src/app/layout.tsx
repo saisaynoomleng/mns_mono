@@ -23,9 +23,10 @@ const playpen_sans = Playpen_Sans({
 export const metadata: Metadata = {
   title: {
     template: '%s | mns',
-    default: 'mns',
+    default: 'mns | Software Subscriptions & Custom Web Development',
   },
-  description: 'MNS Admin dashboard',
+  description:
+    'Ready-to-use software for small businesses from $49.99/month, plus custom website design and development. Serving clients in the US and Myanmar.',
 };
 
 export default function RootLayout({ children }: LayoutProps<'/'>) {
