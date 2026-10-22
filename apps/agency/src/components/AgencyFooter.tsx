@@ -79,7 +79,10 @@ export const AgencyFooter = async () => {
         <Separator className="bg-input" />
 
         <div className="flex justify-between items-center w-full">
-          <p>&copy; {new Date().getFullYear()} mns</p>
+          <p>
+            &copy; {new Date().getFullYear()} mns
+            <span className="text-primary">.</span>
+          </p>
           {/* social */}
           <p>Powerful software, made simple.</p>
         </div>
