@@ -30,6 +30,7 @@ import { RiQuestionnaireLine } from 'react-icons/ri';
 import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
 import { FaUserGear } from 'react-icons/fa6';
+import { GiGearHammer } from 'react-icons/gi';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -61,6 +62,7 @@ const icons: React.ReactElement[] = [
   <IoMdChatbubbles />,
   <MdOutlineDesignServices />,
   <FaUserGear />,
+  <GiGearHammer />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

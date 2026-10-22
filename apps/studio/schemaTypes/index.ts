@@ -15,6 +15,7 @@ import {
   socialLink,
   videoEmbedded,
 } from './sharedTypes';
+import { siteSettingType } from './singletons/siteSettingType';
 
 export const schemaTypes = [
   // shared
@@ -35,4 +36,7 @@ export const schemaTypes = [
   chatBubbleType,
   portfolioType,
   teamMemberType,
+
+  // singletons
+  siteSettingType,
 ];
