@@ -23,7 +23,7 @@ const playpen_sans = Playpen_Sans({
 
 export const metadata: Metadata = {
   title: {
-    template: '%s | mns',
+    template: '%s',
     default: 'mns | Software Subscriptions & Custom Web Development',
   },
   description:

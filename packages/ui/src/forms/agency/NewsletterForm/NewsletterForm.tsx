@@ -48,10 +48,7 @@ export const NewsletterForm = ({
     >
       <div className="space-y-2">
         <SectionTitle as="h3" size="sm">
-          Stay in the{' '}
-          <span className="font-cursive text-primary underline decoration-wavy">
-            loop
-          </span>
+          Stay in the <span className="font-cursive text-primary">loop</span>
         </SectionTitle>
         <p className="text-brand-black-400">
           Occasional updates on new features, apps, and what we're building

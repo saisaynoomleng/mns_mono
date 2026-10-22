@@ -16,7 +16,7 @@ const AgencyHeader = (): React.JSX.Element => {
   const isPlacehold = userProfile.includes('placehold.co');
 
   return (
-    <header className="max-w-7xl mx-auto py-2 px-2 md:px-4 shadow flex justify-between items-center">
+    <header className="max-w-7xl mx-auto py-2 px-2 md:px-4 shadow flex justify-between items-center mt-4">
       <div>
         <Link href="/">
           <Logo />

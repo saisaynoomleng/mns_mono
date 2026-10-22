@@ -12,7 +12,7 @@ export const DashedTitle = ({
     <p
       className={twMerge(
         clsx(
-          'flex gap-x-1 md:gap-x-2 items-center text-muted-foreground uppercase tracking-wide text-fs-300 font-medium',
+          'flex gap-x-1 md:gap-x-2 items-center text-muted-foreground uppercase tracking-wide font-medium',
           className,
         ),
       )}

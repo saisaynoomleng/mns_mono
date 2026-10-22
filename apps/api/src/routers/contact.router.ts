@@ -33,6 +33,7 @@ import { escapeLike } from '../lib/helpers.js';
 export const contactRouter = router({
   sendContactForm: publicProcedure
     .input(ContactUsFormSchema)
+    .output(TRPCMutationSchema)
     .mutation(async ({ input }) => {
       const {
         name,
@@ -61,10 +62,10 @@ export const contactRouter = router({
 
         if (!data) {
           console.error('Insert contact db error', data);
-          throw new TRPCError({
-            code: 'INTERNAL_SERVER_ERROR',
+          return {
+            success: false,
             message: 'Cannot submit the form right now.',
-          });
+          };
         }
 
         try {
@@ -98,10 +99,6 @@ export const contactRouter = router({
               },
             }),
           );
-
-          return {
-            message: `We received your message. Our team will be with you shortly!`,
-          };
         } catch (error) {
           console.error('Contact Form SES error', error);
           throw new TRPCError({
@@ -109,8 +106,13 @@ export const contactRouter = router({
             message: 'Email was not sent!',
           });
         }
+
+        return {
+          success: true,
+          message: `We received your message. Our team will be with you shortly!`,
+        };
       } catch (error) {
-        console.error('Conctac Form TRPC error', error);
+        console.error('contactRouter.sendContactForm error', error);
 
         throw new TRPCError({
           code: 'INTERNAL_SERVER_ERROR',

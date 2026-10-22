@@ -5,3 +5,4 @@ export * from './UserUpdatePasswordForm';
 export * from './UserLinkAccountsForm';
 export * from './UserDeleteForm';
 export * from './NewsletterForm';
+export * from './ContactForm';
