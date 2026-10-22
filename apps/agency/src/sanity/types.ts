@@ -456,26 +456,35 @@ export type PAGE_SEO_QUERY_RESULT = {
 } | null;
 
 // Source: src/sanity/queries.ts
-// Variable: CONTACT_INFO_QUERY
-// Query: *[_type == 'siteSetting'][0]{  "street": contactInfo.street,  "city": contactInfo.city,  "state": contactInfo.state,  "zip": contactInfo.zip,  "country": contactInfo.country,  "lat": contactInfo.lat,  "long": contactInfo.long,  "email": contactInfo.email,  "phone": contactInfo.phone}
-export type CONTACT_INFO_QUERY_RESULT = {
-  street: string | null;
-  city: string | null;
-  state: string | null;
-  zip: string | null;
-  country: string | null;
-  lat: number | null;
-  long: number | null;
-  email: string | null;
-  phone: string | null;
-} | null;
+// Variable: CONTACT_PAGE_QUERY
+// Query: {  "contactInfo": *[_type == 'siteSetting'][0]{                    "street": contactInfo.street,                    "city": contactInfo.city,                    "state": contactInfo.state,                    "zip": contactInfo.zip,                    "country": contactInfo.country,                    "lat": contactInfo.lat,                    "long": contactInfo.long,                    "email": contactInfo.email,                    "phone": contactInfo.phone                  },  "chatBubble": *[_type == 'chatBubble'                  && slug.current == $bubble][0]{                    messages[]{                      _key,                      inbound,                      outbound                    }                  }}
+export type CONTACT_PAGE_QUERY_RESULT = {
+  contactInfo: {
+    street: string | null;
+    city: string | null;
+    state: string | null;
+    zip: string | null;
+    country: string | null;
+    lat: number | null;
+    long: number | null;
+    email: string | null;
+    phone: string | null;
+  } | null;
+  chatBubble: {
+    messages: Array<{
+      _key: string;
+      inbound: string | null;
+      outbound: string | null;
+    }> | null;
+  } | null;
+};
 
 // Query TypeMap
 declare global {
   interface SanityQueries {
     "*[_type == 'siteSetting'][0]{\n  footerText,\n  footerColumns[]{\n    _key,\n    links[]{\n      _key,\n      href,\n      label,\n    },\n    title\n  },\n  contactInfo\n}": FOOTER_QUERY_RESULT;
     '*[_type == \'page\'\n && defined(slug.current\n && slug == $pageName)][0]{\n  "title": seo.metaTitle,\n  "description": seo.metaDescription\n }': PAGE_SEO_QUERY_RESULT;
-    '*[_type == \'siteSetting\'][0]{\n  "street": contactInfo.street,\n  "city": contactInfo.city,\n  "state": contactInfo.state,\n  "zip": contactInfo.zip,\n  "country": contactInfo.country,\n  "lat": contactInfo.lat,\n  "long": contactInfo.long,\n  "email": contactInfo.email,\n  "phone": contactInfo.phone\n}': CONTACT_INFO_QUERY_RESULT;
+    '{\n  "contactInfo": *[_type == \'siteSetting\'][0]{\n                    "street": contactInfo.street,\n                    "city": contactInfo.city,\n                    "state": contactInfo.state,\n                    "zip": contactInfo.zip,\n                    "country": contactInfo.country,\n                    "lat": contactInfo.lat,\n                    "long": contactInfo.long,\n                    "email": contactInfo.email,\n                    "phone": contactInfo.phone\n                  },\n  "chatBubble": *[_type == \'chatBubble\'\n                  && slug.current == $bubble][0]{\n                    messages[]{\n                      _key,\n                      inbound,\n                      outbound\n                    }\n                  }\n}': CONTACT_PAGE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
