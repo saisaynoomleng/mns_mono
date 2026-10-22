@@ -4,10 +4,12 @@ import { useUserSessionContext } from '@/components/UserSessionProvider';
 import { authClient } from '@/lib/auth-client';
 import { toast, UserChangeEmailForm } from '@mns/ui';
 import { UserChangeEmailInput, UserRequestChangeEmailInput } from '@mns/utils';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const UserChangeEmail = (): React.JSX.Element => {
   const { session } = useUserSessionContext();
+  const router = useRouter();
 
   const { user } = session;
 
@@ -38,7 +40,7 @@ const UserChangeEmail = (): React.JSX.Element => {
       {
         onSuccess: () => {
           toast.success('Email updated successfully!');
-          window.location.reload();
+          router.refresh();
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);

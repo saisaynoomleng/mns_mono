@@ -17,7 +17,6 @@ import { SignOutButton } from './SignOutButton';
 import Link from 'next/link';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { MdOutlineHealthAndSafety, MdOutlinePayments } from 'react-icons/md';
-import { AiFillAppstore } from 'react-icons/ai';
 import { LuMessageCircleWarning } from 'react-icons/lu';
 import { TfiSupport } from 'react-icons/tfi';
 import { useUserSessionContext } from './UserSessionProvider';
@@ -48,7 +47,7 @@ const APPLICATION_LINKS = [
 
 const UserSidebar = (): React.JSX.Element | null => {
   const { session } = useUserSessionContext();
-  const { open } = useSidebar();
+  const { open, isMobile } = useSidebar();
 
   if (!session) return null;
 
@@ -61,7 +60,11 @@ const UserSidebar = (): React.JSX.Element | null => {
   const isPlacehold = userProfile.includes('placehold.co');
 
   return (
-    <Sidebar variant="floating" collapsible="icon">
+    <Sidebar
+      collapsible={isMobile ? 'offcanvas' : 'none'}
+      variant="floating"
+      className="sticky top-5"
+    >
       <SidebarHeader>
         <SidebarMenu>
           <SidebarMenuItem>

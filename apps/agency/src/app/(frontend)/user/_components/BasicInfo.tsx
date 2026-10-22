@@ -4,10 +4,12 @@ import { useUserSessionContext } from '@/components/UserSessionProvider';
 import { authClient } from '@/lib/auth-client';
 import { toast, UserInfoForm } from '@mns/ui';
 import { UserInfoFormInput } from '@mns/utils';
+import { useRouter } from 'next/navigation';
 import React from 'react';
 
 const UserBasicInfo = (): React.JSX.Element => {
   const { session } = useUserSessionContext();
+  const router = useRouter();
 
   const { user } = session;
 
@@ -22,7 +24,7 @@ const UserBasicInfo = (): React.JSX.Element => {
       {
         onSuccess: async () => {
           toast.success('Basic info updated successfully!');
-          window.location.reload();
+          router.refresh();
         },
         onError: (ctx) => {
           toast.error(ctx.error.message);

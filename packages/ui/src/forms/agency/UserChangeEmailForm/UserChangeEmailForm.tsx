@@ -17,7 +17,7 @@ import { FormTextField } from '../../FormTextField';
 import { Field, FieldError, FieldLabel } from '#components/ui/field';
 import { SubmitButton } from '#components/shared/SubmitButton/SubmitButton';
 import { LoadingSpinner } from '#components/shared/LoadingSpinner/LoadingSpinner';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   InputOTP,
   InputOTPGroup,
@@ -55,6 +55,13 @@ export const UserChangeEmailForm = ({
       otp: '',
     },
   });
+
+  useEffect(() => {
+    requestForm.reset({
+      oldEmail: oldEmail ?? '',
+      newEmail: '',
+    });
+  }, [oldEmail, requestForm.reset, changeForm.reset]);
 
   const { isSubmitting: requestSubmitting } = requestForm.formState;
 
