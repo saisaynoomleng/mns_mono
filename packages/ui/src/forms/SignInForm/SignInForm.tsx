@@ -64,8 +64,10 @@ export const SignInForm = ({
     <Card className={twMerge(clsx('md:min-w-100', className))}>
       <CardHeader className="text-center">
         <Logo className="mx-auto" />
-        <CardTitle>Sign In</CardTitle>
-        <CardDescription>Welcome back</CardDescription>
+        <CardTitle>Welcome back</CardTitle>
+        <CardDescription>
+          Sign in to manage your apps, subscriptions, and account.
+        </CardDescription>
       </CardHeader>
 
       <CardContent className="mt-4">
