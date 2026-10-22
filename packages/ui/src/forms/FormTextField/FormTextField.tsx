@@ -8,6 +8,7 @@ import {
 } from '#components/ui/field';
 import { Input } from '#components/ui/input';
 import clsx from 'clsx';
+import { twMerge } from 'cn';
 import { useId, type ComponentPropsWithoutRef } from 'react';
 import type React from 'react';
 import {
@@ -45,6 +46,7 @@ export const FormTextField = <T extends FieldValues>({
   label,
   description,
   autoComplete,
+  className,
   ...props
 }: FormTextFieldProps<T>) => {
   const id = useId();
@@ -54,7 +56,7 @@ export const FormTextField = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <Field>
+        <Field className={twMerge(className)}>
           <FieldLabel htmlFor={id} className="capitalize">
             {label}
           </FieldLabel>
