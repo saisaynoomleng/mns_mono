@@ -37,7 +37,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${fraunces.variable} ${playpen_sans.variable} ${sora.variable} h-full antialiased`}
     >
-      <body className="min-h-full flex flex-col">{children}</body>
+      <body>{children}</body>
       <GoogleAnalytics gaId={env.GA_MEASUREMENT_ID} />
     </html>
   );
