@@ -3,6 +3,7 @@ import { FOOTER_QUERY } from '@/sanity/queries';
 import { DashedTitle, Logo, SectionTitle, Separator } from '@mns/ui';
 import clsx from 'clsx';
 import Link from 'next/link';
+import AgencyNewsletterForm from './AgencyNewsletterForm';
 
 const COMPONENT_PADDING = 'px-4 md:px-6 lg:px-8 py-4 md:py-6';
 
@@ -18,10 +19,10 @@ export const AgencyFooter = async () => {
   const { footerColumns, footerText, contactInfo } = footer;
 
   return (
-    <footer className="text-brand-white font-header gap-y-4 gap-x-6 md:gap-x-8">
+    <footer className="text-brand-white font-header ">
       <div
         className={clsx(
-          'grid md:grid-cols-2 lg:grid-cols-4 bg-brand-black-800',
+          'grid md:grid-cols-2 lg:grid-cols-4 bg-brand-black-800 gap-y-4 gap-x-6 md:gap-x-8',
           COMPONENT_PADDING,
         )}
       >
@@ -46,7 +47,9 @@ export const AgencyFooter = async () => {
         ))}
       </div>
 
-      {/* newsletter form */}
+      <AgencyNewsletterForm
+        className={clsx('bg-brand-black-800 text-center', COMPONENT_PADDING)}
+      />
 
       <div
         className={clsx(

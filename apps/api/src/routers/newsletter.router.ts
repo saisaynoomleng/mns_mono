@@ -2,6 +2,7 @@ import {
   NewsletterFormSchema,
   SendProductUpdateEmailFormSchema,
   toTitleCase,
+  TRPCMutationSchema,
 } from '@mns/utils';
 import {
   organizationProcedure,
@@ -23,6 +24,7 @@ import { ListNewsletterOutputSchema } from '../lib/types.js';
 export const newsletterRouter = router({
   subscribe: publicProcedure
     .input(NewsletterFormSchema)
+    .output(TRPCMutationSchema)
     .mutation(async ({ input }) => {
       try {
         const { email } = input;
@@ -36,10 +38,10 @@ export const newsletterRouter = router({
           .returning({ email: NewsletterTable.email, id: NewsletterTable.id });
 
         if (!subscription) {
-          throw new TRPCError({
-            code: 'CONFLICT',
-            message: 'You are already subscribed!',
-          });
+          return {
+            success: false,
+            message: `You are already subscribed!`,
+          };
         }
 
         try {
@@ -81,8 +83,7 @@ export const newsletterRouter = router({
 
         return {
           success: true,
-          message: `Thanks for joining our newsletter.`,
-          data: subscription,
+          message: `Thanks for joining our newsletters.`,
         };
       } catch (error) {
         console.error('Newsletter subscription trpc error', error);
