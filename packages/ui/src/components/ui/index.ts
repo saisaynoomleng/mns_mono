@@ -12,3 +12,4 @@ export * from './card';
 export * from './pagination';
 export * from './input-otp';
 export * from './alert-dialog';
+export * from './separator';

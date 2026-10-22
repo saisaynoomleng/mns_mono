@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { Fraunces, Sora, Playpen_Sans } from 'next/font/google';
+import { SanityLive } from '@/sanity/live';
 
 const fraunces = Fraunces({
   variable: '--font-fraunces',
@@ -36,7 +37,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${fraunces.variable} ${playpen_sans.variable} ${sora.variable} h-full antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+
+        <SanityLive includeDrafts />
+      </body>
     </html>
   );
 }

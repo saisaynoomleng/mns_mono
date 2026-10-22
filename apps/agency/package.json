@@ -13,6 +13,8 @@
     "@mns/api": "workspace:*",
     "@mns/ui": "workspace:*",
     "@mns/utils": "workspace:*",
+    "@sanity/cli": "^8.22.0",
+    "@sanity/client": "^8.10.1",
     "@sanity/image-url": "^2.1.1",
     "@t3-oss/env-nextjs": "catalog:",
     "@tanstack/react-query": "catalog:",
