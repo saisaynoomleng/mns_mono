@@ -21,8 +21,6 @@ export const LinkAccounts = (): React.JSX.Element => {
     fetchAccounts();
   }, []);
 
-  console.log(JSON.stringify(accounts, null, 2));
-
   return (
     <div>
       <UserLinkAccountForm />

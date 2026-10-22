@@ -18,7 +18,7 @@ const SignInPage = (): React.JSX.Element => {
       },
       {
         onSuccess: () => {
-          router.push('/users');
+          router.push('/user');
         },
 
         onError: (ctx) => {
@@ -35,7 +35,7 @@ const SignInPage = (): React.JSX.Element => {
       },
       {
         onSuccess: () => {
-          router.push('/users');
+          router.push('/user');
         },
 
         onError: (ctx) => {
