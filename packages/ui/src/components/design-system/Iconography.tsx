@@ -13,6 +13,7 @@ import {
   MdDashboard,
   MdDesignServices,
   MdOutlineContactSupport,
+  MdOutlineDesignServices,
   MdOutlineHealthAndSafety,
   MdOutlinePayments,
   MdReviews,
@@ -24,6 +25,11 @@ import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
 import { IoCheckmark, IoClose, IoSettingsSharp } from 'react-icons/io5';
+import { PiTextAlignJustifyFill } from 'react-icons/pi';
+import { RiQuestionnaireLine } from 'react-icons/ri';
+import { GrDocumentPerformance } from 'react-icons/gr';
+import { IoMdChatbubbles } from 'react-icons/io';
+import { FaUserGear } from 'react-icons/fa6';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -49,6 +55,12 @@ const icons: React.ReactElement[] = [
   <IoCheckmark />,
   <IoSettingsSharp />,
   <MdOutlinePayments />,
+  <PiTextAlignJustifyFill />,
+  <RiQuestionnaireLine />,
+  <GrDocumentPerformance />,
+  <IoMdChatbubbles />,
+  <MdOutlineDesignServices />,
+  <FaUserGear />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
