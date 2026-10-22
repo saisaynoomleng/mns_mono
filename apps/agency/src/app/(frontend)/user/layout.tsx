@@ -1,22 +1,23 @@
 import { QueryProvider } from '@/components/QueryProvider';
 import { UserSessionProvider } from '@/components/UserSessionProvider';
 import UserSidebar from '@/components/UserSidebar';
-import { SidebarProvider, SidebarTrigger } from '@mns/ui';
+import { Bounded, SidebarInset, SidebarProvider } from '@mns/ui';
 
 const UserLayout = ({ children }: LayoutProps<'/user'>) => {
   return (
-    <QueryProvider>
-      <UserSessionProvider>
-        <SidebarProvider>
-          <UserSidebar />
+    <Bounded size="md" isCentered className="flex items-start">
+      <QueryProvider>
+        <UserSessionProvider>
+          <SidebarProvider>
+            <UserSidebar />
 
-          <div className="w-full">
-            <SidebarTrigger />
-            {children}
-          </div>
-        </SidebarProvider>
-      </UserSessionProvider>
-    </QueryProvider>
+            <SidebarInset>
+              <div className="w-full">{children}</div>
+            </SidebarInset>
+          </SidebarProvider>
+        </UserSessionProvider>
+      </QueryProvider>
+    </Bounded>
   );
 };
 

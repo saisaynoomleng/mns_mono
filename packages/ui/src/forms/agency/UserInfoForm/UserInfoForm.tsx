@@ -12,6 +12,7 @@ import { Field } from '#components/ui/field';
 import { SubmitButton } from '#components/shared/SubmitButton/SubmitButton';
 import { LoadingSpinner } from '#components/shared/LoadingSpinner/LoadingSpinner';
 import { SectionTitle } from '#components/shared/SectionTitle/SectionTitle';
+import { useEffect } from 'react';
 
 type UserInfoFormProps = {
   user: UserInfoFormInput;
@@ -33,6 +34,15 @@ export const UserInfoForm = ({
       phone: user.phone ?? '',
     },
   });
+
+  useEffect(() => {
+    form.reset({
+      name: user.name ?? '',
+      companyName: user.companyName ?? '',
+      position: user.position ?? '',
+      phone: user.phone ?? '',
+    });
+  }, [user, form.reset]);
 
   const { isSubmitting } = form.formState;
 
