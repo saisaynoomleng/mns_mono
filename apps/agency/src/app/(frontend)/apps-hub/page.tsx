@@ -1,3 +1,4 @@
+import { AppCard } from '@/components/AppCard';
 import HandwritingTitle from '@/components/HandwritingTitle';
 import { pageSEOQuery } from '@/lib/utils';
 import { sanityFetch } from '@/sanity/live';
@@ -48,7 +49,7 @@ const AppsHubPage = async (): Promise<React.JSX.Element> => {
         </p>
       </div>
 
-      <div className="sapce-y-4 md:space-y-6">
+      <div className="sapce-y-4 md:space-y-6 lg:space-y-12">
         <div className="space-y-2 text-center">
           <SectionTitle as="h2" size="sm">
             Ready to roll
@@ -63,14 +64,12 @@ const AppsHubPage = async (): Promise<React.JSX.Element> => {
           {apps
             .filter((app) => app.status === 'production')
             .map((app) => (
-              <div key={app._id}>
-                <p>name: {app.name}</p>
-              </div>
+              <AppCard key={app._id} appData={app} />
             ))}
         </div>
       </div>
 
-      <div className="sapce-y-4 md:space-y-6">
+      <div className="sapce-y-4 md:space-y-6 lg:space-y-12">
         <div className="space-y-2 text-center">
           <SectionTitle as="h2" size="sm">
             Cooking in the lab
@@ -87,9 +86,7 @@ const AppsHubPage = async (): Promise<React.JSX.Element> => {
               (app) => app.status === 'test' || app.status === 'development',
             )
             .map((app) => (
-              <div key={app._id}>
-                <p>name: {app.name}</p>
-              </div>
+              <AppCard key={app._id} appData={app} />
             ))}
         </div>
       </div>

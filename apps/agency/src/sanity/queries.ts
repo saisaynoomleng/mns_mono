@@ -72,8 +72,11 @@ export const ALL_APPS_QUERY = defineQuery(`*[_type == 'app'
   | order(name){
   _id,
   name,
+  "slug": slug.current,
   isMyanmarOnly,
   status,
   type,
-  excerpt
+  excerpt,
+  "imageUrl": imageUrl.asset->url,
+  "imageAlt": imageUrl.alt
  }`);
