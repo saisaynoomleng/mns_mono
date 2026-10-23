@@ -1,3 +1,4 @@
+import { appsType } from './documents/appsType';
 import { capabilityType } from './documents/capabilityType';
 import { chatBubbleType } from './documents/chatBubbleType';
 import { faqsType } from './documents/faqsType';
@@ -36,6 +37,7 @@ export const schemaTypes = [
   chatBubbleType,
   portfolioType,
   teamMemberType,
+  appsType,
 
   // singletons
   siteSettingType,

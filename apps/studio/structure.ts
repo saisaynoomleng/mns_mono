@@ -1,3 +1,4 @@
+import { AiFillAppstore } from 'react-icons/ai';
 import { FaUserGear } from 'react-icons/fa6';
 import { GiGearHammer } from 'react-icons/gi';
 import { GrDocumentPerformance } from 'react-icons/gr';
@@ -16,6 +17,7 @@ export const structure: StructureResolver = (S) =>
         .singleton('siteSetting')
         .title('Settings')
         .icon(GiGearHammer),
+      S.documentTypeListItem('app').title('Applications').icon(AiFillAppstore),
       S.documentTypeListItem('portfolio')
         .title('Portfolios')
         .icon(MdOutlineDesignServices),

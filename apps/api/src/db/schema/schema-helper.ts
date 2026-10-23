@@ -12,6 +12,8 @@ export const timestamps = {
     .$onUpdate(() => new Date()),
 };
 
+export const appStatus = t.pgEnum('appStatus', ['active', 'inactive']);
+
 export const contactStatus = t.pgEnum('contactStatus', [
   'new',
   'spam',
@@ -31,20 +33,6 @@ export const contactMessageStatus = t.pgEnum('contactMessageStatus', [
 ]);
 
 export const userRole = t.pgEnum('userRole', ['user', 'admin', 'super_admin']);
-
-export const appStatus = t.pgEnum('appStatus', [
-  'production',
-  'development',
-  'test',
-]);
-
-export const appType = t.pgEnum('appType', [
-  'health_care',
-  'retail_and_commerce',
-  'restaurant',
-  'creative_and_media',
-  'generic',
-]);
 
 export const serviceStatus = t.pgEnum('serviceStatus', [
   'active',
