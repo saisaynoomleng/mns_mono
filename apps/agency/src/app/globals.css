@@ -1,4 +1,5 @@
 @import 'tailwindcss';
+@plugin '@tailwindcss/typography';
 @import '@mns/ui/styles';
 @source '../../../../packages/ui/**/*.{js,ts,jsx,tsx}';
 

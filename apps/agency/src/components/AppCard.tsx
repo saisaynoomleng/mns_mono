@@ -34,13 +34,13 @@ export const AppCard = ({
       href={`/apps-hub/${slug}`}
       className={twMerge(
         clsx(
-          'p-2 w-fit shadow-md rounded-lg group flex flex-col gap-y-4 justify-center items-center text-center hover:-translate-y-2 transition-transform duration-200 ease-in-out',
+          'p-2 w-fit shadow-md rounded-lg group flex flex-col gap-y-4 justify-center items-center text-center hover:-translate-y-2 transition-transform duration-200 ease-in-out py-4',
           className,
         ),
       )}
     >
       {type && (
-        <p className="p-1 bg-primary w-fit rounded-lg text-fs-300 text-background font-semibold self-start">
+        <p className="p-1 bg-secondary w-fit rounded-lg text-fs-300 text-background font-semibold self-start">
           {toTitleCase(replaceDash(type))}
         </p>
       )}

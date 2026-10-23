@@ -5,6 +5,7 @@ import { BsDash } from 'react-icons/bs';
 import { LiaSignOutAltSolid } from 'react-icons/lia';
 import {
   FaCcMastercard,
+  FaExternalLinkAlt,
   FaNewspaper,
   FaSortAmountDown,
   FaUsers,
@@ -66,6 +67,7 @@ const icons: React.ReactElement[] = [
   <SiYoutube />,
   <FaGripLines />,
   <IoClose />,
+  <FaExternalLinkAlt />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
