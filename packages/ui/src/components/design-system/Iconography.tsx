@@ -21,7 +21,7 @@ import {
 import { AiFillAppstore } from 'react-icons/ai';
 import { TfiSupport } from 'react-icons/tfi';
 import { LuMessageCircleWarning } from 'react-icons/lu';
-import { SiFacebook, SiGoogle, SiTiktok } from 'react-icons/si';
+import { SiFacebook, SiGoogle, SiTiktok, SiYoutube } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
 import { IoCheckmark, IoClose, IoSettingsSharp } from 'react-icons/io5';
@@ -63,6 +63,7 @@ const icons: React.ReactElement[] = [
   <MdOutlineDesignServices />,
   <FaUserGear />,
   <GiGearHammer />,
+  <SiYoutube />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

@@ -14,7 +14,6 @@ import React from 'react';
 import { CONTACT_PAGE_QUERY_RESULT } from '@/sanity/types';
 import { twMerge } from 'tailwind-merge';
 import clsx from 'clsx';
-import { urlFor } from '@/sanity/image';
 import { env } from '@/lib/env/client';
 
 type ChatBubbleProps = {
