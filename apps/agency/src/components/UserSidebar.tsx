@@ -23,6 +23,7 @@ import { useUserSessionContext } from './UserSessionProvider';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
+import { AiFillAppstore } from 'react-icons/ai';
 
 const BILLING_LINKS = [
   {
@@ -38,6 +39,11 @@ const BILLING_LINKS = [
 ];
 
 const APPLICATION_LINKS = [
+  {
+    name: 'Apps Hub',
+    href: '/user/apps-hub',
+    icon: <AiFillAppstore />,
+  },
   {
     name: 'Report Issues',
     href: '/user/report-issues',
