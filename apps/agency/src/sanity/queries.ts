@@ -42,3 +42,11 @@ export const CONTACT_PAGE_QUERY = defineQuery(`{
                     }
                   }
 }`);
+
+export const SOCIAL_LINKS_QUERY = defineQuery(`*[_type == 'siteSetting'][0]{
+  socialLinks[]{
+    _key,
+    platform,
+    url
+  }
+}`);

@@ -1,9 +1,10 @@
 import { sanityFetch } from '@/sanity/live';
 import { FOOTER_QUERY } from '@/sanity/queries';
-import { DashedTitle, Logo, SectionTitle, Separator } from '@mns/ui';
+import { Logo, SectionTitle, Separator } from '@mns/ui';
 import clsx from 'clsx';
-import Link from 'next/link';
 import AgencyNewsletterForm from './AgencyNewsletterForm';
+import NavLinkButton from './NavLinkButton';
+import SocialLinks from './SocialLinks';
 
 const COMPONENT_PADDING = 'px-4 md:px-6 lg:px-8 py-4 md:py-6';
 
@@ -39,7 +40,10 @@ export const AgencyFooter = async () => {
             <ul className="list-inside">
               {column.links?.map((link) => (
                 <li key={link._key}>
-                  <Link href={link.href as string}>{link.label}</Link>
+                  <NavLinkButton
+                    href={link.href as string}
+                    label={link.label as string}
+                  />
                 </li>
               ))}
             </ul>
@@ -83,8 +87,8 @@ export const AgencyFooter = async () => {
             &copy; {new Date().getFullYear()} mns
             <span className="text-primary">.</span>
           </p>
-          {/* social */}
-          <p>Powerful software, made simple.</p>
+
+          <SocialLinks />
         </div>
       </div>
     </footer>
