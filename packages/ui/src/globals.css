@@ -177,7 +177,7 @@
   --sidebar-primary-foreground: var(--color-brand-black-950);
   --sidebar-accent: var(--color-brand-primary-400);
   --sidebar-accent-foreground: var(--color-brand-white);
-  --sidebar-border: var(--color-brand-white-200);
+  --sidebar-border: var(--color-brand-white);
   --sidebar-ring: var(--color-brand-primary-300);
 }
 

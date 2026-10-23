@@ -50,3 +50,19 @@ export const SOCIAL_LINKS_QUERY = defineQuery(`*[_type == 'siteSetting'][0]{
     url
   }
 }`);
+
+export const HEADER_QUERY = defineQuery(`*[_type == 'siteSetting'][0]{
+   "navLinks": navigation[]{
+     _key,
+     label,
+     href
+   },
+  "services": footerColumns[title == 'Services'][0]{
+    title,
+    links[]{
+      _key,
+      label,
+      href,
+    }
+  }
+}`);

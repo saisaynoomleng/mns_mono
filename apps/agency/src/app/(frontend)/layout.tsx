@@ -1,20 +1,28 @@
 import { AgencyFooter } from '@/components/AgencyFooter';
 import AgencyHeader from '@/components/AgencyHeader';
 import { QueryProvider } from '@/components/QueryProvider';
-import { SidebarProvider, Toaster } from '@mns/ui';
+import { sanityFetch } from '@/sanity/live';
+import { HEADER_QUERY } from '@/sanity/queries';
+import { Toaster } from '@mns/ui';
 
-const FrontendLayout = ({ children }: LayoutProps<'/'>) => {
+const FrontendLayout = async ({ children }: LayoutProps<'/'>) => {
+  const { data: header } = await sanityFetch({
+    query: HEADER_QUERY,
+    stega: false,
+    perspective: 'published',
+  });
+
+  if (!header) return null;
+
   return (
     <QueryProvider>
-      <SidebarProvider>
-        <div className="w-full">
-          <AgencyHeader />
-          {children}
-          <AgencyFooter />
-        </div>
+      <div className="w-full">
+        <AgencyHeader header={header} />
+        {children}
+        <AgencyFooter />
+      </div>
 
-        <Toaster closeButton duration={3000} position="top-center" richColors />
-      </SidebarProvider>
+      <Toaster closeButton duration={3000} position="top-center" richColors />
     </QueryProvider>
   );
 };

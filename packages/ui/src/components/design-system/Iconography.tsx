@@ -29,7 +29,7 @@ import { PiTextAlignJustifyFill } from 'react-icons/pi';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
-import { FaUserGear } from 'react-icons/fa6';
+import { FaUserGear, FaGripLines } from 'react-icons/fa6';
 import { GiGearHammer } from 'react-icons/gi';
 
 const icons: React.ReactElement[] = [
@@ -64,6 +64,8 @@ const icons: React.ReactElement[] = [
   <FaUserGear />,
   <GiGearHammer />,
   <SiYoutube />,
+  <FaGripLines />,
+  <IoClose />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
