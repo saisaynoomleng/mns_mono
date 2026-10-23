@@ -28,7 +28,7 @@ const AppsHubPage = async (): Promise<React.JSX.Element> => {
   }
 
   return (
-    <Bounded as="main" size="md" isCentered padding="none" spacing="md">
+    <Bounded as="main" size="md" isCentered spacing="md">
       <div className="space-y-4">
         <DashedTitle label="Apps Hub" />
         <SectionTitle as="h1">

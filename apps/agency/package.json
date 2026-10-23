@@ -17,6 +17,7 @@
     "@sanity/client": "^8.10.1",
     "@sanity/image-url": "^2.1.1",
     "@t3-oss/env-nextjs": "catalog:",
+    "@tailwindcss/typography": "^0.5.20",
     "@tanstack/react-query": "catalog:",
     "@trpc/client": "catalog:",
     "@trpc/tanstack-react-query": "catalog:",

@@ -204,6 +204,9 @@ importers:
       '@t3-oss/env-nextjs':
         specifier: 'catalog:'
         version: 0.13.11(typescript@5.9.3)(valibot@1.5.0(typescript@5.9.3))(zod@4.6.5)
+      '@tailwindcss/typography':
+        specifier: ^0.5.20
+        version: 0.5.20(tailwindcss@4.3.3)
       '@tanstack/react-query':
         specifier: 'catalog:'
         version: 5.104.2(react@19.2.8)

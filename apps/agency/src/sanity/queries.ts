@@ -80,3 +80,18 @@ export const ALL_APPS_QUERY = defineQuery(`*[_type == 'app'
   "imageUrl": imageUrl.asset->url,
   "imageAlt": imageUrl.alt
  }`);
+
+export const APP_QUERY = defineQuery(`*[_type == 'app'
+ && slug.current == $slug][0]{
+  name,
+  liveUrl,
+  demoUrl,
+  status,
+  isMyanmarOnly,
+  type,
+  excerpt,
+  body,
+  "imageUrl": imageUrl.asset->url,
+  "imageAlt": imageUrl.alt,
+  seo
+ }`);
