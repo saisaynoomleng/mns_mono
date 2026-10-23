@@ -42,7 +42,7 @@ export const Bounded = <T extends React.ElementType>({
   className,
   children,
   padding = 'sm',
-  spacing = 'none',
+  spacing = 'md',
   size = 'full',
   isCentered = false,
   ...props

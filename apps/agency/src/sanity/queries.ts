@@ -66,3 +66,14 @@ export const HEADER_QUERY = defineQuery(`*[_type == 'siteSetting'][0]{
     }
   }
 }`);
+
+export const ALL_APPS_QUERY = defineQuery(`*[_type == 'app'
+ && defined(slug.current)]
+  | order(name){
+  _id,
+  name,
+  isMyanmarOnly,
+  status,
+  type,
+  excerpt
+ }`);
