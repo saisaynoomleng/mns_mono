@@ -67,14 +67,6 @@ export const UserAddressForm = ({
   const onSubmit: SubmitHandler<UserAddressFormInput> = async (data) => {
     const result = await action(data);
 
-    if (!result.success) {
-      toast.error(result.message);
-      return form.setError('root', {
-        message: result.message,
-      });
-    }
-
-    toast.success(result.message);
     form.reset();
   };
 
