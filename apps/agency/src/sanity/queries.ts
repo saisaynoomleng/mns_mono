@@ -95,3 +95,16 @@ export const APP_QUERY = defineQuery(`*[_type == 'app'
   "imageAlt": imageUrl.alt,
   seo
  }`);
+
+export const ALL_UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'page'
+ && defined(slug.current)
+ && type == 'utility']{
+  'slug': slug.current
+ }`);
+
+export const UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'page'
+ && defined(slug.current)
+ && slug.current == $slug][0]{
+  body,
+  seo
+ }`);

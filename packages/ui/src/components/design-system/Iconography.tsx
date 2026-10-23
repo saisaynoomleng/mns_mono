@@ -25,7 +25,12 @@ import { LuMessageCircleWarning } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok, SiYoutube } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
-import { IoCheckmark, IoClose, IoSettingsSharp } from 'react-icons/io5';
+import {
+  IoArrowBackCircleSharp,
+  IoCheckmark,
+  IoClose,
+  IoSettingsSharp,
+} from 'react-icons/io5';
 import { PiTextAlignJustifyFill } from 'react-icons/pi';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 import { GrDocumentPerformance } from 'react-icons/gr';
@@ -68,6 +73,7 @@ const icons: React.ReactElement[] = [
   <FaGripLines />,
   <IoClose />,
   <FaExternalLinkAlt />,
+  <IoArrowBackCircleSharp />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
