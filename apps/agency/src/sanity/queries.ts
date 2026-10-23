@@ -78,7 +78,9 @@ export const ALL_APPS_QUERY = defineQuery(`*[_type == 'app'
   type,
   excerpt,
   "imageUrl": imageUrl.asset->url,
-  "imageAlt": imageUrl.alt
+  "imageAlt": imageUrl.alt,
+  liveUrl,
+  demoUrl,
  }`);
 
 export const APP_QUERY = defineQuery(`*[_type == 'app'

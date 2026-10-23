@@ -1,6 +1,12 @@
 import { UserSessionProvider } from '@/components/UserSessionProvider';
 import UserSidebar from '@/components/UserSidebar';
 import { Bounded, SidebarInset, SidebarProvider } from '@mns/ui';
+import { Metadata } from 'next';
+
+export const metadata: Metadata = {
+  title: 'User Management | mns.',
+  description: 'Update, manage your apps, subscriptions, and account.',
+};
 
 const UserLayout = ({ children }: LayoutProps<'/user'>) => {
   return (

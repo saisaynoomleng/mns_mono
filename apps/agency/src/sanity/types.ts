@@ -536,7 +536,7 @@ export type HEADER_QUERY_RESULT = {
 
 // Source: src/sanity/queries.ts
 // Variable: ALL_APPS_QUERY
-// Query: *[_type == 'app' && defined(slug.current)]  | order(name){  _id,  name,  "slug": slug.current,  isMyanmarOnly,  status,  type,  excerpt,  "imageUrl": imageUrl.asset->url,  "imageAlt": imageUrl.alt }
+// Query: *[_type == 'app' && defined(slug.current)]  | order(name){  _id,  name,  "slug": slug.current,  isMyanmarOnly,  status,  type,  excerpt,  "imageUrl": imageUrl.asset->url,  "imageAlt": imageUrl.alt,  liveUrl,  demoUrl, }
 export type ALL_APPS_QUERY_RESULT = Array<{
   _id: string;
   name: string | null;
@@ -553,6 +553,8 @@ export type ALL_APPS_QUERY_RESULT = Array<{
   excerpt: string | null;
   imageUrl: string | null;
   imageAlt: string | null;
+  liveUrl: string | null;
+  demoUrl: string | null;
 }>;
 
 // Source: src/sanity/queries.ts
@@ -601,7 +603,7 @@ declare global {
     '{\n  "contactInfo": *[_type == \'siteSetting\'][0]{\n                    "street": contactInfo.street,\n                    "city": contactInfo.city,\n                    "state": contactInfo.state,\n                    "zip": contactInfo.zip,\n                    "country": contactInfo.country,\n                    "lat": contactInfo.lat,\n                    "long": contactInfo.long,\n                    "email": contactInfo.email,\n                    "phone": contactInfo.phone\n                  },\n  "chatBubble": *[_type == \'chatBubble\'\n                  && slug.current == $bubble][0]{\n                    messages[]{\n                      _key,\n                      inbound,\n                      outbound\n                    }\n                  }\n}': CONTACT_PAGE_QUERY_RESULT;
     "*[_type == 'siteSetting'][0]{\n  socialLinks[]{\n    _key,\n    platform,\n    url\n  }\n}": SOCIAL_LINKS_QUERY_RESULT;
     '*[_type == \'siteSetting\'][0]{\n   "navLinks": navigation[]{\n     _key,\n     label,\n     href\n   },\n  "services": footerColumns[title == \'Services\'][0]{\n    title,\n    links[]{\n      _key,\n      label,\n      href,\n    }\n  }\n}': HEADER_QUERY_RESULT;
-    '*[_type == \'app\'\n && defined(slug.current)]\n  | order(name){\n  _id,\n  name,\n  "slug": slug.current,\n  isMyanmarOnly,\n  status,\n  type,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt\n }': ALL_APPS_QUERY_RESULT;
+    '*[_type == \'app\'\n && defined(slug.current)]\n  | order(name){\n  _id,\n  name,\n  "slug": slug.current,\n  isMyanmarOnly,\n  status,\n  type,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  liveUrl,\n  demoUrl,\n }': ALL_APPS_QUERY_RESULT;
     '*[_type == \'app\'\n && slug.current == $slug][0]{\n  name,\n  liveUrl,\n  demoUrl,\n  status,\n  isMyanmarOnly,\n  type,\n  excerpt,\n  body,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  seo\n }': APP_QUERY_RESULT;
     "*[_type == 'page'\n && defined(slug.current)\n && type == 'utility']{\n  'slug': slug.current\n }": ALL_UTILITY_PAGE_QUERY_RESULT;
     "*[_type == 'page'\n && defined(slug.current)\n && slug.current == $slug][0]{\n  body,\n  seo\n }": UTILITY_PAGE_QUERY_RESULT;
