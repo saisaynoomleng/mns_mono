@@ -578,6 +578,21 @@ export type APP_QUERY_RESULT = {
   seo: Seo | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_UTILITY_PAGE_QUERY
+// Query: *[_type == 'page' && defined(slug.current) && type == 'utility']{  'slug': slug.current }
+export type ALL_UTILITY_PAGE_QUERY_RESULT = Array<{
+  slug: string | null;
+}>;
+
+// Source: src/sanity/queries.ts
+// Variable: UTILITY_PAGE_QUERY
+// Query: *[_type == 'page' && defined(slug.current) && slug.current == $slug][0]{  body,  seo }
+export type UTILITY_PAGE_QUERY_RESULT = {
+  body: BlockContent | null;
+  seo: Seo | null;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -588,6 +603,8 @@ declare global {
     '*[_type == \'siteSetting\'][0]{\n   "navLinks": navigation[]{\n     _key,\n     label,\n     href\n   },\n  "services": footerColumns[title == \'Services\'][0]{\n    title,\n    links[]{\n      _key,\n      label,\n      href,\n    }\n  }\n}': HEADER_QUERY_RESULT;
     '*[_type == \'app\'\n && defined(slug.current)]\n  | order(name){\n  _id,\n  name,\n  "slug": slug.current,\n  isMyanmarOnly,\n  status,\n  type,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt\n }': ALL_APPS_QUERY_RESULT;
     '*[_type == \'app\'\n && slug.current == $slug][0]{\n  name,\n  liveUrl,\n  demoUrl,\n  status,\n  isMyanmarOnly,\n  type,\n  excerpt,\n  body,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  seo\n }': APP_QUERY_RESULT;
+    "*[_type == 'page'\n && defined(slug.current)\n && type == 'utility']{\n  'slug': slug.current\n }": ALL_UTILITY_PAGE_QUERY_RESULT;
+    "*[_type == 'page'\n && defined(slug.current)\n && slug.current == $slug][0]{\n  body,\n  seo\n }": UTILITY_PAGE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
