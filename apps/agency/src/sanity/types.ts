@@ -78,41 +78,28 @@ export type ImageWithAlt = {
   alt?: string;
 };
 
-export type TeamMember = {
+export type App = {
   _id: string;
-  _type: 'teamMember';
+  _type: 'app';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   name?: string;
   slug?: Slug;
-  position?: string;
-  imageUrl?: ImageWithAlt;
-};
-
-export type Slug = {
-  _type: 'slug';
-  current?: string;
-  source?: string;
-};
-
-export type Portfolio = {
-  _id: string;
-  _type: 'portfolio';
-  _createdAt: string;
-  _updatedAt: string;
-  _rev: string;
-  name?: string;
-  slug?: Slug;
+  liveUrl?: string;
+  demoUrl?: string;
   type?:
-    'health-care' | 'retail-and-commerce' | 'restaurant' | 'creative-and-media';
-  imageUrl?: ImageWithAlt;
-  startedAt?: string;
-  endedAt?: string;
+    | 'health-care'
+    | 'retail-and-commerce'
+    | 'restaurant'
+    | 'creative-and-media'
+    | 'generic';
+  status?: 'test' | 'production' | 'development';
   excerpt?: string;
   body?: BlockContent;
+  imageUrl?: ImageWithAlt;
+  isMyanmarOnly?: boolean;
   seo?: Seo;
-  previewUrl?: string;
 };
 
 export type BlockContent = Array<
@@ -138,6 +125,43 @@ export type BlockContent = Array<
       _key: string;
     } & ImageWithAlt)
 >;
+
+export type Slug = {
+  _type: 'slug';
+  current?: string;
+  source?: string;
+};
+
+export type TeamMember = {
+  _id: string;
+  _type: 'teamMember';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  position?: string;
+  imageUrl?: ImageWithAlt;
+};
+
+export type Portfolio = {
+  _id: string;
+  _type: 'portfolio';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  type?:
+    'health-care' | 'retail-and-commerce' | 'restaurant' | 'creative-and-media';
+  imageUrl?: ImageWithAlt;
+  startedAt?: string;
+  endedAt?: string;
+  excerpt?: string;
+  body?: BlockContent;
+  seo?: Seo;
+  previewUrl?: string;
+};
 
 export type ChatBubble = {
   _id: string;
@@ -392,10 +416,11 @@ export type AllSanitySchemaTypes =
   | Seo
   | SanityImageAssetReference
   | ImageWithAlt
-  | TeamMember
-  | Slug
-  | Portfolio
+  | App
   | BlockContent
+  | Slug
+  | TeamMember
+  | Portfolio
   | ChatBubble
   | Capability
   | Faqs
@@ -509,6 +534,24 @@ export type HEADER_QUERY_RESULT = {
   } | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_APPS_QUERY
+// Query: *[_type == 'app' && defined(slug.current)]  | order(name){  _id,  name,  isMyanmarOnly,  status,  type,  excerpt }
+export type ALL_APPS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  isMyanmarOnly: boolean | null;
+  status: 'development' | 'production' | 'test' | null;
+  type:
+    | 'creative-and-media'
+    | 'generic'
+    | 'health-care'
+    | 'restaurant'
+    | 'retail-and-commerce'
+    | null;
+  excerpt: string | null;
+}>;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -517,6 +560,7 @@ declare global {
     '{\n  "contactInfo": *[_type == \'siteSetting\'][0]{\n                    "street": contactInfo.street,\n                    "city": contactInfo.city,\n                    "state": contactInfo.state,\n                    "zip": contactInfo.zip,\n                    "country": contactInfo.country,\n                    "lat": contactInfo.lat,\n                    "long": contactInfo.long,\n                    "email": contactInfo.email,\n                    "phone": contactInfo.phone\n                  },\n  "chatBubble": *[_type == \'chatBubble\'\n                  && slug.current == $bubble][0]{\n                    messages[]{\n                      _key,\n                      inbound,\n                      outbound\n                    }\n                  }\n}': CONTACT_PAGE_QUERY_RESULT;
     "*[_type == 'siteSetting'][0]{\n  socialLinks[]{\n    _key,\n    platform,\n    url\n  }\n}": SOCIAL_LINKS_QUERY_RESULT;
     '*[_type == \'siteSetting\'][0]{\n   "navLinks": navigation[]{\n     _key,\n     label,\n     href\n   },\n  "services": footerColumns[title == \'Services\'][0]{\n    title,\n    links[]{\n      _key,\n      label,\n      href,\n    }\n  }\n}': HEADER_QUERY_RESULT;
+    "*[_type == 'app'\n && defined(slug.current)]\n  | order(name){\n  _id,\n  name,\n  isMyanmarOnly,\n  status,\n  type,\n  excerpt\n }": ALL_APPS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
