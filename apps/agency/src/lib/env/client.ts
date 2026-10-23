@@ -31,6 +31,12 @@ export const env = createEnv({
     NEXT_PUBLIC_MAPBOX_TOKEN: z
       .string()
       .min(1, { error: 'NEXT PUBLIC MAPBOX TOKEN is required' }),
+    NEXT_PUBLIC_MNS_STAFF_IMAGE_URL: z
+      .url({ error: 'Must be a valid URL' })
+      .min(1, { error: 'NEXT PUBLIC MNS STAFF IMAGE URL is required' }),
+    NEXT_PUBLIC_CLIENT_IMAGE_URL: z
+      .url({ error: 'Must be a valid URL' })
+      .min(1, { error: 'NEXT PUBLIC CLIENT IMAGE URL is required' }),
   },
   runtimeEnv: {
     NEXT_PUBLIC_APP_URL: process.env.NEXT_PUBLIC_APP_URL,
@@ -44,5 +50,8 @@ export const env = createEnv({
     NEXT_PUBLIC_NOT_AUTHORIZED_IMAGE_URL:
       process.env.NEXT_PUBLIC_NOT_AUTHORIZED_IMAGE_URL,
     NEXT_PUBLIC_MAPBOX_TOKEN: process.env.NEXT_PUBLIC_MAPBOX_TOKEN,
+    NEXT_PUBLIC_MNS_STAFF_IMAGE_URL:
+      process.env.NEXT_PUBLIC_MNS_STAFF_IMAGE_URL,
+    NEXT_PUBLIC_CLIENT_IMAGE_URL: process.env.NEXT_PUBLIC_CLIENT_IMAGE_URL,
   },
 });

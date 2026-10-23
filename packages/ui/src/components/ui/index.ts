@@ -13,3 +13,6 @@ export * from './pagination';
 export * from './input-otp';
 export * from './alert-dialog';
 export * from './separator';
+export * from './avatar';
+export * from './bubble';
+export * from './message';

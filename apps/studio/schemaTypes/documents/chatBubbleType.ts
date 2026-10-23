@@ -33,13 +33,13 @@ export const chatBubbleType = defineType({
             defineField({
               name: 'inbound',
               type: 'string',
-              title: 'mns',
+              title: 'Client',
               validation: (rule) => rule.required(),
             }),
             defineField({
               name: 'outbound',
               type: 'string',
-              title: 'Client',
+              title: 'mns.',
               validation: (rule) => rule.required(),
             }),
           ],

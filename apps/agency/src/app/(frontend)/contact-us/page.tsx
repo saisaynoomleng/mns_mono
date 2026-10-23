@@ -1,3 +1,4 @@
+import { AgencyChatBubble } from '@/components/AgencyChatBubble';
 import AgencyContactForm from '@/components/AgencyContactForm';
 import HandwritingTitle from '@/components/HandwritingTitle';
 import { MapBox } from '@/components/MapBox';
@@ -46,13 +47,11 @@ const ContactUsPage = async (): Promise<React.JSX.Element> => {
         </SectionTitle>
       </div>
 
-      <Separator />
-
-      {/* chat bubble */}
+      <AgencyChatBubble bubbles={chatBubble} />
 
       <AgencyContactForm />
 
-      <div className="grid md:grid-cols-[2fr_1fr] md:gap-x-6 gap-y-4">
+      <div className="grid md:grid-cols-[2fr_1fr] md:gap-x-12 gap-y-6">
         <div className="max-md:hidden">
           <MapBox
             lat={contactInfo?.lat as number}
@@ -90,8 +89,6 @@ const ContactUsPage = async (): Promise<React.JSX.Element> => {
               </Link>
             </p>
           </div>
-
-          <Separator />
 
           <div className="flex flex-col gap-y-2">
             <DashedTitle label="office" />
