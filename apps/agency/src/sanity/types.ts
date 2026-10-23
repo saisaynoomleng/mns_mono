@@ -490,6 +490,25 @@ export type SOCIAL_LINKS_QUERY_RESULT = {
   }> | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: HEADER_QUERY
+// Query: *[_type == 'siteSetting'][0]{   "navLinks": navigation[]{     _key,     label,     href   },  "services": footerColumns[title == 'Services'][0]{    title,    links[]{      _key,      label,      href,    }  }}
+export type HEADER_QUERY_RESULT = {
+  navLinks: Array<{
+    _key: string;
+    label: string | null;
+    href: string | null;
+  }> | null;
+  services: {
+    title: string | null;
+    links: Array<{
+      _key: string;
+      label: string | null;
+      href: string | null;
+    }> | null;
+  } | null;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -497,6 +516,7 @@ declare global {
     '*[_type == \'page\'\n && defined(slug.current\n && slug == $pageName)][0]{\n  "title": seo.metaTitle,\n  "description": seo.metaDescription\n }': PAGE_SEO_QUERY_RESULT;
     '{\n  "contactInfo": *[_type == \'siteSetting\'][0]{\n                    "street": contactInfo.street,\n                    "city": contactInfo.city,\n                    "state": contactInfo.state,\n                    "zip": contactInfo.zip,\n                    "country": contactInfo.country,\n                    "lat": contactInfo.lat,\n                    "long": contactInfo.long,\n                    "email": contactInfo.email,\n                    "phone": contactInfo.phone\n                  },\n  "chatBubble": *[_type == \'chatBubble\'\n                  && slug.current == $bubble][0]{\n                    messages[]{\n                      _key,\n                      inbound,\n                      outbound\n                    }\n                  }\n}': CONTACT_PAGE_QUERY_RESULT;
     "*[_type == 'siteSetting'][0]{\n  socialLinks[]{\n    _key,\n    platform,\n    url\n  }\n}": SOCIAL_LINKS_QUERY_RESULT;
+    '*[_type == \'siteSetting\'][0]{\n   "navLinks": navigation[]{\n     _key,\n     label,\n     href\n   },\n  "services": footerColumns[title == \'Services\'][0]{\n    title,\n    links[]{\n      _key,\n      label,\n      href,\n    }\n  }\n}': HEADER_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

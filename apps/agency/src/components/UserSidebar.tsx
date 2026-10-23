@@ -22,16 +22,17 @@ import { TfiSupport } from 'react-icons/tfi';
 import { useUserSessionContext } from './UserSessionProvider';
 import Image from 'next/image';
 import clsx from 'clsx';
+import { usePathname } from 'next/navigation';
 
 const BILLING_LINKS = [
   {
     name: 'Subscription',
-    href: '/users/subscriptions',
+    href: '/user/subscriptions',
     icon: <MdOutlineHealthAndSafety />,
   },
   {
     name: 'Payment History',
-    href: '/users/payment-history',
+    href: '/user/payment-histories',
     icon: <MdOutlinePayments />,
   },
 ];
@@ -39,15 +40,20 @@ const BILLING_LINKS = [
 const APPLICATION_LINKS = [
   {
     name: 'Report Issues',
-    href: '/users/report-issues',
+    href: '/user/report-issues',
     icon: <LuMessageCircleWarning />,
   },
-  { name: 'Feature Requests', href: '/users', icon: <TfiSupport /> },
+  {
+    name: 'Feature Requests',
+    href: '/user/feature-requests',
+    icon: <TfiSupport />,
+  },
 ];
 
 const UserSidebar = (): React.JSX.Element | null => {
   const { session } = useUserSessionContext();
   const { open, isMobile } = useSidebar();
+  const pathname = usePathname();
 
   if (!session) return null;
 
@@ -91,7 +97,7 @@ const UserSidebar = (): React.JSX.Element | null => {
         <SidebarGroup>
           <SidebarMenu>
             <SidebarMenuItem>
-              <SidebarMenuButton asChild>
+              <SidebarMenuButton asChild isActive={pathname === '/user'}>
                 <Link href="/user">
                   <IoSettingsSharp />
                   <span>Account Setting</span>
@@ -109,7 +115,7 @@ const UserSidebar = (): React.JSX.Element | null => {
           <SidebarMenu>
             {BILLING_LINKS.map((l) => (
               <SidebarMenuItem key={l.name}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === l.href}>
                   <Link href={l.href}>
                     <span>{l.icon}</span>
                     <span>{l.name}</span>
