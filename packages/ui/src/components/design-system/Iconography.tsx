@@ -6,6 +6,7 @@ import { LiaSignOutAltSolid } from 'react-icons/lia';
 import {
   FaCcMastercard,
   FaExternalLinkAlt,
+  FaHeart,
   FaNewspaper,
   FaSortAmountDown,
   FaUsers,
@@ -21,7 +22,7 @@ import {
 } from 'react-icons/md';
 import { AiFillAppstore } from 'react-icons/ai';
 import { TfiSupport } from 'react-icons/tfi';
-import { LuMessageCircleWarning } from 'react-icons/lu';
+import { LuMessageCircleWarning, LuMessageSquareHeart } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok, SiYoutube } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
 import { TbTextWrapDisabled } from 'react-icons/tb';
@@ -74,6 +75,8 @@ const icons: React.ReactElement[] = [
   <IoClose />,
   <FaExternalLinkAlt />,
   <IoArrowBackCircleSharp />,
+  <LuMessageSquareHeart />,
+  <FaHeart />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

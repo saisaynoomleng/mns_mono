@@ -208,6 +208,15 @@ export type CreateApplicationFormOutput = z.output<
   typeof CreateApplicationFormSchema
 >;
 
+export const TestimonialFormSchema = z.object({
+  title: z.string().min(1, { error: 'Title is required' }),
+  body: z
+    .string()
+    .min(10, { error: 'Your thoughts need at least 10 characters' })
+    .max(50000, { error: 'Your thoughts cannot exceeds 50,000 characters' }),
+});
+export type TestimonialFormInput = z.input<typeof TestimonialFormSchema>;
+
 //============================//
 //====== User Forms =========//
 //==========================//
