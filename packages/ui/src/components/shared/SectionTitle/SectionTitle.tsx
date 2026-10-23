@@ -32,7 +32,7 @@ export const SectionTitle = <T extends Heading>({
     <Comp
       className={twMerge(
         clsx(
-          'font-header font-semibold uppercase tracking-wider',
+          'font-header font-semibold capitalize tracking-wider',
           sizeVariants[size],
           className,
         ),

@@ -1,6 +1,12 @@
 import { TRPCError } from '@trpc/server';
 import db from '../db/index.js';
-import { organizationProcedure, router } from '../trpc/trpc.js';
+import {
+  organizationProcedure,
+  protectedProcedure,
+  router,
+} from '../trpc/trpc.js';
+import { TestimonialFormSchema, TRPCMutationSchema } from '@mns/utils';
+import { TestimonialTable } from '../db/schema/testimonials.schema.js';
 
 export const testimonialRouter = router({
   list: organizationProcedure.query(async () => {
@@ -34,4 +40,44 @@ export const testimonialRouter = router({
       });
     }
   }),
+
+  insert: protectedProcedure
+    .input(TestimonialFormSchema)
+    .output(TRPCMutationSchema)
+    .mutation(async ({ input, ctx }) => {
+      const { title, body } = input;
+      const { id, name } = ctx.user;
+
+      try {
+        const [review] = await db
+          .insert(TestimonialTable)
+          .values({
+            userId: id,
+            userNameSnapshot: name,
+            title,
+            body,
+            status: 'new',
+          })
+          .returning({ id: TestimonialTable.id });
+
+        if (!review) {
+          return {
+            success: false,
+            message: 'Cannot leave a review this time,please try again later.',
+          };
+        }
+
+        return {
+          success: true,
+          message:
+            "Thank you for your comments, we'll review it shortly and have a nice day!",
+        };
+      } catch (error) {
+        console.error('testimonialRouter.insert error', error);
+
+        throw new TRPCError({
+          code: 'INTERNAL_SERVER_ERROR',
+        });
+      }
+    }),
 });

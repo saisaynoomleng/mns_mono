@@ -17,13 +17,26 @@ import { SignOutButton } from './SignOutButton';
 import Link from 'next/link';
 import { IoSettingsSharp } from 'react-icons/io5';
 import { MdOutlineHealthAndSafety, MdOutlinePayments } from 'react-icons/md';
-import { LuMessageCircleWarning } from 'react-icons/lu';
+import { LuMessageCircleWarning, LuMessageSquareHeart } from 'react-icons/lu';
 import { TfiSupport } from 'react-icons/tfi';
 import { useUserSessionContext } from './UserSessionProvider';
 import Image from 'next/image';
 import clsx from 'clsx';
 import { usePathname } from 'next/navigation';
 import { AiFillAppstore } from 'react-icons/ai';
+
+const GENERAL_LINKS = [
+  {
+    name: 'Account Settings',
+    href: '/user',
+    icon: <IoSettingsSharp />,
+  },
+  {
+    name: 'Share your thoughts',
+    href: '/user/testimonials',
+    icon: <LuMessageSquareHeart />,
+  },
+];
 
 const BILLING_LINKS = [
   {
@@ -101,15 +114,21 @@ const UserSidebar = (): React.JSX.Element | null => {
 
       <SidebarContent>
         <SidebarGroup>
+          <SidebarGroupLabel className="flex items-center gap-x-2">
+            General
+          </SidebarGroupLabel>
+
           <SidebarMenu>
-            <SidebarMenuItem>
-              <SidebarMenuButton asChild isActive={pathname === '/user'}>
-                <Link href="/user">
-                  <IoSettingsSharp />
-                  <span>Account Setting</span>
-                </Link>
-              </SidebarMenuButton>
-            </SidebarMenuItem>
+            {GENERAL_LINKS.map((l) => (
+              <SidebarMenuItem key={l.name}>
+                <SidebarMenuButton asChild isActive={pathname === l.href}>
+                  <Link href={l.href}>
+                    <span>{l.icon}</span>
+                    <span>{l.name}</span>
+                  </Link>
+                </SidebarMenuButton>
+              </SidebarMenuItem>
+            ))}
           </SidebarMenu>
         </SidebarGroup>
 
