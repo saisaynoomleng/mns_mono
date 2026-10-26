@@ -8,3 +8,4 @@ export * from './NewsletterForm';
 export * from './ContactForm';
 export * from './UserTestimonialForm';
 export * from './UserReportIssueForm';
+export * from './UserFeatureRequestForm';
