@@ -4,6 +4,8 @@ import { chatBubbleType } from './documents/chatBubbleType';
 import { faqsType } from './documents/faqsType';
 import { pageType } from './documents/pageType';
 import { portfolioType } from './documents/portfolioType';
+import { serviceType } from './documents/serviceType';
+import { subscriptionPlanType } from './documents/subscriptionPlanType';
 import { teamMemberType } from './documents/teamMemberType';
 import {
   blockContent,
@@ -38,6 +40,8 @@ export const schemaTypes = [
   portfolioType,
   teamMemberType,
   appsType,
+  serviceType,
+  subscriptionPlanType,
 
   // singletons
   siteSettingType,
