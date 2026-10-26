@@ -288,3 +288,10 @@ export const UserReportAppIssueFormSchema = z.object({
 export type UserReportAppIssueFromInput = z.input<
   typeof UserReportAppIssueFormSchema
 >;
+
+export const UserFeatureRequestFormSchema = UserReportAppIssueFormSchema.omit({
+  imageUrl: true,
+});
+export type UserFeatureRequestFormInput = z.input<
+  typeof UserFeatureRequestFormSchema
+>;
