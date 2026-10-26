@@ -116,4 +116,48 @@ export const applicationRouter = router({
         message: 'Thank you for reporting, our team will review this ASAP!',
       };
     }),
+
+  listByUser: protectedProcedure.query(async ({ ctx }) => {
+    const { id } = ctx.user;
+
+    try {
+      const issues = await db.query.ReportIssueTable.findMany({
+        columns: {
+          appId: true,
+          body: true,
+          status: true,
+          createdAt: true,
+        },
+        where: {
+          userId: id,
+        },
+        with: {
+          apps: {
+            columns: {
+              name: true,
+            },
+          },
+        },
+        orderBy: { createdAt: 'desc' },
+      });
+
+      if (!issues) {
+        return {
+          success: false,
+          message: 'Cannot get the issues log',
+        };
+      }
+
+      return {
+        success: true,
+        data: issues,
+      };
+    } catch (error) {
+      console.error('applicationRouter.listByUser error', error);
+
+      throw new TRPCError({
+        code: 'INTERNAL_SERVER_ERROR',
+      });
+    }
+  }),
 });
