@@ -11,10 +11,7 @@ import {
 import db from '../db/index.js';
 import { ContactTable } from '../db/schema/contacts.schema.js';
 import { TRPCError } from '@trpc/server';
-import {
-  renderContactEmail,
-  renderReplyToContactEmail,
-} from '../../../../packages/email/dist/index.js';
+import { renderContactEmail, renderReplyToContactEmail } from '@mns/email';
 import { emailClient } from '../lib/emailClient.js';
 import { SendEmailCommand } from '@aws-sdk/client-ses';
 import env from '../lib/env.js';

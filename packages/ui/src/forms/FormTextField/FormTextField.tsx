@@ -56,7 +56,7 @@ export const FormTextField = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <Field className={twMerge(className)}>
+        <Field className={twMerge(className)} data-invalid={fieldState.invalid}>
           <FieldLabel htmlFor={id} className="capitalize">
             {label}
           </FieldLabel>

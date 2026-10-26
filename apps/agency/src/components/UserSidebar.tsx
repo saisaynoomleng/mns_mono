@@ -159,7 +159,7 @@ const UserSidebar = (): React.JSX.Element | null => {
           <SidebarMenu>
             {APPLICATION_LINKS.map((l) => (
               <SidebarMenuItem key={l.name}>
-                <SidebarMenuButton asChild>
+                <SidebarMenuButton asChild isActive={pathname === l.href}>
                   <Link href={l.href}>
                     <span>{l.icon}</span>
                     <span>{l.name}</span>

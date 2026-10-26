@@ -1,4 +1,4 @@
-import { TRPCMutationSchema, UserAddressFormSchema } from '@mns/utils';
+import { TRPCResponseSchema, UserAddressFormSchema } from '@mns/utils';
 import { protectedProcedure, router } from '../trpc/trpc.js';
 import db from '../db/index.js';
 import { TRPCError } from '@trpc/server';
@@ -52,7 +52,7 @@ export const addressRouter = router({
 
   update: protectedProcedure
     .input(UserAddressFormSchema)
-    .output(TRPCMutationSchema)
+    .output(TRPCResponseSchema)
     .mutation(async ({ input, ctx }) => {
       const { address1, address2, city, state, country, zip } = input;
       const { id } = ctx.user;
