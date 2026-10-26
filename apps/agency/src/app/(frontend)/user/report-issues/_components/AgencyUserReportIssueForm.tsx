@@ -17,7 +17,7 @@ const AgencyUserReportIssueForm = ({
 }: AgencyUserReportIssueFormProps): React.JSX.Element => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
-  const queryKey = trpc.applications.listByUser.queryKey();
+  const queryKey = trpc.reportIssues.listByUser.queryKey();
 
   const invalidateQuery = async () => {
     await queryClient.invalidateQueries({
@@ -26,7 +26,7 @@ const AgencyUserReportIssueForm = ({
   };
 
   const action = useMutation(
-    trpc.applications.reportIssue.mutationOptions({
+    trpc.reportIssues.report.mutationOptions({
       onSuccess: async (result) => {
         await invalidateQuery();
         toast.success(result.message);
