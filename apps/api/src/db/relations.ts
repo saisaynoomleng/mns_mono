@@ -3,11 +3,6 @@ import * as schema from './schema/index.js';
 
 export const relations = defineRelations(schema, (r) => ({
   UserTable: {
-    sessions: r.many.SessionTable({
-      from: r.UserTable.id,
-      to: r.SessionTable.userId,
-    }),
-
     accounts: r.many.AccountTable({
       from: r.UserTable.id,
       to: r.AccountTable.userId,
@@ -54,13 +49,6 @@ export const relations = defineRelations(schema, (r) => ({
   AddressTable: {
     user: r.one.UserTable({
       from: r.AddressTable.userId,
-      to: r.UserTable.id,
-    }),
-  },
-
-  SessionTable: {
-    user: r.one.UserTable({
-      from: r.SessionTable.userId,
       to: r.UserTable.id,
     }),
   },
