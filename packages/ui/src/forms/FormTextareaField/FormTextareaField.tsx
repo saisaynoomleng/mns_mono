@@ -59,10 +59,8 @@ export const FormTextareaField = <T extends FieldValues>({
       name={name}
       control={control}
       render={({ field, fieldState }) => (
-        <Field aria-invalid={fieldState.invalid} className={twMerge(className)}>
-          <FieldLabel htmlFor={id} aria-invalid={fieldState.invalid}>
-            {label}
-          </FieldLabel>
+        <Field data-invalid={fieldState.invalid} className={twMerge(className)}>
+          <FieldLabel htmlFor={id}>{label}</FieldLabel>
           {description && <FieldDescription>{description}</FieldDescription>}
 
           <InputGroup>

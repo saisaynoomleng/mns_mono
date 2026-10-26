@@ -5,7 +5,7 @@ import {
   protectedProcedure,
   router,
 } from '../trpc/trpc.js';
-import { TestimonialFormSchema, TRPCMutationSchema } from '@mns/utils';
+import { TestimonialFormSchema, TRPCResponseSchema } from '@mns/utils';
 import { TestimonialTable } from '../db/schema/testimonials.schema.js';
 
 export const testimonialRouter = router({
@@ -43,7 +43,7 @@ export const testimonialRouter = router({
 
   insert: protectedProcedure
     .input(TestimonialFormSchema)
-    .output(TRPCMutationSchema)
+    .output(TRPCResponseSchema)
     .mutation(async ({ input, ctx }) => {
       const { title, body } = input;
       const { id, name } = ctx.user;

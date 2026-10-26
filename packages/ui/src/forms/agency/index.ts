@@ -7,3 +7,4 @@ export * from './UserDeleteForm';
 export * from './NewsletterForm';
 export * from './ContactForm';
 export * from './UserTestimonialForm';
+export * from './UserReportIssueForm';

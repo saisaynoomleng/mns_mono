@@ -30,7 +30,7 @@ export const FormCheckboxField = <T extends FieldValues>({
       render={({ field, fieldState }) => (
         <Field
           orientation="horizontal"
-          aria-invalid={fieldState.invalid}
+          data-invalid={fieldState.invalid}
           className="w-fit"
         >
           <Checkbox {...field} id={id} aria-invalid={fieldState.invalid} />

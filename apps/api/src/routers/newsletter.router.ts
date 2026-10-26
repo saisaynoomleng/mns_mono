@@ -2,7 +2,7 @@ import {
   NewsletterFormSchema,
   SendProductUpdateEmailFormSchema,
   toTitleCase,
-  TRPCMutationSchema,
+  TRPCResponseSchema,
 } from '@mns/utils';
 import {
   organizationProcedure,
@@ -24,7 +24,7 @@ import { ListNewsletterOutputSchema } from '../lib/types.js';
 export const newsletterRouter = router({
   subscribe: publicProcedure
     .input(NewsletterFormSchema)
-    .output(TRPCMutationSchema)
+    .output(TRPCResponseSchema)
     .mutation(async ({ input }) => {
       try {
         const { email } = input;

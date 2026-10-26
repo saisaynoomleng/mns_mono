@@ -5,11 +5,11 @@ import { passwordRules } from './helper.js';
 //======Schema Helper========//
 //==========================//
 
-export const TRPCMutationSchema = z.object({
+export const TRPCResponseSchema = z.object({
   success: z.boolean(),
   message: z.string(),
 });
-export type TRPCMutationType = z.infer<typeof TRPCMutationSchema>;
+export type TRPCMutationType = z.infer<typeof TRPCResponseSchema>;
 
 export const emailSchema = z
   .email({ error: 'Must be a valid email addres' })
@@ -182,24 +182,8 @@ export type UpdatePasswordFormInput = z.input<typeof UpdatePasswordFormSchema>;
 
 export const CreateApplicationFormSchema = z.object({
   name: z.string().min(1, 'App name is required'),
-  liveUrl: z
-    .url({ error: 'Must be a valid URL' })
-    .min(1, { error: 'Live URL is required' }),
-  demoUrl: z
-    .url({ error: 'Must be a valid URL' })
-    .min(1, { error: 'Live URL is required' }),
-  status: z.enum(['production', 'development', 'test']),
-  isMyanmarOnly: z.boolean().default(false),
-  type: z.enum([
-    'health_care',
-    'generic',
-    'restaurant',
-    'creative_and_media',
-    'retail_and_commerce',
-  ]),
-  excerpt: z.string().min(1, { error: 'Excerpt is required' }),
-  body: z.string().min(1, { error: 'Text content is required' }),
-  imageUrl: z.string().optional(),
+  sanityId: z.string().min(1, { error: 'Sanity ID is required' }),
+  status: z.enum(['active', 'inactive']).default('inactive'),
 });
 export type CreateApplicationFormInput = z.input<
   typeof CreateApplicationFormSchema
@@ -291,4 +275,16 @@ export const UserUpdatePasswordFormSchema = z
   });
 export type UserUpdatePasswordFormInput = z.input<
   typeof UserUpdatePasswordFormSchema
+>;
+
+export const UserReportAppIssueFormSchema = z.object({
+  appId: z.uuid(),
+  body: z
+    .string()
+    .min(10, { error: 'Error detail should have at least 10 characters' })
+    .max(20000, { error: 'Error detail cannot exceeds 20,000 characters' }),
+  imageUrl: z.string().nullable(),
+});
+export type UserReportAppIssueFromInput = z.input<
+  typeof UserReportAppIssueFormSchema
 >;
