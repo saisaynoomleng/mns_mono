@@ -3,6 +3,7 @@ import { applicationRouter } from '../routers/application.router.js';
 import { contactRouter } from '../routers/contact.router.js';
 import { featureRequestRouter } from '../routers/featureRequest.router.js';
 import { newsletterRouter } from '../routers/newsletter.router.js';
+import { reportIssueRouter } from '../routers/reportIssues.router.js';
 import { testimonialRouter } from '../routers/testimonials.router.js';
 import { router } from './trpc.js';
 
@@ -13,6 +14,7 @@ export const appRouter = router({
   address: addressRouter,
   testimonials: testimonialRouter,
   featureRequests: featureRequestRouter,
+  reportIssues: reportIssueRouter,
 });
 
 export type AppRouter = typeof appRouter;

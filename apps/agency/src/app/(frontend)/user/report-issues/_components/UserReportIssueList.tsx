@@ -15,7 +15,7 @@ export const UserReportIssueList = ({ className }: { className?: string }) => {
     data: apps,
     isPending,
     isError,
-  } = useQuery(trpc.applications.listByUser.queryOptions());
+  } = useQuery(trpc.reportIssues.listByUser.queryOptions());
 
   if (isPending) {
     return <div>Loading...</div>;
