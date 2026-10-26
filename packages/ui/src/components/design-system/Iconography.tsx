@@ -25,7 +25,10 @@ import { TfiSupport } from 'react-icons/tfi';
 import { LuMessageCircleWarning, LuMessageSquareHeart } from 'react-icons/lu';
 import { SiFacebook, SiGoogle, SiTiktok, SiYoutube } from 'react-icons/si';
 import { CiLinkedin } from 'react-icons/ci';
-import { TbTextWrapDisabled } from 'react-icons/tb';
+import {
+  TbLayoutBottombarCollapseFilled,
+  TbTextWrapDisabled,
+} from 'react-icons/tb';
 import {
   IoArrowBackCircleSharp,
   IoCheckmark,
@@ -77,6 +80,7 @@ const icons: React.ReactElement[] = [
   <IoArrowBackCircleSharp />,
   <LuMessageSquareHeart />,
   <FaHeart />,
+  <TbLayoutBottombarCollapseFilled />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

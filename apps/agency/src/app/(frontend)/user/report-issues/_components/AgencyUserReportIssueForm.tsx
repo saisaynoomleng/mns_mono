@@ -3,7 +3,7 @@
 import { useTRPC } from '@/components/QueryProvider';
 import { ALL_APPS_QUERY_RESULT } from '@/sanity/types';
 import { toast, UserReportIssueForm } from '@mns/ui';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
 type AgencyUserReportIssueFormProps = {
@@ -17,10 +17,18 @@ const AgencyUserReportIssueForm = ({
 }: AgencyUserReportIssueFormProps): React.JSX.Element => {
   const trpc = useTRPC();
   const queryClient = useQueryClient();
+  const queryKey = trpc.applications.listByUser.queryKey();
+
+  const invalidateQuery = async () => {
+    await queryClient.invalidateQueries({
+      queryKey: queryKey,
+    });
+  };
 
   const action = useMutation(
     trpc.applications.reportIssue.mutationOptions({
-      onSuccess: (result) => {
+      onSuccess: async (result) => {
+        await invalidateQuery();
         toast.success(result.message);
       },
       onError: (result) => {
