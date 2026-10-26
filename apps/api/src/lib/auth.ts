@@ -5,13 +5,13 @@ import db from '../db/index.js';
 import { admin, emailOTP } from 'better-auth/plugins';
 import { nextCookies } from 'better-auth/next-js';
 import { UserTable } from '../db/schema/users.schema.js';
-import { SessionTable } from '../db/schema/sessions.schema.js';
 import { AccountTable } from '../db/schema/accounts.schema.js';
 import { VerificationTable } from '../db/schema/verifications.schema.js';
 import { ac, admin as adminAC, super_admin, user } from './access-control.js';
 import { signUpVerification } from '../auth/signUpVerification.js';
 import { otpVerification } from '../auth/otpVerification.js';
 import { deleteVerification } from '../auth/deleteVerification.js';
+import { redisSecondaryStorage } from './redis.js';
 
 const origins = env.ALLOWED_ORIGINS.split(',');
 const adminIds = env.ADMIN_USER_IDS?.split(',');
@@ -123,7 +123,6 @@ export const auth = betterAuth({
     },
     expiresIn: env.SESSION_EXPIRES_IN,
     updateAge: env.SESSION_UPDATE_AGE,
-    storeSessionInDatabase: true,
     cookieCache: {
       enabled: true,
       maxAge: env.SESSION_COOKIE_CACHE_MAX_AGE,
@@ -165,17 +164,19 @@ export const auth = betterAuth({
     customRules: {
       '/get-session': false,
     },
+    storage: 'secondary-storage',
   },
 
   database: drizzleAdapter(db, {
     provider: 'pg',
     schema: {
       users: UserTable,
-      sessions: SessionTable,
       accounts: AccountTable,
       verifications: VerificationTable,
     },
   }),
+
+  secondaryStorage: redisSecondaryStorage,
 
   advanced: {
     database: {

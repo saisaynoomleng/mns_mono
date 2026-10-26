@@ -14,6 +14,14 @@ const schema = z.object({
     .startsWith('postgresql://'),
   DATABASE_POOL_MAX: z.coerce.number().min(2).max(30).default(20),
 
+  // Redis
+  UPSTASH_REDIS_REST_URL: z
+    .url({ error: 'Must be a valid URL' })
+    .min(1, { error: 'Upstash redis REST URL is required' }),
+  UPSTASH_REDIS_REST_TOKEN: z
+    .string()
+    .min(1, { error: 'Upstash redis token is required' }),
+
   // Auth
   BETTER_AUTH_SECRET: z
     .string()
