@@ -10,7 +10,7 @@ export const featureRequestRouter = router({
     .output(TRPCResponseSchema)
     .mutation(async ({ input, ctx }) => {
       const { body, appId } = input;
-      const { id, name } = ctx.user;
+      const { id } = ctx.user;
       let app: { id: string } | undefined;
 
       try {
@@ -18,6 +18,7 @@ export const featureRequestRouter = router({
           columns: {
             id: true,
           },
+          where: { sanityId: appId },
         });
       } catch (error) {
         console.error('featureRequestRouter.request get app db error', error);
@@ -71,12 +72,20 @@ export const featureRequestRouter = router({
     try {
       const requests = await db.query.FeatureRequestTable.findMany({
         columns: {
+          id: true,
           status: true,
           body: true,
           createdAt: true,
         },
         where: { userId: id },
         orderBy: { createdAt: 'desc' },
+        with: {
+          app: {
+            columns: {
+              name: true,
+            },
+          },
+        },
       });
 
       return {

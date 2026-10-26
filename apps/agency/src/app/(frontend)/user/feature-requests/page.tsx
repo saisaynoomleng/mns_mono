@@ -3,6 +3,7 @@ import { ALL_APPS_QUERY } from '@/sanity/queries';
 import { Bounded, SectionTitle } from '@mns/ui';
 import React from 'react';
 import { AgencyFeatureRequestForm } from './_components/AgencyFeatureRequestForm';
+import { AgencyFeatureRequestList } from './_components/AgencyFeatureRequestList';
 
 const UserFeatureRequestPage = async () => {
   const { data: apps } = await sanityFetch({
@@ -27,6 +28,17 @@ const UserFeatureRequestPage = async () => {
       </div>
 
       <AgencyFeatureRequestForm apps={apps} />
+
+      <div className="space-y-4">
+        <div className="space-y-2">
+          <SectionTitle as="h2" size="sm">
+            Your idea pile
+          </SectionTitle>
+          <p>Every bright idea you&apos;ve sent our way, all in one place.</p>
+        </div>
+
+        <AgencyFeatureRequestList />
+      </div>
     </Bounded>
   );
 };

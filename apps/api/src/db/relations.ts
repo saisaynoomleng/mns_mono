@@ -146,8 +146,19 @@ export const relations = defineRelations(schema, (r) => ({
       from: r.ReportIssueTable.userId,
       to: r.UserTable.id,
     }),
-    apps: r.one.AppTable({
+    app: r.one.AppTable({
       from: r.ReportIssueTable.appId,
+      to: r.AppTable.id,
+    }),
+  },
+
+  FeatureRequestTable: {
+    user: r.one.UserTable({
+      from: r.FeatureRequestTable.userId,
+      to: r.UserTable.id,
+    }),
+    app: r.one.AppTable({
+      from: r.FeatureRequestTable.appId,
       to: r.AppTable.id,
     }),
   },

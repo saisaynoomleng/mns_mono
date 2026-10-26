@@ -132,7 +132,7 @@ export const applicationRouter = router({
           userId: id,
         },
         with: {
-          apps: {
+          app: {
             columns: {
               name: true,
             },

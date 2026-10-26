@@ -41,7 +41,7 @@ export const UserReportIssueList = ({ className }: { className?: string }) => {
           <CollapsibleTrigger className="flex justify-between items-center min-w-full">
             <p className="flex gap-x-2">
               <span className="font-semibold">
-                {toTitleCase(data.apps?.name as string)}
+                {toTitleCase(data.app?.name as string)}
               </span>
               {data.status && (
                 <span className="p-1 rounded-lg border border-input text-fs-300">
@@ -57,7 +57,7 @@ export const UserReportIssueList = ({ className }: { className?: string }) => {
           </CollapsibleTrigger>
 
           <CollapsibleContent>
-            <p>{data.body}</p>
+            <p className="prose min-w-full">{data.body}</p>
           </CollapsibleContent>
         </Collapsible>
       ))}

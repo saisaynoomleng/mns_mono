@@ -3,7 +3,7 @@
 import { useTRPC } from '@/components/QueryProvider';
 import { ALL_APPS_QUERY_RESULT } from '@/sanity/types';
 import { toast, UserReportIssueForm } from '@mns/ui';
-import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
 type AgencyUserReportIssueFormProps = {

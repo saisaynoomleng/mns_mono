@@ -79,12 +79,12 @@ export const UserFeatureRequestForm = ({
                   onValueChange={field.onChange}
                 >
                   <SelectTrigger id="app" aria-invalid={fieldState.invalid}>
-                    <SelectValue placeholder="Select an App" />
+                    <SelectValue placeholder="Select an app" />
                   </SelectTrigger>
                   <SelectContent>
                     {apps.map((app) => (
                       <SelectItem key={app._id} value={app._id as string}>
-                        {toTitleCase(app.name as string)}
+                        {app.name as string}
                       </SelectItem>
                     ))}
                   </SelectContent>
