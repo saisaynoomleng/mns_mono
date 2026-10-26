@@ -1,9 +1,10 @@
 import { AiFillAppstore } from 'react-icons/ai';
+import { BiSolidCategoryAlt } from 'react-icons/bi';
 import { FaUserGear } from 'react-icons/fa6';
 import { GiGearHammer } from 'react-icons/gi';
 import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
-import { MdOutlineDesignServices } from 'react-icons/md';
+import { MdOutlineDesignServices, MdWorkspaces } from 'react-icons/md';
 import { PiTextAlignJustifyFill } from 'react-icons/pi';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 import { StructureResolver } from 'sanity/structure';
@@ -24,6 +25,10 @@ export const structure: StructureResolver = (S) =>
       S.documentTypeListItem('teamMember')
         .title('Team Members')
         .icon(FaUserGear),
+      S.documentTypeListItem('service').title('Services').icon(MdWorkspaces),
+      S.documentTypeListItem('subscriptionPlan')
+        .title('Subscription Plans')
+        .icon(BiSolidCategoryAlt),
 
       S.divider().title('Marketing'),
       S.documentTypeListItem('faqs').title('FAQs').icon(RiQuestionnaireLine),

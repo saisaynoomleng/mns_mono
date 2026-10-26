@@ -19,6 +19,7 @@ import {
   MdOutlineHealthAndSafety,
   MdOutlinePayments,
   MdReviews,
+  MdWorkspaces,
 } from 'react-icons/md';
 import { AiFillAppstore } from 'react-icons/ai';
 import { TfiSupport } from 'react-icons/tfi';
@@ -41,6 +42,7 @@ import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
 import { FaUserGear, FaGripLines } from 'react-icons/fa6';
 import { GiGearHammer } from 'react-icons/gi';
+import { BiSolidCategoryAlt } from 'react-icons/bi';
 
 const icons: React.ReactElement[] = [
   <BsDash />,
@@ -81,6 +83,8 @@ const icons: React.ReactElement[] = [
   <LuMessageSquareHeart />,
   <FaHeart />,
   <TbLayoutBottombarCollapseFilled />,
+  <MdWorkspaces />,
+  <BiSolidCategoryAlt />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
