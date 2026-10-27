@@ -78,27 +78,45 @@ export type ImageWithAlt = {
   alt?: string;
 };
 
-export type App = {
+export type ServiceReference = {
+  _ref: string;
+  _type: 'reference';
+  _weak?: boolean;
+  [internalGroqTypeReferenceTo]?: 'service';
+};
+
+export type SubscriptionPlan = {
   _id: string;
-  _type: 'app';
+  _type: 'subscriptionPlan';
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   name?: string;
   slug?: Slug;
-  liveUrl?: string;
-  demoUrl?: string;
-  type?:
-    | 'health-care'
-    | 'retail-and-commerce'
-    | 'restaurant'
-    | 'creative-and-media'
-    | 'generic';
-  status?: 'test' | 'production' | 'development';
+  pricePerMonth?: number;
+  includedFeatures?: Array<string>;
+  notIncludedFeatures?: Array<string>;
+  service?: ServiceReference;
+};
+
+export type Slug = {
+  _type: 'slug';
+  current?: string;
+  source?: string;
+};
+
+export type Service = {
+  _id: string;
+  _type: 'service';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  slogan?: string;
   excerpt?: string;
   body?: BlockContent;
   imageUrl?: ImageWithAlt;
-  isMyanmarOnly?: boolean;
   seo?: Seo;
 };
 
@@ -126,10 +144,28 @@ export type BlockContent = Array<
     } & ImageWithAlt)
 >;
 
-export type Slug = {
-  _type: 'slug';
-  current?: string;
-  source?: string;
+export type App = {
+  _id: string;
+  _type: 'app';
+  _createdAt: string;
+  _updatedAt: string;
+  _rev: string;
+  name?: string;
+  slug?: Slug;
+  liveUrl?: string;
+  demoUrl?: string;
+  type?:
+    | 'health-care'
+    | 'retail-and-commerce'
+    | 'restaurant'
+    | 'creative-and-media'
+    | 'generic';
+  status?: 'test' | 'production' | 'development';
+  excerpt?: string;
+  body?: BlockContent;
+  imageUrl?: ImageWithAlt;
+  isMyanmarOnly?: boolean;
+  seo?: Seo;
 };
 
 export type TeamMember = {
@@ -140,7 +176,7 @@ export type TeamMember = {
   _rev: string;
   name?: string;
   slug?: Slug;
-  position?: string;
+  positions?: Array<string>;
   imageUrl?: ImageWithAlt;
 };
 
@@ -416,9 +452,12 @@ export type AllSanitySchemaTypes =
   | Seo
   | SanityImageAssetReference
   | ImageWithAlt
-  | App
-  | BlockContent
+  | ServiceReference
+  | SubscriptionPlan
   | Slug
+  | Service
+  | BlockContent
+  | App
   | TeamMember
   | Portfolio
   | ChatBubble
@@ -474,7 +513,7 @@ export type FOOTER_QUERY_RESULT = {
 
 // Source: src/sanity/queries.ts
 // Variable: PAGE_SEO_QUERY
-// Query: *[_type == 'page' && defined(slug.current && slug == $pageName)][0]{  "title": seo.metaTitle,  "description": seo.metaDescription }
+// Query: *[_type == 'page' && defined(slug.current) && slug.current == $pageName][0]{  "title": seo.metaTitle,  "description": seo.metaDescription }
 export type PAGE_SEO_QUERY_RESULT = {
   title: string | null;
   description: string | null;
@@ -595,11 +634,23 @@ export type UTILITY_PAGE_QUERY_RESULT = {
   seo: Seo | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_SERVICES_QUERY
+// Query: *[_type == 'service' && defined(slug.current)]{  _id,  name,  "imageUrl": imageUrl.asset->url,  "imageAlt": imageUrl.alt,  "slug": slug.current,  excerpt }
+export type ALL_SERVICES_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  slug: string | null;
+  excerpt: string | null;
+}>;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
     "*[_type == 'siteSetting'][0]{\n  footerText,\n  footerColumns[]{\n    _key,\n    links[]{\n      _key,\n      href,\n      label,\n    },\n    title\n  },\n  contactInfo\n}": FOOTER_QUERY_RESULT;
-    '*[_type == \'page\'\n && defined(slug.current\n && slug == $pageName)][0]{\n  "title": seo.metaTitle,\n  "description": seo.metaDescription\n }': PAGE_SEO_QUERY_RESULT;
+    '*[_type == \'page\'\n && defined(slug.current)\n && slug.current == $pageName][0]{\n  "title": seo.metaTitle,\n  "description": seo.metaDescription\n }': PAGE_SEO_QUERY_RESULT;
     '{\n  "contactInfo": *[_type == \'siteSetting\'][0]{\n                    "street": contactInfo.street,\n                    "city": contactInfo.city,\n                    "state": contactInfo.state,\n                    "zip": contactInfo.zip,\n                    "country": contactInfo.country,\n                    "lat": contactInfo.lat,\n                    "long": contactInfo.long,\n                    "email": contactInfo.email,\n                    "phone": contactInfo.phone\n                  },\n  "chatBubble": *[_type == \'chatBubble\'\n                  && slug.current == $bubble][0]{\n                    messages[]{\n                      _key,\n                      inbound,\n                      outbound\n                    }\n                  }\n}': CONTACT_PAGE_QUERY_RESULT;
     "*[_type == 'siteSetting'][0]{\n  socialLinks[]{\n    _key,\n    platform,\n    url\n  }\n}": SOCIAL_LINKS_QUERY_RESULT;
     '*[_type == \'siteSetting\'][0]{\n   "navLinks": navigation[]{\n     _key,\n     label,\n     href\n   },\n  "services": footerColumns[title == \'Services\'][0]{\n    title,\n    links[]{\n      _key,\n      label,\n      href,\n    }\n  }\n}': HEADER_QUERY_RESULT;
@@ -607,6 +658,7 @@ declare global {
     '*[_type == \'app\'\n && slug.current == $slug][0]{\n  name,\n  liveUrl,\n  demoUrl,\n  status,\n  isMyanmarOnly,\n  type,\n  excerpt,\n  body,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  seo\n }': APP_QUERY_RESULT;
     "*[_type == 'page'\n && defined(slug.current)\n && type == 'utility']{\n  'slug': slug.current\n }": ALL_UTILITY_PAGE_QUERY_RESULT;
     "*[_type == 'page'\n && defined(slug.current)\n && slug.current == $slug][0]{\n  body,\n  seo\n }": UTILITY_PAGE_QUERY_RESULT;
+    '*[_type == \'service\'\n && defined(slug.current)]{\n  _id,\n  name,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  "slug": slug.current,\n  excerpt\n }': ALL_SERVICES_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
