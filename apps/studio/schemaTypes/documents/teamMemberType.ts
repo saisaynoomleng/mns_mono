@@ -23,9 +23,10 @@ export const teamMemberType = defineType({
       validation: (rule) => rule.required(),
     }),
     defineField({
-      name: 'position',
-      title: 'Member position',
-      type: 'string',
+      name: 'positions',
+      title: 'Member positions',
+      type: 'array',
+      of: [{ type: 'string' }],
       validation: (rule) => rule.required(),
     }),
     defineField({
@@ -37,7 +38,7 @@ export const teamMemberType = defineType({
   preview: {
     select: {
       name: 'name',
-      position: 'position',
+      position: 'positions.0',
       image: 'imageUrl',
     },
     prepare({ name, position, image }) {

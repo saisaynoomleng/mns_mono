@@ -18,12 +18,12 @@
     "./types": "./src/lib/types.ts"
   },
   "dependencies": {
-    "@aws-sdk/client-ses": "^3.1149.0",
-    "@epic-web/remember": "^1.1.0",
+    "@aws-sdk/client-ses": "3.1149.0",
+    "@epic-web/remember": "1.1.0",
     "@mns/email": "workspace:*",
     "@mns/utils": "workspace:*",
-    "@trpc/server": "^11.19.0",
-    "@upstash/redis": "^1.39.0",
+    "@trpc/server": "11.19.0",
+    "@upstash/redis": "catalog:",
     "better-auth": "catalog:",
     "cors": "^2.8.6",
     "dotenv": "catalog:",
@@ -31,7 +31,7 @@
     "express": "catalog:",
     "helmet": "^8.3.0",
     "morgan": "^1.12.1",
-    "pg": "^8.23.1",
+    "pg": "catalog:",
     "superjson": "catalog:",
     "zod": "catalog:"
   },

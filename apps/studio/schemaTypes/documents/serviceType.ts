@@ -41,14 +41,17 @@ export const serviceType = defineType({
       type: 'imageWithAlt',
       validation: (rule) => rule.required(),
     }),
+    defineField({
+      name: 'seo',
+      type: 'seo',
+    }),
   ],
   preview: {
     select: {
       name: 'name',
-      price: 'price',
       image: 'imageUrl',
     },
-    prepare({ name, price, image }) {
+    prepare({ name, image }) {
       const formatName = name ? toTitleCase(name) : 'Service name not provided';
 
       return {
