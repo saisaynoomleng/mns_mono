@@ -15,7 +15,7 @@ export const subscriptionPlanType = defineType({
     defineField({
       name: 'slug',
       type: 'slug',
-      options: { source: 'name' },
+      options: { source: (doc) => `${doc.name}-subscription-plan` },
       validation: (rule) => rule.required(),
     }),
     defineField({
