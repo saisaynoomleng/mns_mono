@@ -15,8 +15,8 @@ export const FOOTER_QUERY = defineQuery(`*[_type == 'siteSetting'][0]{
 }`);
 
 export const PAGE_SEO_QUERY = defineQuery(`*[_type == 'page'
- && defined(slug.current
- && slug == $pageName)][0]{
+ && defined(slug.current)
+ && slug.current == $pageName][0]{
   "title": seo.metaTitle,
   "description": seo.metaDescription
  }`);
@@ -109,4 +109,14 @@ export const UTILITY_PAGE_QUERY = defineQuery(`*[_type == 'page'
  && slug.current == $slug][0]{
   body,
   seo
+ }`);
+
+export const ALL_SERVICES_QUERY = defineQuery(`*[_type == 'service'
+ && defined(slug.current)]{
+  _id,
+  name,
+  "imageUrl": imageUrl.asset->url,
+  "imageAlt": imageUrl.alt,
+  "slug": slug.current,
+  excerpt
  }`);
