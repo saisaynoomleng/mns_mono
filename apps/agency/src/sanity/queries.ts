@@ -120,3 +120,31 @@ export const ALL_SERVICES_QUERY = defineQuery(`*[_type == 'service'
   "slug": slug.current,
   excerpt
  }`);
+
+export const SERVICE_QUERY = defineQuery(`*[_type == "service"
+ && defined(slug.current)
+ && slug.current == $slug][0]{
+  name,
+  excerpt,
+  "imageUrl": imageUrl.asset->url,
+  "imageAlt": imageUrl.alt,
+  body,
+  seo{
+    "title": metaTitle,
+    "description": metaDescription,
+    "imageUrl": ogImage.asset->url
+  },
+  price,
+  "plans": *[_type == 'subscriptionPlan'
+            && defined(slug.current)
+            && references(^._id)]
+            | order(pricePerMonth){
+              _id,
+              name,
+              "slug": slug.current,
+              includedFeatures,
+              notIncludedFeatures,
+              pricePerMonth,
+              "type": ^.name
+            }
+ }`);

@@ -28,7 +28,7 @@ export const BackTo = ({
           <IoArrowBackCircleSharp />
         </span>
         <span>Back to</span>
-        <span>{label}</span>
+        <span className="capitalize">{label}</span>
       </Link>
     </Button>
   );
