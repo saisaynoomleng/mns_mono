@@ -51,6 +51,7 @@ export const portfolioType = defineType({
     defineField({
       name: 'endedAt',
       type: 'date',
+      validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'excerpt',
@@ -70,6 +71,11 @@ export const portfolioType = defineType({
     defineField({
       name: 'previewUrl',
       type: 'url',
+      validation: (rule) => rule.required(),
+    }),
+    defineField({
+      name: 'pages',
+      type: 'number',
       validation: (rule) => rule.required(),
     }),
   ],

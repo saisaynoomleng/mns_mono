@@ -161,3 +161,24 @@ export const ALL_PORTFOLIO_QUERY = defineQuery(`*[_type == 'portfolio'
     excerpt,
     previewUrl,
   }`);
+
+export const PORTFOLIO_QUERY = defineQuery(`*[_type == 'portfolio'
+ && defined(slug.current)
+ && slug.current == $slug][0]{
+    name,
+    type,
+    "imageUrl": imageUrl.asset->url,
+    "imageAlt": imageUrl.alt,
+    excerpt,
+    previewUrl,
+    body,
+    startedAt,
+    endedAt,
+    seo{
+      "title": metaTitle,
+      "description": metaDescription,
+      "image": ogImage.asset->url
+    },
+    "duration": (dateTime(endedAt + "T00:00:00Z") - dateTime(startedAt + "T00:00:00Z")) / 86400,
+    pages
+  }`);
