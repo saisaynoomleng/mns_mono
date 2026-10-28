@@ -3,7 +3,12 @@ import { urlFor } from '@/sanity/image';
 import { sanityFetch } from '@/sanity/live';
 import { ALL_PORTFOLIO_QUERY, PORTFOLIO_QUERY } from '@/sanity/queries';
 import { Bounded, SectionTitle } from '@mns/ui';
-import { formatDateUS, PageParamsSlugProps } from '@mns/utils';
+import {
+  formatDateUS,
+  PageParamsSlugProps,
+  replaceDash,
+  toTitleCase,
+} from '@mns/utils';
 import type { Metadata } from 'next';
 import { PortableText } from 'next-sanity';
 import Image from 'next/image';
@@ -79,6 +84,10 @@ const PortfolioDetailPage = async ({
         >
           {name}
         </SectionTitle>
+
+        <p className="border-2 p-2 border-primary rounded-lg">
+          {toTitleCase(replaceDash(type as string))}
+        </p>
 
         <div className="overflow-hidden p-2">
           {imageUrl && (
