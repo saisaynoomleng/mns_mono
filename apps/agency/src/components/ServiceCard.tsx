@@ -25,7 +25,7 @@ const ServiceCard = ({
       href={`/services/${slug}`}
       className={twMerge(
         clsx(
-          'flex flex-col gap-y-4 text-center border p-4 border-input rounded-lg group',
+          'flex flex-col gap-y-4 md:gap-y-8 text-center border p-4 border-input rounded-lg group',
           className,
         ),
       )}
@@ -44,7 +44,7 @@ const ServiceCard = ({
           />
         )}
       </div>
-      <p className="text-fs-300">{excerpt}</p>
+      <p className="text-fs-300 prose prose-sm">{excerpt}</p>
     </Link>
   );
 };

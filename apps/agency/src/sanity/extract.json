@@ -1126,6 +1126,13 @@
           "type": "string"
         },
         "optional": true
+      },
+      "pages": {
+        "type": "objectAttribute",
+        "value": {
+          "type": "number"
+        },
+        "optional": true
       }
     }
   },

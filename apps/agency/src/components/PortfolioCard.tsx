@@ -1,3 +1,5 @@
+'use client';
+
 import { urlFor } from '@/sanity/image';
 import { ALL_PORTFOLIO_QUERY_RESULT } from '@/sanity/types';
 import {
@@ -9,10 +11,11 @@ import {
   CollapsibleTrigger,
 } from '@mns/ui';
 import { replaceDash, toTitleCase } from '@mns/utils';
+import clsx from 'clsx';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { TbLayoutBottombarCollapseFilled } from 'react-icons/tb';
+import React, { useState } from 'react';
+import { FaCircleArrowRight } from 'react-icons/fa6';
 import { twMerge } from 'tailwind-merge';
 
 type PortfolioCardProps = {
@@ -24,36 +27,35 @@ export const PortfolioCard = ({
   className,
   portfolio,
 }: PortfolioCardProps): React.JSX.Element | null => {
+  const [open, setOpen] = useState<boolean>(false);
+
   if (!portfolio) return null;
 
-  const {
-    name,
-    excerpt,
-    body,
-    imageAlt,
-    imageUrl,
-    type,
-    startedAt,
-    endedAt,
-    previewUrl,
-    slug,
-  } = portfolio;
+  const { name, excerpt, imageAlt, imageUrl, type, previewUrl, slug } =
+    portfolio;
 
   return (
     <Card className="shadow shadow-primary">
       <CardContent>
-        <Collapsible className={twMerge(className)}>
-          <div className="grid grid-cols-[auto_max-content_min-content] gap-x-4 md:gap-x-6 items-center">
+        <Collapsible
+          className={twMerge(className)}
+          open={open}
+          onOpenChange={setOpen}
+        >
+          <div className="flex justify-between items-center">
             <p className="md:text-fs-600 font-semibold text-primary">{name}</p>
             {type && (
               <p className="p-2 border-2 border-primary text-primary rounded-2xl text-fs-300 font-semibold">
                 {toTitleCase(replaceDash(type))}
               </p>
             )}
-            <CollapsibleTrigger asChild>
-              <Button>
-                <TbLayoutBottombarCollapseFilled aria-label="expand the portoflio" />
-              </Button>
+            <CollapsibleTrigger
+              className={clsx(
+                'text-primary transition-transform duration-200',
+                open ? 'rotate-45!' : 'rotate-0',
+              )}
+            >
+              <FaCircleArrowRight aria-label="expand the portoflio" size={40} />
             </CollapsibleTrigger>
           </div>
 
@@ -71,7 +73,7 @@ export const PortfolioCard = ({
                 )}
               </div>
 
-              <div className="flex flex-col gap-y-2">
+              <div className="flex flex-col justify-center gap-y-2">
                 <p className="prose prose-sm min-w-full">{excerpt}</p>
 
                 <div className="flex gap-x-2 items-center">
@@ -85,7 +87,7 @@ export const PortfolioCard = ({
                       rel="noreferrer nofollow"
                       target="_blank"
                     >
-                      Live URL
+                      View Live
                     </Link>
                   </Button>
                 </div>

@@ -40,7 +40,7 @@ import { PiTextAlignJustifyFill } from 'react-icons/pi';
 import { RiQuestionnaireLine } from 'react-icons/ri';
 import { GrDocumentPerformance } from 'react-icons/gr';
 import { IoMdChatbubbles } from 'react-icons/io';
-import { FaUserGear, FaGripLines } from 'react-icons/fa6';
+import { FaUserGear, FaGripLines, FaCircleArrowRight } from 'react-icons/fa6';
 import { GiGearHammer } from 'react-icons/gi';
 import { BiSolidCategoryAlt } from 'react-icons/bi';
 
@@ -85,6 +85,7 @@ const icons: React.ReactElement[] = [
   <TbLayoutBottombarCollapseFilled />,
   <MdWorkspaces />,
   <BiSolidCategoryAlt />,
+  <FaCircleArrowRight />,
 ];
 
 export const Iconography = (): React.JSX.Element => {
