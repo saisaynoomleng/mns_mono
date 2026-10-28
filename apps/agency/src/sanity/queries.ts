@@ -148,3 +148,16 @@ export const SERVICE_QUERY = defineQuery(`*[_type == "service"
               "type": ^.name
             }
  }`);
+
+export const ALL_PORTFOLIO_QUERY = defineQuery(`*[_type == 'portfolio'
+ && defined(slug.current)]
+  | order(_createdAt){
+    _id,
+    name,
+    "slug": slug.current,
+    type,
+    "imageUrl": imageUrl.asset->url,
+    "imageAlt": imageUrl.alt,
+    excerpt,
+    previewUrl,
+  }`);

@@ -190,7 +190,11 @@ export type Portfolio = {
   name?: string;
   slug?: Slug;
   type?:
-    'health-care' | 'retail-and-commerce' | 'restaurant' | 'creative-and-media';
+    | 'health-care'
+    | 'retail-and-commerce'
+    | 'restaurant'
+    | 'creative-and-media'
+    | 'personal-portfolio';
   imageUrl?: ImageWithAlt;
   startedAt?: string;
   endedAt?: string;
@@ -673,6 +677,30 @@ export type SERVICE_QUERY_RESULT = {
   }>;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_PORTFOLIO_QUERY
+// Query: *[_type == 'portfolio' && defined(slug.current)]  | order(_createdAt){    _id,    name,    "slug": slug.current,    type,    "imageUrl": imageUrl.asset->url,    "imageAlt": imageUrl.alt,    startedAt,    endedAt,    excerpt,    body,    seo,    previewUrl,  }
+export type ALL_PORTFOLIO_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  slug: string | null;
+  type:
+    | 'creative-and-media'
+    | 'health-care'
+    | 'personal-portfolio'
+    | 'restaurant'
+    | 'retail-and-commerce'
+    | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  startedAt: string | null;
+  endedAt: string | null;
+  excerpt: string | null;
+  body: BlockContent | null;
+  seo: Seo | null;
+  previewUrl: string | null;
+}>;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -687,6 +715,7 @@ declare global {
     "*[_type == 'page'\n && defined(slug.current)\n && slug.current == $slug][0]{\n  body,\n  seo\n }": UTILITY_PAGE_QUERY_RESULT;
     '*[_type == \'service\'\n && defined(slug.current)]{\n  _id,\n  name,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  "slug": slug.current,\n  excerpt\n }': ALL_SERVICES_QUERY_RESULT;
     '*[_type == "service"\n && defined(slug.current)\n && slug.current == $slug][0]{\n  name,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  body,\n  seo{\n    "title": metaTitle,\n    "description": metaDescription,\n    "imageUrl": ogImage.asset->url\n  },\n  price,\n  "plans": *[_type == \'subscriptionPlan\'\n            && defined(slug.current)\n            && references(^._id)]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": ^.name\n            }\n }': SERVICE_QUERY_RESULT;
+    '*[_type == \'portfolio\'\n && defined(slug.current)]\n  | order(_createdAt){\n    _id,\n    name,\n    "slug": slug.current,\n    type,\n    "imageUrl": imageUrl.asset->url,\n    "imageAlt": imageUrl.alt,\n    startedAt,\n    endedAt,\n    excerpt,\n    body,\n    seo,\n    previewUrl,\n  }': ALL_PORTFOLIO_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
