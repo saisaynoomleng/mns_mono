@@ -1066,6 +1066,10 @@
             {
               "type": "string",
               "value": "creative-and-media"
+            },
+            {
+              "type": "string",
+              "value": "personal-portfolio"
             }
           ]
         },

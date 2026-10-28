@@ -18,13 +18,13 @@ export const portfolioType = defineType({
       name: 'slug',
       type: 'slug',
       options: {
-        source: 'name',
+        source: (doc) => `${doc.name}-portfolio`,
       },
       validation: (rule) => rule.required(),
     }),
     defineField({
       name: 'type',
-      title: 'Porfolio Type',
+      title: 'Portfolio Type',
       type: 'string',
       options: {
         list: [
@@ -32,6 +32,7 @@ export const portfolioType = defineType({
           { title: 'Retail & Commerce', value: 'retail-and-commerce' },
           { title: 'Restaurant', value: 'restaurant' },
           { title: 'Creative & Media', value: 'creative-and-media' },
+          { title: 'Personal Portfolio', value: 'personal-portfolio' },
         ],
         layout: 'radio',
       },
