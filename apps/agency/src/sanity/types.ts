@@ -118,6 +118,7 @@ export type Service = {
   body?: BlockContent;
   imageUrl?: ImageWithAlt;
   seo?: Seo;
+  price?: number;
 };
 
 export type BlockContent = Array<
@@ -646,6 +647,32 @@ export type ALL_SERVICES_QUERY_RESULT = Array<{
   excerpt: string | null;
 }>;
 
+// Source: src/sanity/queries.ts
+// Variable: SERVICE_QUERY
+// Query: *[_type == "service" && defined(slug.current) && slug.current == $slug][0]{  name,  excerpt,  "imageUrl": imageUrl.asset->url,  "imageAlt": imageUrl.alt,  body,  seo{    "title": metaTitle,    "description": metaDescription,    "imageUrl": ogImage.asset->url  },  price,  "plans": *[_type == 'subscriptionPlan'            && defined(slug.current)            && references(^._id)]            | order(pricePerMonth){              _id,              name,              "slug": slug.current,              includedFeatures,              notIncludedFeatures,              pricePerMonth,              "type": ^.name            } }
+export type SERVICE_QUERY_RESULT = {
+  name: string | null;
+  excerpt: string | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  body: BlockContent | null;
+  seo: {
+    title: string | null;
+    description: string | null;
+    imageUrl: string | null;
+  } | null;
+  price: number | null;
+  plans: Array<{
+    _id: string;
+    name: string | null;
+    slug: string | null;
+    includedFeatures: Array<string> | null;
+    notIncludedFeatures: Array<string> | null;
+    pricePerMonth: number | null;
+    type: string | null;
+  }>;
+} | null;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -659,6 +686,7 @@ declare global {
     "*[_type == 'page'\n && defined(slug.current)\n && type == 'utility']{\n  'slug': slug.current\n }": ALL_UTILITY_PAGE_QUERY_RESULT;
     "*[_type == 'page'\n && defined(slug.current)\n && slug.current == $slug][0]{\n  body,\n  seo\n }": UTILITY_PAGE_QUERY_RESULT;
     '*[_type == \'service\'\n && defined(slug.current)]{\n  _id,\n  name,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  "slug": slug.current,\n  excerpt\n }': ALL_SERVICES_QUERY_RESULT;
+    '*[_type == "service"\n && defined(slug.current)\n && slug.current == $slug][0]{\n  name,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  body,\n  seo{\n    "title": metaTitle,\n    "description": metaDescription,\n    "imageUrl": ogImage.asset->url\n  },\n  price,\n  "plans": *[_type == \'subscriptionPlan\'\n            && defined(slug.current)\n            && references(^._id)]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": ^.name\n            }\n }': SERVICE_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

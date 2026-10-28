@@ -45,6 +45,10 @@ export const serviceType = defineType({
       name: 'seo',
       type: 'seo',
     }),
+    defineField({
+      name: 'price',
+      type: 'number',
+    }),
   ],
   preview: {
     select: {
