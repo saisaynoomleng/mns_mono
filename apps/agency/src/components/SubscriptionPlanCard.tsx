@@ -1,4 +1,5 @@
 import { SERVICE_QUERY_RESULT } from '@/sanity/types';
+import { Button, Separator } from '@mns/ui';
 import { formatPriceInUSD, toTitleCase } from '@mns/utils';
 import clsx from 'clsx';
 import React from 'react';
@@ -12,7 +13,7 @@ type SubscriptionPlanCardProps = {
 const SubscriptionPlanCard = ({
   className,
   plan,
-}: SubscriptionPlanCardProps) => {
+}: SubscriptionPlanCardProps): React.JSX.Element | null => {
   if (!plan) return null;
 
   const {
@@ -26,7 +27,12 @@ const SubscriptionPlanCard = ({
 
   return (
     <div
-      className={twMerge(clsx('max-w-100 flex flex-col gap-y-4', className))}
+      className={twMerge(
+        clsx(
+          'max-w-100 flex flex-col gap-y-4 border p-4 border-input rounded-lg',
+          className,
+        ),
+      )}
     >
       <p className="font-semibold text-fs-500">{toTitleCase(name as string)}</p>
       {pricePerMonth && (
@@ -47,16 +53,23 @@ const SubscriptionPlanCard = ({
       </ul>
 
       {type?.toLowerCase() === 'enterprise' && (
-        <ul className="list-inside list-disc flex flex-col gap-y-2">
-          <p className="font-semibold">What&apos;s NOT included</p>
-          {notIncludedFeatures &&
-            notIncludedFeatures.map((f) => (
-              <li key={f} className="marker:text-primary">
-                {f}
-              </li>
-            ))}
-        </ul>
+        <>
+          <Separator />
+          <ul className="list-inside list-disc flex flex-col gap-y-2">
+            <p className="font-semibold">What&apos;s NOT included</p>
+            {notIncludedFeatures &&
+              notIncludedFeatures.map((f) => (
+                <li key={f} className="marker:text-primary">
+                  {f}
+                </li>
+              ))}
+          </ul>
+        </>
       )}
+
+      <div className="mt-auto">
+        <Button className="w-full">Subscribe</Button>
+      </div>
     </div>
   );
 };

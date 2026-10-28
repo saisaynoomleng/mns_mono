@@ -100,19 +100,19 @@ const ServieDetailPage = async ({
         </div>
       )}
 
-      <div className="space-y-4 md:space-y-6">
-        <SectionTitle as="h2" size="sm" className="text-center">
-          Available Plans
-        </SectionTitle>
+      {plans.length > 1 ? (
+        <div className="space-y-4 md:space-y-6">
+          <SectionTitle as="h2" size="sm" className="text-center">
+            Available Plans
+          </SectionTitle>
 
-        <div className="flex gap-x-4 md:gap-x-6 justify-center">
-          {plans
-            ? plans.map((plan) => (
-                <SubscriptionPlanCard key={plan._id} plan={plan} />
-              ))
-            : null}
+          <div className="flex gap-x-4 md:gap-x-6 justify-center">
+            {plans.map((plan) => (
+              <SubscriptionPlanCard key={plan._id} plan={plan} />
+            ))}
+          </div>
         </div>
-      </div>
+      ) : null}
     </Bounded>
   );
 };
