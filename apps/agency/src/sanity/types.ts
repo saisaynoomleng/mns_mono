@@ -726,6 +726,37 @@ export type PORTFOLIO_QUERY_RESULT = {
   pages: number | null;
 } | null;
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_PRICING_QUERY
+// Query: {  "plugs": *[_type == 'subscriptionPlan'           && defined(slug.current)           && references("0af90c0f-1dda-4ec3-9ab5-8e64eabd99e6")]            | order(pricePerMonth){              _id,              name,              "slug": slug.current,              includedFeatures,              notIncludedFeatures,              pricePerMonth,              "type": "plug & play"            },  "enterprises": *[_type == 'subscriptionPlan'           && defined(slug.current)           && references("1e4a3006-9128-477b-b2ef-b6c012a94e15")]            | order(pricePerMonth){              _id,              name,              "slug": slug.current,              includedFeatures,              notIncludedFeatures,              pricePerMonth,              "type": "enterprise"            },  "onboarding": *[_type == 'service'                 && defined(slug.current)                 && slug.current == 'onboarding'][0]{                    name,                    "slug": slug.current,                    price,                    slogan,                    excerpt                 }}
+export type ALL_PRICING_QUERY_RESULT = {
+  plugs: Array<{
+    _id: string;
+    name: string | null;
+    slug: string | null;
+    includedFeatures: Array<string> | null;
+    notIncludedFeatures: Array<string> | null;
+    pricePerMonth: number | null;
+    type: 'plug & play';
+  }>;
+  enterprises: Array<{
+    _id: string;
+    name: string | null;
+    slug: string | null;
+    includedFeatures: Array<string> | null;
+    notIncludedFeatures: Array<string> | null;
+    pricePerMonth: number | null;
+    type: 'enterprise';
+  }>;
+  onboarding: {
+    name: string | null;
+    slug: string | null;
+    price: number | null;
+    slogan: string | null;
+    excerpt: string | null;
+  } | null;
+};
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -742,6 +773,7 @@ declare global {
     '*[_type == "service"\n && defined(slug.current)\n && slug.current == $slug][0]{\n  name,\n  excerpt,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  body,\n  seo{\n    "title": metaTitle,\n    "description": metaDescription,\n    "imageUrl": ogImage.asset->url\n  },\n  price,\n  "plans": *[_type == \'subscriptionPlan\'\n            && defined(slug.current)\n            && references(^._id)]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": ^.name\n            }\n }': SERVICE_QUERY_RESULT;
     '*[_type == \'portfolio\'\n && defined(slug.current)]\n  | order(_createdAt){\n    _id,\n    name,\n    "slug": slug.current,\n    type,\n    "imageUrl": imageUrl.asset->url,\n    "imageAlt": imageUrl.alt,\n    excerpt,\n    previewUrl,\n  }': ALL_PORTFOLIO_QUERY_RESULT;
     '*[_type == \'portfolio\'\n && defined(slug.current)\n && slug.current == $slug][0]{\n    name,\n    type,\n    "imageUrl": imageUrl.asset->url,\n    "imageAlt": imageUrl.alt,\n    excerpt,\n    previewUrl,\n    body,\n    startedAt,\n    endedAt,\n    seo{\n      "title": metaTitle,\n      "description": metaDescription,\n      "image": ogImage.asset->url\n    },\n    "duration": (dateTime(endedAt + "T00:00:00Z") - dateTime(startedAt + "T00:00:00Z")) / 86400,\n    pages\n  }': PORTFOLIO_QUERY_RESULT;
+    '{\n  "plugs": *[_type == \'subscriptionPlan\'\n           && defined(slug.current)\n           && references("0af90c0f-1dda-4ec3-9ab5-8e64eabd99e6")]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": "plug & play"\n            },\n  "enterprises": *[_type == \'subscriptionPlan\'\n           && defined(slug.current)\n           && references("1e4a3006-9128-477b-b2ef-b6c012a94e15")]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": "enterprise"\n            },\n  "onboarding": *[_type == \'service\'\n                 && defined(slug.current)\n                 && slug.current == \'onboarding\'][0]{\n                    name,\n                    "slug": slug.current,\n                    price,\n                    slogan,\n                    excerpt\n                 }\n}': ALL_PRICING_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too
