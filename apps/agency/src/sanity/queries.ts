@@ -182,3 +182,39 @@ export const PORTFOLIO_QUERY = defineQuery(`*[_type == 'portfolio'
     "duration": (dateTime(endedAt + "T00:00:00Z") - dateTime(startedAt + "T00:00:00Z")) / 86400,
     pages
   }`);
+
+export const ALL_PRICING_QUERY = defineQuery(`{
+  "plugs": *[_type == 'subscriptionPlan'
+           && defined(slug.current)
+           && references("0af90c0f-1dda-4ec3-9ab5-8e64eabd99e6")]
+            | order(pricePerMonth){
+              _id,
+              name,
+              "slug": slug.current,
+              includedFeatures,
+              notIncludedFeatures,
+              pricePerMonth,
+              "type": "plug & play"
+            },
+  "enterprises": *[_type == 'subscriptionPlan'
+           && defined(slug.current)
+           && references("1e4a3006-9128-477b-b2ef-b6c012a94e15")]
+            | order(pricePerMonth){
+              _id,
+              name,
+              "slug": slug.current,
+              includedFeatures,
+              notIncludedFeatures,
+              pricePerMonth,
+              "type": "enterprise"
+            },
+  "onboarding": *[_type == 'service'
+                 && defined(slug.current)
+                 && slug.current == 'onboarding'][0]{
+                    name,
+                    "slug": slug.current,
+                    price,
+                    slogan,
+                    excerpt
+                 }
+}`);
