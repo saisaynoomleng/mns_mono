@@ -14,11 +14,15 @@ export const testimonialRouter = router({
       const rows = await db.query.TestimonialTable.findMany({
         columns: {
           status: true,
+          title: true,
+          createdAt: true,
+          id: true,
         },
         with: {
           user: {
             columns: {
               name: true,
+              id: true,
             },
           },
         },
@@ -30,6 +34,11 @@ export const testimonialRouter = router({
           message: 'Unable to find the testimonials',
         });
       }
+
+      return {
+        success: true,
+        data: rows,
+      };
     } catch (error) {
       console.error('testimonialRouter.list error', error);
 
