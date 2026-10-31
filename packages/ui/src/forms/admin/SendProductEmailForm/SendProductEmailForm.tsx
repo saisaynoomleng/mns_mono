@@ -1,12 +1,6 @@
 'use client';
 
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from '#components/ui/card';
+import { Card, CardContent, CardHeader, CardTitle } from '#components/ui/card';
 import { zodResolver } from '@hookform/resolvers/zod';
 import {
   SendProductUpdateEmailFormSchema,
@@ -24,9 +18,7 @@ import { LoadingSpinner } from '#components/shared/LoadingSpinner/LoadingSpinner
 import { twMerge } from 'cn';
 
 type SendProductEmailFormProps = {
-  action: (
-    data: SendProductUpdateEmailInput,
-  ) => Promise<ActionResponse<SendProductUpdateEmailInput>>;
+  action: (data: SendProductUpdateEmailInput) => Promise<ActionResponse>;
   className?: string;
   isPending: boolean;
 };

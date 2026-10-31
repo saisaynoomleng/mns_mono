@@ -13,7 +13,6 @@ export const testimonialRouter = router({
     try {
       const rows = await db.query.TestimonialTable.findMany({
         columns: {
-          rating: true,
           status: true,
         },
         with: {

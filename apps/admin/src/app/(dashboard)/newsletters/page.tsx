@@ -3,7 +3,6 @@
 import { PageBreadcrumb } from '@/components/PageBreadcrumb';
 import { useTRPC } from '@/components/Provider';
 import { NewslettersPageSkeleton } from '@/components/Skeletons';
-import { queryKeys } from '@/lib/querykeys';
 import {
   Bounded,
   SendProductEmailForm,
