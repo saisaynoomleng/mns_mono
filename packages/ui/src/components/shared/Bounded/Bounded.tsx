@@ -41,7 +41,7 @@ export const Bounded = <T extends React.ElementType>({
   as,
   className,
   children,
-  padding = 'sm',
+  padding = 'none',
   spacing = 'md',
   size = 'full',
   isCentered = false,
@@ -53,7 +53,7 @@ export const Bounded = <T extends React.ElementType>({
     <Comp
       className={twMerge(
         clsx(
-          'py-4 md:py-6',
+          'py-4 md:py-6 max-md:px-4',
           paddingVariants[padding],
           spacingVariants[spacing],
           sizeVariants[size],
