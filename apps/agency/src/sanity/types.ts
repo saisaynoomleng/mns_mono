@@ -757,6 +757,17 @@ export type ALL_PRICING_QUERY_RESULT = {
   } | null;
 };
 
+// Source: src/sanity/queries.ts
+// Variable: ALL_TEAM_MEMBERS_QUERY
+// Query: *[_type == 'teamMember' && defined(slug.current)]{  _id,  name,  "imageUrl": imageUrl.asset->url,  "imageAlt": imageUrl.alt,  positions[], }
+export type ALL_TEAM_MEMBERS_QUERY_RESULT = Array<{
+  _id: string;
+  name: string | null;
+  imageUrl: string | null;
+  imageAlt: string | null;
+  positions: Array<string> | null;
+}>;
+
 // Query TypeMap
 declare global {
   interface SanityQueries {
@@ -774,6 +785,7 @@ declare global {
     '*[_type == \'portfolio\'\n && defined(slug.current)]\n  | order(_createdAt){\n    _id,\n    name,\n    "slug": slug.current,\n    type,\n    "imageUrl": imageUrl.asset->url,\n    "imageAlt": imageUrl.alt,\n    excerpt,\n    previewUrl,\n  }': ALL_PORTFOLIO_QUERY_RESULT;
     '*[_type == \'portfolio\'\n && defined(slug.current)\n && slug.current == $slug][0]{\n    name,\n    type,\n    "imageUrl": imageUrl.asset->url,\n    "imageAlt": imageUrl.alt,\n    excerpt,\n    previewUrl,\n    body,\n    startedAt,\n    endedAt,\n    seo{\n      "title": metaTitle,\n      "description": metaDescription,\n      "image": ogImage.asset->url\n    },\n    "duration": (dateTime(endedAt + "T00:00:00Z") - dateTime(startedAt + "T00:00:00Z")) / 86400,\n    pages\n  }': PORTFOLIO_QUERY_RESULT;
     '{\n  "plugs": *[_type == \'subscriptionPlan\'\n           && defined(slug.current)\n           && references("0af90c0f-1dda-4ec3-9ab5-8e64eabd99e6")]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": "plug & play"\n            },\n  "enterprises": *[_type == \'subscriptionPlan\'\n           && defined(slug.current)\n           && references("1e4a3006-9128-477b-b2ef-b6c012a94e15")]\n            | order(pricePerMonth){\n              _id,\n              name,\n              "slug": slug.current,\n              includedFeatures,\n              notIncludedFeatures,\n              pricePerMonth,\n              "type": "enterprise"\n            },\n  "onboarding": *[_type == \'service\'\n                 && defined(slug.current)\n                 && slug.current == \'onboarding\'][0]{\n                    name,\n                    "slug": slug.current,\n                    price,\n                    slogan,\n                    excerpt\n                 }\n}': ALL_PRICING_QUERY_RESULT;
+    '*[_type == \'teamMember\'\n && defined(slug.current)]{\n  _id,\n  name,\n  "imageUrl": imageUrl.asset->url,\n  "imageAlt": imageUrl.alt,\n  positions[],\n }': ALL_TEAM_MEMBERS_QUERY_RESULT;
   }
 }
 // Lets @sanity/client releases that predate the global registry read it too

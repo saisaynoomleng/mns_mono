@@ -218,3 +218,12 @@ export const ALL_PRICING_QUERY = defineQuery(`{
                     excerpt
                  }
 }`);
+
+export const ALL_TEAM_MEMBERS_QUERY = defineQuery(`*[_type == 'teamMember'
+ && defined(slug.current)]{
+  _id,
+  name,
+  "imageUrl": imageUrl.asset->url,
+  "imageAlt": imageUrl.alt,
+  positions[],
+ }`);
