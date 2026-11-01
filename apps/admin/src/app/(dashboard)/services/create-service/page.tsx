@@ -1,6 +1,8 @@
+'use client';
+
 import React from 'react';
 
-const CreateServicePage = () => {
+const CreateServicePage = (): React.JSX.Element => {
   return <div>CreateServicePage</div>;
 };
 

@@ -295,3 +295,13 @@ export const UserFeatureRequestFormSchema = UserReportAppIssueFormSchema.omit({
 export type UserFeatureRequestFormInput = z.input<
   typeof UserFeatureRequestFormSchema
 >;
+
+//============================//
+//====== Admin Forms ========//
+//==========================//
+export const CreateServiceFormSchema = z.object({
+  name: z.string().min(1, { error: 'Service name is required' }),
+  sanityId: z.string().min(1, { error: 'Sanity ID is required' }),
+  status: z.enum(['active', 'no_longer_available']).default('active'),
+});
+export type CreateServiceFormInput = z.input<typeof CreateServiceFormSchema>;
