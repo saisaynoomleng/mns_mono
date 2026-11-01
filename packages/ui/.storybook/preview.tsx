@@ -7,6 +7,8 @@ import '@fontsource-variable/playpen-sans';
 
 import './fonts.css';
 
+import { Toaster } from '../src/components/ui/sonner';
+
 const preview: Preview = {
   parameters: {
     controls: {
@@ -27,6 +29,8 @@ const preview: Preview = {
     (Story) => (
       <>
         <Story />
+
+        <Toaster richColors closeButton position="bottom-center" />
       </>
     ),
   ],
