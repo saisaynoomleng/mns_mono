@@ -8,8 +8,6 @@ export * from './verifications.schema.js';
 export * from './apps.schema.js';
 export * from './services.schema.js';
 export * from './subscription-plans.schema.js';
-export * from './subscription-plan-included-features.schema.js';
-export * from './subscription-plan-not-included-features.schema.js';
 export * from './payment-providers.schema.js';
 export * from './user-subscriptions.schema.js';
 export * from './workspaces.schema.js';

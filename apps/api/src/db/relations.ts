@@ -68,16 +68,6 @@ export const relations = defineRelations(schema, (r) => ({
   },
 
   SubscriptionTable: {
-    includedFeatures: r.many.SubscriptionPlanIncludedFeatureTable({
-      from: r.SubscriptionPlanTable.id,
-      to: r.SubscriptionPlanIncludedFeatureTable.subscriptionId,
-    }),
-
-    notIncludedFeatures: r.many.SubscriptionNotIncludedFeatureTable({
-      from: r.SubscriptionPlanTable.id,
-      to: r.SubscriptionNotIncludedFeatureTable.subscriptionId,
-    }),
-
     users: r.many.UserTable({
       from: r.SubscriptionPlanTable.id.through(
         r.UserSubscriptionTable.subscriptionId,

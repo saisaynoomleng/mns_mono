@@ -16,7 +16,12 @@ import {
 import Link from 'next/link';
 import React from 'react';
 import { SignOutButton } from './SignOutButton';
-import { FaCcMastercard, FaNewspaper, FaUsers } from 'react-icons/fa';
+import {
+  FaCcMastercard,
+  FaFileInvoiceDollar,
+  FaNewspaper,
+  FaUsers,
+} from 'react-icons/fa';
 import {
   MdDashboard,
   MdDesignServices,
@@ -47,6 +52,11 @@ const OPERATION_LINKS = [
     label: 'Payment Providers',
     href: '/payment-providers',
     icon: <FaCcMastercard />,
+  },
+  {
+    label: 'Invoices',
+    href: '/invoices',
+    icon: <FaFileInvoiceDollar />,
   },
 ];
 
