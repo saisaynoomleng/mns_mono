@@ -28,13 +28,6 @@ export const testimonialRouter = router({
         },
       });
 
-      if (!rows) {
-        throw new TRPCError({
-          code: 'INTERNAL_SERVER_ERROR',
-          message: 'Unable to find the testimonials',
-        });
-      }
-
       return {
         success: true,
         data: rows,

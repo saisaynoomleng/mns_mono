@@ -6,6 +6,7 @@ import { LiaSignOutAltSolid } from 'react-icons/lia';
 import {
   FaCcMastercard,
   FaExternalLinkAlt,
+  FaFileInvoiceDollar,
   FaHeart,
   FaNewspaper,
   FaSortAmountDown,
@@ -86,6 +87,7 @@ const icons: React.ReactElement[] = [
   <MdWorkspaces />,
   <BiSolidCategoryAlt />,
   <FaCircleArrowRight />,
+  <FaFileInvoiceDollar />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

@@ -31,11 +31,12 @@ export const redisSecondaryStorage: SecondaryStorage = {
   },
 
   async set(key, value, ttl) {
-    if (ttl) {
+    if (ttl !== undefined) {
       await redis.set(`${prefix}${key}`, value, { ex: ttl });
-    } else {
-      await redis.set(`${prefix}${key}`, value);
+      return;
     }
+
+    await redis.set(`${prefix}${key}`, value);
   },
 
   async delete(key) {

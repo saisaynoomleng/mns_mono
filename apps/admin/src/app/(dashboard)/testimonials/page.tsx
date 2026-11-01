@@ -31,6 +31,10 @@ const TestimonialPage = () => {
     return <div>Loading...</div>;
   }
 
+  if (!data) {
+    return <div> Nth to display</div>;
+  }
+
   const { data: testimonials } = data;
 
   return (
