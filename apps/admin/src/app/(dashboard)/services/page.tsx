@@ -6,6 +6,7 @@ import { Bounded, CreateServiceForm, SectionTitle, toast } from '@mns/ui';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 import { ServiceTable } from './_components/ServiceTable';
+import { ServicePageSkeleton } from '@/components/Skeletons';
 
 const ServicePage = (): React.JSX.Element => {
   const trpc = useTRPC();
@@ -37,11 +38,17 @@ const ServicePage = (): React.JSX.Element => {
   );
 
   if (isPending) {
-    return <div>loading...</div>;
+    return <ServicePageSkeleton />;
   }
 
   if (isError) {
-    return <div>cannot get services</div>;
+    return (
+      <Bounded as="main">
+        <p className="font-semibold text-fs-500">
+          Error Getting Services, try refresh the page.
+        </p>
+      </Bounded>
+    );
   }
 
   const { data: serviceData } = data;
