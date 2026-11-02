@@ -1,6 +1,6 @@
 import * as t from 'drizzle-orm/pg-core';
 import { ServiceTable } from './services.schema.js';
-import { subscriptionStauts, timestamps } from './schema-helper.js';
+import { subscriptionStatus, timestamps } from './schema-helper.js';
 
 export const SubscriptionPlanTable = t.pgTable(
   'subscription_plans',
@@ -11,8 +11,9 @@ export const SubscriptionPlanTable = t.pgTable(
       .references(() => ServiceTable.id, { onDelete: 'cascade' })
       .notNull(),
     name: t.varchar('name', { length: 255 }).notNull().unique(),
+    sanityId: t.varchar('sanity_id', { length: 255 }).notNull().unique(),
     pricePerMonthInCent: t.integer('price_per_month_in_cents').notNull(),
-    status: subscriptionStauts('status').notNull().default('active'),
+    status: subscriptionStatus('status').notNull().default('active'),
     ...timestamps,
   },
   (table) => [t.index('subscriptionPlan_serviceId_idx').on(table.serviceId)],
