@@ -56,6 +56,7 @@ export const serviceRouter = router({
           name: true,
           sanityId: true,
           createdAt: true,
+          status: true,
         },
 
         with: {

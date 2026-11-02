@@ -59,6 +59,7 @@
   },
   "exports": {
     ".": "./src/index.ts",
-    "./styles": "./src/globals.css"
+    "./styles": "./src/globals.css",
+    "./colors": "./src/lib/colors.ts"
   }
 }

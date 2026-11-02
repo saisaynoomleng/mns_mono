@@ -43,7 +43,7 @@ export const CreateServiceForm = ({
   };
 
   return (
-    <Card className={twMerge(clsx('md:min-w-100', className))}>
+    <Card className={twMerge(clsx(className))}>
       <CardHeader>
         <CardTitle>Create Service</CardTitle>
       </CardHeader>
