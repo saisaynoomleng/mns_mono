@@ -9,6 +9,7 @@ import {
   FaFileInvoiceDollar,
   FaHeart,
   FaNewspaper,
+  FaPlus,
   FaSortAmountDown,
   FaUsers,
 } from 'react-icons/fa';
@@ -88,6 +89,7 @@ const icons: React.ReactElement[] = [
   <BiSolidCategoryAlt />,
   <FaCircleArrowRight />,
   <FaFileInvoiceDollar />,
+  <FaPlus />,
 ];
 
 export const Iconography = (): React.JSX.Element => {

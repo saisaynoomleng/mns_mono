@@ -39,7 +39,7 @@ export const serviceStatus = t.pgEnum('serviceStatus', [
   'no_longer_available',
 ]);
 
-export const subscriptionStauts = t.pgEnum('subscriptionStatus', [
+export const subscriptionStatus = t.pgEnum('subscriptionStatus', [
   'active',
   'no_longer_available',
 ]);
