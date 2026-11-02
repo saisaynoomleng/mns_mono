@@ -2,18 +2,10 @@
 
 import { PageBreadcrumb } from '@/components/PageBreadcrumb';
 import { useTRPC } from '@/components/Provider';
-import {
-  Bounded,
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-  CreateServiceForm,
-  SectionTitle,
-  toast,
-} from '@mns/ui';
+import { Bounded, CreateServiceForm, SectionTitle, toast } from '@mns/ui';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
+import { ServiceTable } from './_components/ServiceTable';
 
 const ServicePage = (): React.JSX.Element => {
   const trpc = useTRPC();
@@ -64,31 +56,21 @@ const ServicePage = (): React.JSX.Element => {
         </SectionTitle>
 
         <div className="max-w-100">
-          <div className="max-w-100">
-            <CreateServiceForm
-              action={async (input) => createServiceAction.mutateAsync(input)}
-              isPending={createServiceAction.isPending}
-            />
-          </div>
+          <CreateServiceForm
+            action={async (input) => createServiceAction.mutateAsync(input)}
+            isPending={createServiceAction.isPending}
+          />
         </div>
 
-        <div className="grid md:grid-cols-2 gap-y-4 md:gap-x-6">
-          {/* all services lists */}
-          <div className="space-y-2">
-            <p>services</p>
-            {serviceData.length ? (
-              serviceData.map((s) => (
-                <div className="space-y-2" key={s.id}>
-                  <p>{s.name}</p>
-                </div>
-              ))
-            ) : (
-              <p>No services data, create one?</p>
-            )}
-          </div>
-
-          {/* selected service plans */}
+        <div className="max-w-100">
+          <div className="max-w-100"></div>
         </div>
+
+        {serviceData.length ? (
+          <ServiceTable services={serviceData} />
+        ) : (
+          <p>There are no services yet, please create a service.</p>
+        )}
       </div>
     </Bounded>
   );
