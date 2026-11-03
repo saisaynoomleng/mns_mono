@@ -2,7 +2,7 @@ import { AdminSidebar } from '@/components/AdminSidebar';
 import { AdminHeader } from '@/components/Header';
 import { Provider } from '@/components/Provider';
 import { UserSessionContextProvider } from '@/components/UserSessionContextProvider';
-import { SidebarProvider, Toaster } from '@mns/ui';
+import { SidebarProvider } from '@mns/ui';
 
 const DashBoardLayout = ({ children }: LayoutProps<'/'>) => {
   return (
@@ -15,8 +15,6 @@ const DashBoardLayout = ({ children }: LayoutProps<'/'>) => {
             <AdminHeader />
             {children}
           </div>
-
-          <Toaster richColors closeButton position="top-center" />
         </SidebarProvider>
       </UserSessionContextProvider>
     </Provider>

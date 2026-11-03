@@ -305,3 +305,14 @@ export const CreateServiceFormSchema = z.object({
   status: z.enum(['active', 'no_longer_available']).default('active'),
 });
 export type CreateServiceFormInput = z.input<typeof CreateServiceFormSchema>;
+
+export const CreateSubscriptionFormSchema = z.object({
+  name: z.string().min(1, { error: 'Plan name is required' }),
+  sanityId: z.string().min(1, { error: 'Sanity ID is required' }),
+  serviceId: z.uuid().min(1, { error: 'Service is required' }),
+  pricePerMonthInCents: z.number().nonnegative(),
+  status: z.enum(['active', 'no_longer_available']).default('active'),
+});
+export type CreateSubscriptionFormInput = z.input<
+  typeof CreateSubscriptionFormSchema
+>;

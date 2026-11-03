@@ -67,6 +67,13 @@ export const relations = defineRelations(schema, (r) => ({
     }),
   },
 
+  SubscriptionPlanTable: {
+    service: r.one.ServiceTable({
+      from: r.SubscriptionPlanTable.serviceId,
+      to: r.ServiceTable.id,
+    }),
+  },
+
   SubscriptionTable: {
     users: r.many.UserTable({
       from: r.SubscriptionPlanTable.id.through(
