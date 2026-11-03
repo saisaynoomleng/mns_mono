@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { ServiceTable } from './ServiceTable';
-import { AllServiceData } from '#lib/data';
+import { mockAllServiceData } from '#lib/data';
 
 const meta: Meta<typeof ServiceTable> = {
   title: 'Components/Admin/ServiceTable',
@@ -16,7 +16,7 @@ const meta: Meta<typeof ServiceTable> = {
   },
 
   args: {
-    services: AllServiceData,
+    services: mockAllServiceData,
   },
   argTypes: {
     className: {
