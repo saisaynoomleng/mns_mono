@@ -14,7 +14,7 @@ import {
   TableRow,
   toast,
 } from '@mns/ui';
-import { formatDateUS } from '@mns/utils';
+import { formatDateUS, formatPriceInCentsToUSD } from '@mns/utils';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import React from 'react';
 
@@ -23,6 +23,7 @@ const SubscriptionPlansPage = (): React.JSX.Element => {
   const queryClient = useQueryClient();
 
   const serviceQueryKey = trpc.services.list.queryKey();
+  const planQueryKey = trpc.subscriptionPlan.list.queryKey();
 
   const {
     data: services,
@@ -37,9 +38,14 @@ const SubscriptionPlansPage = (): React.JSX.Element => {
   } = useQuery(trpc.subscriptionPlan.list.queryOptions());
 
   const invalidateQueries = async () => {
-    await queryClient.invalidateQueries({
-      queryKey: serviceQueryKey,
-    });
+    await Promise.all([
+      queryClient.invalidateQueries({
+        queryKey: serviceQueryKey,
+      }),
+      queryClient.invalidateQueries({
+        queryKey: planQueryKey,
+      }),
+    ]);
   };
 
   const createPlanAction = useMutation(
@@ -86,10 +92,11 @@ const SubscriptionPlansPage = (): React.JSX.Element => {
         </SectionTitle>
 
         {planData.length > 0 ? (
-          <Table>
+          <Table className="border-collapse">
             <TableHeader>
               <TableRow>
                 <TableHead>Name</TableHead>
+                <TableHead>Price Per Month</TableHead>
                 <TableHead>Service Name</TableHead>
                 <TableHead>Status</TableHead>
                 <TableHead className="text-left">Created On</TableHead>
@@ -100,6 +107,10 @@ const SubscriptionPlansPage = (): React.JSX.Element => {
               {planData.map((plan) => (
                 <TableRow key={plan.id}>
                   <TableCell>{plan.name}</TableCell>
+                  <TableCell>
+                    {plan.pricePerMonthInCent &&
+                      formatPriceInCentsToUSD(plan.pricePerMonthInCent)}
+                  </TableCell>
                   <TableCell>{plan.service?.name}</TableCell>
                   <TableCell>{plan.status}</TableCell>
                   <TableCell>

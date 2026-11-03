@@ -122,8 +122,8 @@ export const CreateSubscriptionForm = ({
             control={form.control}
             type="number"
             min={0}
-            label="Price Per Month"
-            description="Price Per Month should be in cents"
+            label="Price Per Month In Cents"
+            description="Price Per Month should be in cents(e.g. $79.99 will be 7999)"
           />
 
           <Field orientation="horizontal">
