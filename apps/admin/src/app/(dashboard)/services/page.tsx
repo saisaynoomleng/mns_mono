@@ -1,6 +1,5 @@
 'use client';
 
-import { PageBreadcrumb } from '@/components/PageBreadcrumb';
 import { useTRPC } from '@/components/Provider';
 import { Bounded, CreateServiceForm, SectionTitle, toast } from '@mns/ui';
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
@@ -54,30 +53,17 @@ const ServicePage = (): React.JSX.Element => {
   const { data: serviceData } = data;
 
   return (
-    <Bounded as="main">
-      <PageBreadcrumb />
-
-      <div className="space-y-4 md:space-y-6">
-        <SectionTitle as="h1" size="sm">
-          services
-        </SectionTitle>
-
-        <div className="max-w-100">
-          <CreateServiceForm
-            action={async (input) => createServiceAction.mutateAsync(input)}
-            isPending={createServiceAction.isPending}
-          />
-        </div>
-
-        <div className="max-w-100">
-          <div className="max-w-100"></div>
-        </div>
-
-        {serviceData.length ? (
-          <ServiceTable services={serviceData} />
-        ) : (
-          <p>There are no services yet, please create a service.</p>
-        )}
+    <Bounded as="main" spacing="sm">
+      {serviceData.length ? (
+        <ServiceTable services={serviceData} />
+      ) : (
+        <p>There are no services yet, please create a service.</p>
+      )}
+      <div className="max-w-100">
+        <CreateServiceForm
+          action={async (input) => createServiceAction.mutateAsync(input)}
+          isPending={createServiceAction.isPending}
+        />
       </div>
     </Bounded>
   );

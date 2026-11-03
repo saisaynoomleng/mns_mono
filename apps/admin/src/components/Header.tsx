@@ -1,11 +1,12 @@
 'use client';
 
-import { SidebarTrigger } from '@mns/ui';
+import { Separator, SidebarTrigger } from '@mns/ui';
 import React from 'react';
 import { useUserSessionContext } from './UserSessionContextProvider';
 import Image from 'next/image';
 import Link from 'next/link';
 import { env } from '@/lib/env/client';
+import { PageBreadcrumb } from './PageBreadcrumb';
 
 export const AdminHeader = (): React.JSX.Element | null => {
   const { session } = useUserSessionContext();
@@ -21,9 +22,13 @@ export const AdminHeader = (): React.JSX.Element | null => {
   const isPlacehold = userImage.includes('placehold.co');
 
   return (
-    <header className="p-2 shadow flex justify-between items-center rounded">
-      <div>
+    <header className="p-2 shadow flex justify-between items-center rounded-lg bg-background">
+      <div className="flex flex-col md:flex-row md:items-center gap-x-4">
         <SidebarTrigger />
+
+        <p className="font-semibold">Dashboard</p>
+        <Separator orientation="vertical" />
+        <PageBreadcrumb />
       </div>
 
       <div>

@@ -43,9 +43,11 @@ export const CreateServiceForm = ({
   };
 
   return (
-    <Card className={twMerge(clsx(className))}>
+    <Card className={twMerge(clsx('shadow border-0!', className))}>
       <CardHeader>
-        <CardTitle>Create Service</CardTitle>
+        <CardTitle className="text-secondary font-semibold">
+          Create Service
+        </CardTitle>
       </CardHeader>
 
       <CardContent>
