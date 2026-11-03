@@ -38,7 +38,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${fraunces.variable} ${playpen_sans.variable} ${sora.variable} h-full antialiased`}
     >
-      <body>
+      <body className="bg-brand-black-300">
         {children}
 
         <Toaster richColors closeButton position="top-center" />

@@ -7,7 +7,7 @@ import type React from 'react';
 type DashboardListWidgetProps = {
   className?: string;
   listItems: React.ReactNode;
-  title: string;
+  title: React.ReactNode;
   footer?: string;
 };
 
@@ -21,16 +21,18 @@ export const DashboardListWidget = ({
     <div
       className={twMerge(
         clsx(
-          'max-md:min-w-full md:min-w-100 flex flex-col gap-y-4 md:gap-y-6 shadow-md rounded-lg py-4',
+          'max-md:min-w-full md:min-w-100 flex flex-col gap-y-4 md:gap-y-6 shadow rounded-lg py-4 bg-background',
           className,
         ),
       )}
     >
-      <p className="font-semibold text-left px-2">{title}</p>
+      <p className="font-semibold text-left px-4 md:px-6 capitalize text-secondary">
+        {title}
+      </p>
 
       <Separator />
 
-      <ScrollArea className="h-50 px-4 md:px-6">
+      <ScrollArea className="h-75 px-4 md:px-6">
         {listItems}
         <ScrollBar orientation="vertical" />
       </ScrollArea>
