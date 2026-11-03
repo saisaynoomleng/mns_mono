@@ -10,8 +10,18 @@ import {
 import clsx from 'clsx';
 import { twMerge } from 'cn';
 import type React from 'react';
-import { useForm, type SubmitHandler } from 'react-hook-form';
+import { Controller, useForm, type SubmitHandler } from 'react-hook-form';
 import { FormTextField } from '../../FormTextField';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '#components/ui/select';
+import { Field, FieldLabel } from '#components/ui/field';
+import { SubmitButton } from '#components/shared/SubmitButton/SubmitButton';
+import { LoadingSpinner } from '#components/shared/LoadingSpinner/LoadingSpinner';
 
 type CreateSubscriptionFormProps = {
   className?: string;
@@ -75,6 +85,38 @@ export const CreateSubscriptionForm = ({
             description="Sanity ID can be retrieved from Studio"
           />
 
+          <Controller
+            name="serviceId"
+            control={form.control}
+            render={({ field, fieldState }) => (
+              <Field>
+                <FieldLabel htmlFor="serviceId">Service</FieldLabel>
+
+                <Select
+                  name={field.name}
+                  value={field.value}
+                  onValueChange={field.onChange}
+                >
+                  <SelectTrigger
+                    aria-invalid={fieldState.invalid}
+                    className="w-full"
+                    id="serviceId"
+                  >
+                    <SelectValue placeholder="Select a service" />
+                  </SelectTrigger>
+
+                  <SelectContent>
+                    {services.map((s) => (
+                      <SelectItem key={s.id} value={s.id}>
+                        {s.name}
+                      </SelectItem>
+                    ))}
+                  </SelectContent>
+                </Select>
+              </Field>
+            )}
+          />
+
           <FormTextField
             name="pricePerMonthInCents"
             control={form.control}
@@ -83,6 +125,12 @@ export const CreateSubscriptionForm = ({
             label="Price Per Month"
             description="Price Per Month should be in cents"
           />
+
+          <Field orientation="horizontal">
+            <SubmitButton disabled={isPending}>
+              {isPending ? <LoadingSpinner /> : 'Create'}
+            </SubmitButton>
+          </Field>
         </form>
       </CardContent>
     </Card>
