@@ -3,6 +3,7 @@ import './globals.css';
 import { Fraunces, Sora, Playpen_Sans } from 'next/font/google';
 import { GoogleAnalytics } from '@next/third-parties/google';
 import { env } from '@/lib/env/server';
+import { Toaster } from '@mns/ui';
 
 const fraunces = Fraunces({
   variable: '--font-fraunces',
@@ -37,7 +38,11 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
       lang="en"
       className={`${fraunces.variable} ${playpen_sans.variable} ${sora.variable} h-full antialiased`}
     >
-      <body>{children}</body>
+      <body>
+        {children}
+
+        <Toaster richColors closeButton position="top-center" />
+      </body>
       <GoogleAnalytics gaId={env.GA_MEASUREMENT_ID} />
     </html>
   );
