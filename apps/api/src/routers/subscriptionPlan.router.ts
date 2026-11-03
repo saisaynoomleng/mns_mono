@@ -51,6 +51,7 @@ export const subscriptionPlanRouter = router({
           name: true,
           status: true,
           createdAt: true,
+          pricePerMonthInCent: true,
         },
         with: {
           service: {
