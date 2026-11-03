@@ -4,31 +4,22 @@ import clsx from 'clsx';
 import { twMerge } from 'cn';
 import type React from 'react';
 
-type DashboardListWidgetProps = {
+type DashboardWidgetListProps = {
   className?: string;
   listItems: React.ReactNode;
   title: React.ReactNode;
   footer?: string;
 };
 
-export const DashboardListWidget = ({
+export const DashboardWidgetList = ({
   className,
   listItems,
   title,
   footer,
-}: DashboardListWidgetProps): React.JSX.Element => {
+}: DashboardWidgetListProps): React.JSX.Element => {
   return (
-    <div
-      className={twMerge(
-        clsx(
-          'max-md:min-w-full md:min-w-100 flex flex-col gap-y-4 md:gap-y-6 shadow rounded-lg py-4 bg-background',
-          className,
-        ),
-      )}
-    >
-      <p className="font-semibold text-left px-4 md:px-6 capitalize text-secondary">
-        {title}
-      </p>
+    <div className={twMerge(clsx('dashboard-widget', className))}>
+      <p className="widget-title">{title}</p>
 
       <Separator />
 

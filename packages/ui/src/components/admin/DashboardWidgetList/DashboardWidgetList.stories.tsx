@@ -1,15 +1,15 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { DashboardListWidget } from './DashboardListWidget';
+import { DashboardWidgetList } from './DashboardWidgetList';
 
-const meta: Meta<typeof DashboardListWidget> = {
-  title: 'Widgets/DashboardList',
-  component: DashboardListWidget,
+const meta: Meta<typeof DashboardWidgetList> = {
+  title: 'DashboardWidgets/List',
+  component: DashboardWidgetList,
   tags: ['autodocs'],
   parameters: {
     layout: 'centered',
     docs: {
       description: {
-        component: 'Admin Dashboard: List Widget to display different lists',
+        component: 'Admin Dashboard: List Widget',
       },
     },
   },
@@ -26,7 +26,7 @@ type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
   render: (args) => (
-    <DashboardListWidget
+    <DashboardWidgetList
       {...args}
       listItems={Array.from({ length: 10 }, (_, i) => (
         <p key={i}>
@@ -43,7 +43,7 @@ export const NoFooter: Story = {
     footer: '',
   },
   render: (args) => (
-    <DashboardListWidget
+    <DashboardWidgetList
       {...args}
       listItems={Array.from({ length: 10 }, (_, i) => (
         <p key={i}>

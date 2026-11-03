@@ -5,10 +5,18 @@ import {
   CardContent,
   CardHeader,
   CardTitle,
-  DashboardListWidget,
+  DashboardWidgetList,
+  DashboardWidgetTable,
+  TableCell,
+  TableRow,
 } from '@mns/ui';
 import { colors } from '@mns/ui/colors';
-import { formatDateUS, replaceUnderscore, toTitleCase } from '@mns/utils';
+import {
+  formatDateUS,
+  formatPriceInCentsToUSD,
+  replaceUnderscore,
+  toTitleCase,
+} from '@mns/utils';
 import clsx from 'clsx';
 import Link from 'next/link';
 import React, { useState } from 'react';
@@ -32,6 +40,7 @@ type Subscriptions = {
   id: string;
   status: Status;
   pricePerMonthInCent: number;
+  createdAt: Date;
 };
 
 type Status = 'active' | 'no_longer_available';
@@ -62,7 +71,7 @@ export const ServiceTable = ({
         ),
       )}
     >
-      <DashboardListWidget
+      <DashboardWidgetList
         title="All services"
         listItems={
           <div className="flex flex-col gap-y-4">
@@ -101,33 +110,28 @@ export const ServiceTable = ({
         }
       />
 
-      <DashboardListWidget
+      <DashboardWidgetTable
+        headers={['name', 'price per month', 'status', 'created on']}
         title={
           <React.Fragment>
             Available Subscription Plans for{' '}
-            <span className="text-primary">{selectedService.name}</span>
+            <span className="text-primary">{selectedService.name}</span>{' '}
           </React.Fragment>
         }
-        listItems={
-          <div>
-            {selectedService.subscriptions.length ? (
-              <div className="flex flex-col gap-y-4">
-                {selectedService.subscriptions.map((sub) => (
-                  <Link href="/subscription-plans" key={sub.id}>
-                    {sub.name}
-                  </Link>
-                ))}
-              </div>
-            ) : (
-              <div>
-                <p>
-                  No subscrition plans to display yet, add more subscription
-                  plans.
-                </p>
-              </div>
-            )}
-          </div>
-        }
+        tableBody={selectedService.subscriptions.map((sub) => (
+          <TableRow key={sub.id}>
+            <TableCell className="px-4 md:px-6">{sub.name}</TableCell>
+            <TableCell className="px-4 md:px-6">
+              {formatPriceInCentsToUSD(sub.pricePerMonthInCent)}
+            </TableCell>
+            <TableCell className="px-4 md:px-6">
+              {toTitleCase(sub.status)}
+            </TableCell>
+            <TableCell className="px-4 md:px-6">
+              {formatDateUS(sub.createdAt)}
+            </TableCell>
+          </TableRow>
+        ))}
       />
     </div>
   );

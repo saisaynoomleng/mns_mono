@@ -1,2 +1,3 @@
 export * from './ServiceTable';
-export * from './DashboardListWidget';
+export * from './DashboardWidgetList';
+export * from './DashboardWidgetTable';
