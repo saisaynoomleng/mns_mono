@@ -66,6 +66,7 @@ export const serviceRouter = router({
               name: true,
               pricePerMonthInCent: true,
               status: true,
+              createdAt: true,
             },
           },
         },
