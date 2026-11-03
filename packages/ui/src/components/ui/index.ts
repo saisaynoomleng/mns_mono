@@ -19,3 +19,4 @@ export * from './message';
 export * from './select';
 export * from './collapsible';
 export * from './dialog';
+export * from './scroll-area';
